@@ -5,9 +5,10 @@ import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from '../screens/Login/LoginScreen';
 
 import StudentProfileScreen from '../screens/student/StudentProfileScreen';
-import GameMapScreen from '../screens/student/GameMapScreen';
-import GameQuestionScreen from '../screens/student/GameQuestionScreen';
-import GameResultScreen from '../screens/student/GameResultScreen';
+import GameMapSelectionScreen from '../screens/student/soloPlay/GameMapScreenSelection';
+import GameQuestionScreen from '../screens/student/soloPlay/GameQuestionScreen';
+import GameMapScreen from '../screens/student/soloPlay/GameMapScreen';
+import GameResultScreen from '../screens/student/soloPlay/GameResultScreen';
 import ChallengeListScreen from '../screens/student/ChallengeListScreen';
 import ChallengeCreationScreen from '../screens/student/ChallengeCreationScreen';
 import ChallengeQuestionScreen from '../screens/student/ChallengeQuestionScreen';
@@ -22,6 +23,7 @@ const RootNavigator = createStackNavigator({
 	Login: LoginScreen,
 	StudentProfile: StudentProfileScreen,
 	GameMap: GameMapScreen,
+	GameMapSelection: GameMapSelectionScreen,
 	GameQuestion: GameQuestionScreen,
 	GameResult: GameResultScreen,
 	ChallengeList: ChallengeListScreen,

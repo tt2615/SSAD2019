@@ -19,7 +19,7 @@ const LoginScreen = props => {
 				title='Login'
 				onPress={()=>{
 					props.navigation.navigate({
-						routeName: 'GameMap'
+						routeName: 'GameMapSelection'
 					})
 				}}
 			/>

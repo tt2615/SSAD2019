@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native'
+import { Image, View, Text, Platform } from 'react-native'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
@@ -47,8 +47,10 @@ export default function App() {
 
   //render main navigator
   return (
-    <Provider store={store}>
-      <RootNavigator />
-    </Provider>
+      <Provider store={store}>
+          <View style={Platform.os==='IOS'?{height:30}:{}}></View>
+          <RootNavigator />
+      </Provider>
+
   );
 };
