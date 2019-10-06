@@ -5,11 +5,11 @@ import {
 	StyleSheet
 } from 'react-native';
 
-const ProfileScreen = props => {
+const ChallengeListScreen = props => {
 
 	return(
 		<View>
-			<Text>Profile Screen</Text>
+			<Text>ChallengeListScreen Screen</Text>
 		</View>
 	);
 };
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
 	
 });
 
-export default ProfileScreen;
+export default ChallengeListScreen;

@@ -1,16 +1,21 @@
 import React from 'react';
 import {
 	View,
-	Text
+	Text,
+	StyleSheet
 } from 'react-native';
 
 const LeaderBoardScreen = props => {
 
-	return (
+	return(
 		<View>
-			<Text>LeaderBoard Screen</Text>
+			<Text>LeaderBoardScreen Screen</Text>
 		</View>
 	);
-}
+};
+
+const styles = StyleSheet.create({
+	
+});
 
 export default LeaderBoardScreen;
