@@ -25,7 +25,8 @@ const inputReducer = (state,action) => {
 			return {
 				...state,
 				value: action.value,
-				isValid: action.isValid
+				isValid: action.isValid,
+				error: action.error
 			};
 		case INPUT_BLUR:
 			return {
@@ -39,16 +40,17 @@ const inputReducer = (state,action) => {
 
 const Input = props => {
 
+	//update input to parents
+	const { onInputChange, id } = props; //destruct props
+
 	//register inputReducer and initialise inputState
 	const [inputState, dispatch] = useReducer(inputReducer, {
 		//initial State
 		value: props.initialValue ? props.initialValue : '',
-		isValid: props.initialValidity,
-		touched: false //if user has ever entered anything
+		isValid: props.initialValidity ? props.initialValidity : false,
+		touched: false,//if user has ever entered anything
+		error: validate({[id]:props.initialValue ? props.initialValue : ''}, Constrains)[id][0] ? validate({[id]:props.initialValue ? props.initialValue : ''}, Constrains)[id][0] : ''
 	});
-
-	//update input to parents
-	const { onInputChange, id } = props; //destruct props
 	
 	useEffect(()=>{
 		//inform parent whenever there is change in value
@@ -56,12 +58,11 @@ const Input = props => {
 	}, [inputState, onInputChange, id]);
 
 	//validate input legitimacy
-	const errorMessage = '';
 	const textChangeHandler = text => {
-		const validationResult = validate({id:text}, Constrains);
-		let isValid = validationResult ? false : true;
-		errorMessage = validationResult.id[0];
-		dispatch({type:INPUT_CHANGE, value: text, isValid: isValid});
+		const validationResult = validate({[id]:text}, Constrains);
+		const isValid = validationResult[id] ? false : true;
+		const errorMessage = validationResult[id] ? validationResult[id][0] : '';
+		dispatch({type:INPUT_CHANGE, value: text, isValid: isValid, error: errorMessage});
 	}
 
 	//mark input as touched when it lose focus
@@ -70,7 +71,7 @@ const Input = props => {
 	};
 
 	return (
-		<View style={sytles.inputControl}>
+		<View style={styles.inputControl}>
 			<Text style={styles.label}>
 				{props.label}
 			</Text>
@@ -82,12 +83,12 @@ const Input = props => {
 				onBlur={lostFocusHandler}
 			/>
 			{//show error msg for invalid input (after touched)
-				!inputState.isValid && inputState.touched && (
-					<View style={styles.errorContainer}>
-						<Text style={styles.errorText}>
-							{errorMessage}
-						</Text>
-					</View>
+			!inputState.isValid && inputState.touched && (
+				<View style={styles.errorContainer}>
+					<Text style={styles.errorText}>
+						{inputState.error}
+					</Text>
+				</View>
 			)}
 		</View>
 	);

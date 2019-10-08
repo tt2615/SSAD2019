@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native'
+import { YellowBox } from 'react-native'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
@@ -10,12 +10,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'; //todo: remove a
 
 //todo: import reducers
 import authReducer from './store/reducers/authReducer';
+import userReducer from './store/reducers/userReducer';
 
-import RootNavigator from './navigation/RootNavigator';
+import NavigationContainer from './navigation/NavigationContainer';
 
 //add reducers
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  user: userReducer
 });
 
 //todo: remove devtools after dev is finished
@@ -30,6 +32,10 @@ const fetchFont = () => {
 };
 
 export default function App() {
+
+  //suppress the irritating timer warning
+  YellowBox.ignoreWarnings(['Setting a timer']);
+
   //load elements
   const [isReady, setIsReady] = useState(false);
   
@@ -48,7 +54,7 @@ export default function App() {
   //render main navigator
   return (
     <Provider store={store}>
-      <RootNavigator />
+      <NavigationContainer />
     </Provider>
   );
 };

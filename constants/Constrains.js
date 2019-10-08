@@ -1,14 +1,11 @@
 //input criteria
 
 export default {
-	userID: {
+	email: {
 		presence: {
 			allowEmpty: false
 		},
-		format:{
-			pattern: /[A-Z][0-9]{7}[A-Z]/,
-			message: "must be a valid matriculation No."
-		}
+		email: true
 	},
 	password: {
 		presence: {

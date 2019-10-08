@@ -1,7 +1,9 @@
+import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 //import screens
+import StartupScreen from '../screens/StartupScreen';
 import LoginScreen from '../screens/Login/LoginScreen';
 
 import StudentProfileScreen from '../screens/student/StudentProfileScreen';
@@ -14,12 +16,12 @@ import ChallengeQuestionScreen from '../screens/student/ChallengeQuestionScreen'
 import ChallengeResultScreen from '../screens/student/ChallengeResultScreen';
 import LeaderBoardScreen from '../screens/student/LeaderBoardScreen';
 
+import TeacherHomeScreen from '../screens/teacher/TeacherHomeScreen';
 import TeacherProfileScreen from '../screens/teacher/TeacherProfileScreen';
 import SocialMediaScreen from '../screens/teacher/SocialMediaScreen';
 import ReportScreen from '../screens/teacher/ReportScreen';
 
-const RootNavigator = createStackNavigator({
-	Login: LoginScreen,
+const StudentNavigator = createStackNavigator({
 	StudentProfile: StudentProfileScreen,
 	GameMap: GameMapScreen,
 	GameQuestion: GameQuestionScreen,
@@ -29,15 +31,43 @@ const RootNavigator = createStackNavigator({
 	ChallengeQuestion: ChallengeQuestionScreen,
 	ChallengeResult: ChallengeResultScreen,
 	LeaderBoard: LeaderBoardScreen,
-	TeacherProfile: TeacherProfileScreen,
-	SocialMedia: SocialMediaScreen,
-	Report: ReportScreen
 },{
-	initialRouteName: "Login",
+	initialRouteName: 'GameMap',
 	headerMode: 'none',
     navigationOptions: {
         headerVisible: false,
     }
 });
 
-export default createAppContainer(RootNavigator);
+const TeacherNavigator = createStackNavigator({
+	TeacherHome: TeacherHomeScreen,
+	TeacherProfile: TeacherProfileScreen,
+	SocialMediaScreen: SocialMediaScreen,
+	Report: ReportScreen
+},{
+	initialRouteName: 'TeacherHome',
+	headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+});
+
+const AuthNavigator = createStackNavigator(
+  {
+    Login: LoginScreen
+  },{
+	headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+});
+
+const MainNavigator = createSwitchNavigator({
+	Startup: StartupScreen,
+	Auth: AuthNavigator,
+	Student: StudentNavigator,
+	Teacher: TeacherNavigator
+});
+
+
+export default createAppContainer(MainNavigator);
