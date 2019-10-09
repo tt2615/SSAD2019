@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { YellowBox } from 'react-native'
+import { Image, View, Text, Platform, YellowBox } from 'react-native'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
