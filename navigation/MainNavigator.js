@@ -34,7 +34,7 @@ const StudentNavigator = createStackNavigator({
 	ChallengeResult: ChallengeResultScreen,
 	LeaderBoard: LeaderBoardScreen,
 },{
-	initialRouteName: 'GameMap',
+	initialRouteName: 'GameMapSelection',
 	headerMode: 'none',
     navigationOptions: {
         headerVisible: false,
