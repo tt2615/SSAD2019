@@ -160,8 +160,7 @@ const LoginScreen = props => {
 							onPress={() => {
 			                  setIsSignup(prevState => !prevState);
 			                }}
-						/>
-						
+						/>						
 					</View>				
 				</ScrollView>
 			</Card>

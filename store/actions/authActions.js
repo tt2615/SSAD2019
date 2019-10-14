@@ -114,7 +114,6 @@ export const login = (email, password) => {
 		);
 
 		const type = getState().user.userType;
-		console.log(type);
 
 		const expirationDate = new Date(
 		  	new Date().getTime() + parseInt(resultData.expiresIn) * 1000

@@ -41,6 +41,26 @@ export default (state=initialState, action) => {
             		ttPassword: action.userTtPassword
 				};
 			}
+
+		case UPDATE_USER:
+			if(action.userType==='student'){
+				return {
+					...state,
+					userName: action.userName,
+					character: action.character,
+					userTotalScore: action.totalScore
+				};
+			} else{
+				return{
+					...state,
+					userName: action.userName,
+					fbAccountunt: action.userFbAccount,
+					fbPassword: action.userFbPassword,
+            		ttAccount: action.userTtAccount,
+            		ttPassword: action.userTtPassword
+				};
+			}
+
 		default: 
 			return state;
 	}

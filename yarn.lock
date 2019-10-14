@@ -1976,6 +1976,11 @@ expo-constants@~7.0.0:
   dependencies:
     ua-parser-js "^0.7.19"
 
+expo-facebook@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/expo-facebook/-/expo-facebook-7.0.0.tgz#532b42d67ec91df051fa1f41ee8a1322154fba2b"
+  integrity sha512-R/ogRMxFqUCh08f575IR8aPy8q5463E5Sg/Ef7nasuqKKh1tEcVh4JoRXN3pEnZ9hivnRsXvJOchmPsy+L1upw==
+
 expo-file-system@~7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-7.0.0.tgz#ac98233b18774cce299fffd9451f08f21b116564"
@@ -1999,6 +2004,13 @@ expo-linear-gradient@~7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-7.0.0.tgz#91e86f3f4a70428c7ac5e43ee0d06215bca39afd"
   integrity sha512-8VrFWR9tpXrDmk0kMyIpo6C5jKiDRzXPZN55JtyPhjuN1kF8Kle4d9ybNtV+bYd3Ql6PAZXY8Y/bhLAuWv0L9g==
+
+expo-local-authentication@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/expo-local-authentication/-/expo-local-authentication-7.0.0.tgz#aca6b79e59e53ec3d44d4951203abb1a85d9f5c6"
+  integrity sha512-LTFMc8A7hm0Glgs6fSdkpHzrGH2EVqpUPdLQCyvMNwhQMncsh9Q13kzuNhrSjeBX+4M9c8HiH5OymETiC4GQYA==
+  dependencies:
+    invariant "^2.2.4"
 
 expo-location@~7.0.0:
   version "7.0.0"

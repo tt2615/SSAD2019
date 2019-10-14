@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	Button
 } from 'react-native';
 
 const state=[{
@@ -48,6 +49,12 @@ const GameMapSelectionScreen = props => {
 	return(
 		<View style={styles.mainContainer}>
 			<Text style={styles.mapSelection}>Map Selection</Text>
+			<Button 
+				title='user profile' 
+				onPress={()=>{
+					props.navigation.navigate('StudentProfile');
+				}}
+			/>
 			<View style={styles.mapContainer}>
 				{state.map(res=>(
 					<Text key={res.wid} 

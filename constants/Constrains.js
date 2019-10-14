@@ -16,5 +16,13 @@ export default {
 			pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/,
 			message:"must conatin at least 6 numbers, with a mixtrue of digits, small letters and capital letters"
 		}
+	},
+	username: {
+		presence: {
+			allowEmpty: false
+		},
+		length: {
+			maximum: 30
+		}
 	}
 }

@@ -67,9 +67,7 @@ export const getUser = (email) => {
 
     const resData = await response.json();
     for (const key in resData) {
-      console.log(resData[key]);
       if (resData[key].userEmail===email){
-        console.log(resData[key]);
         if(resData[key].userType==='student'){ 
           //load student Info to store
           await dispatch({
@@ -99,5 +97,81 @@ export const getUser = (email) => {
         }
       }
     }
+  };
+};
+
+export const updateStudent = (id, userEmail, userType, userName, character, totalScore) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    //update database
+    const response = await fetch(
+      `https://ssad2019-1cc69.firebaseio.com/users/${id}.json?auth=${token}`,
+        {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          character,
+          totalScore,
+          userEmail,
+          userName,
+          userType
+        })
+      } 
+    );
+
+    if (!response.ok) {
+      throw new Error('Something went wrong when update user information!');
+    }
+
+    //update store
+    dispatch({
+      type: UPDATE_USER,
+      userType: 'student',
+      userName: userName,
+      character: character,
+      userTotalScore: totalScore
+    });
+  };
+};
+
+export const updateTeacher = (id, userEmail, userType, userName, userFbAccount, userFbPassword, userTtAccount, userTtPassword) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    //update database
+    const response = await fetch(
+      `https://ssad2019-1cc69.firebaseio.com/users/${id}.json?auth=${token}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userEmail,
+          userFbAccount,
+          userFbPassword,
+          userName,
+          userTtAccount,
+          userTtPassword,
+          userType
+        })
+      } 
+    );
+
+    if (!response.ok) {
+      throw new Error('Something went wrong when update user information!');
+    }
+
+    //update store
+    dispatch({
+      type: UPDATE_USER,
+      userType: 'teacher',
+      userName: userName,
+      userFbAccount: userFbAccount,
+      userFbPassword: userFbPassword,
+      userTtAccount: userTtAccount,
+      userTtPassword: userTtPassword
+    });    
   };
 };

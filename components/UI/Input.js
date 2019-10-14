@@ -49,7 +49,7 @@ const Input = props => {
 		value: props.initialValue ? props.initialValue : '',
 		isValid: props.initialValidity ? props.initialValidity : false,
 		touched: false,//if user has ever entered anything
-		error: validate({[id]:props.initialValue ? props.initialValue : ''}, Constrains)[id][0] ? validate({[id]:props.initialValue ? props.initialValue : ''}, Constrains)[id][0] : ''
+		error: validate({[id]:props.initialValue ? props.initialValue : ''}, Constrains)[id] ? validate({[id]:props.initialValue ? props.initialValue : ''}, Constrains)[id][0] : ''
 	});
 	
 	useEffect(()=>{
