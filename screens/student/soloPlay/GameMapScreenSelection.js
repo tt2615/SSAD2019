@@ -1,60 +1,44 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
 	View,
 	Text,
 	StyleSheet
 } from 'react-native';
 
-const state=[{
-		wid:1,
-		name: "world 1",
-		picurl: "",
-		currentres: "1"
-	},
-	{
-		wid:2,
-		name:"world 2",
-		picurl: "",
-		curres: "2"
-	},
-	{
-		wid:3,
-		name:"world 2",
-		picurl: "",
-		curres: "2"
-	},
-	{
-		wid:4,
-		name:"world 2",
-		picurl: "",
-		curres: "2"
-	},
-	{
-		wid:5,
-		name:"world 2",
-		picurl: "",
-		curres: "2"
-	},
-	{
-		wid:6,
-		name:"world 2",
-		picurl: "",
-		curres: "2"
-	}
-
-];
-
 const GameMapSelectionScreen = props => {
+
+	// useEffect(()=>{
+	// 	mapOverViewAction.loadMaps(1);
+	// });
+	
+	const [maps,setMaps]=useState([
+        {
+            mapid: 1,
+            name: 'world1',
+            totalScore: 100,
+        },
+        {
+            mapid: 2,
+            name: 'world2',
+            totalScore: 100,
+        },
+        {
+            mapid: 3,
+            name: 'world3',
+            totalScore: 100,
+        },
+    ]);
+
 	return(
 		<View style={styles.mainContainer}>
 			<Text style={styles.mapSelection}>Map Selection</Text>
 			<View style={styles.mapContainer}>
-				{state.map(res=>(
-					<Text key={res.wid} 
+				{maps.map(res=>(
+					<Text key={res.mapid} 
 						onPress={()=>{
 							props.navigation.navigate(
 								'GameMap',
-								{wid: res.wid}
+								{wid: res.mapid}
 							)
 						}}
 						style={styles.mapBlock}>{res.name}</Text>
