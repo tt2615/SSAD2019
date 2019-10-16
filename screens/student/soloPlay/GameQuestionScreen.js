@@ -8,7 +8,7 @@ import {
 import useInterval from '../../../components/UI/intervalHook.js';
 import { StackGestureContext } from 'react-navigation-stack';
 const GameQuestionScreen = props => {
-	const tid=props.tid;
+	const params=props.navigation.state.params;
 	// fake question base
 	const [questionBase, setQuestionBase]=useState([
 		[
@@ -121,16 +121,47 @@ const GameQuestionScreen = props => {
 	const [visited,setVisited]=useState([]);
 		//seconds
 	const [seconds, setSeconds]=useState(5);
+		//styles for question options
+	const [correctStyle, setCorrectStyle]=useState(
+		{
+			backgroundColor: 'green',
+			fontSize: 30,
+			height:100,
+			lineHeight: 100,
+			marginVertical: 15,
+			textAlign: 'center',
+			width: 'auto'
+		}
+	);
+
+	const defaultStyle={
+		backgroundColor: 'green',
+		fontSize: 30,
+		height:100,
+		lineHeight: 100,
+		marginVertical: 15,
+		textAlign: 'center',
+		width: 'auto'
+	}
+
 	//functions
 	const checkAnswer = (e,res) =>{
 		const newScore=curQuestion.difficulty;
+		//tbc
+		setCorrectStyle({
+			backgroundColor:'yellow'
+		});
+		setCorrectStyle(defaultStyle);
+		//tbc
 		if (res===curQuestion.options[curQuestion.answerIndex]){
+			
 			getNextQues(newScore, true);
 		}
 		else{
+
 			getNextQues(newScore, false);
-			}
 		}
+	}
 
 	const getNextQues=(diff,correct)=>{
 		if (correct){
@@ -153,6 +184,7 @@ const GameQuestionScreen = props => {
 		if (correct===true)
 			tempScore+=controls.diff;
 		if (tempCount<6){
+			setSeconds(5);
 			setControls({
 				score: tempScore,
 				diff: tempDiff,
@@ -162,7 +194,15 @@ const GameQuestionScreen = props => {
 			});
 		}
 		else {
-			props.navigation.navigate('GameMap',{wid: props.wid})
+			let pass=false;
+			if (tempScore>6) pass=true;
+			props.navigation.navigate('GameQuestionReport',
+				{wid: params.wid,
+				tid: params.tid, 
+				score: tempScore,
+				pass:pass
+				}
+			);
 		}
 	}
 
@@ -173,7 +213,13 @@ const GameQuestionScreen = props => {
 				return i;
 			}
 		}
-		console.log("Something goes wrong");
+	}
+
+	const chooseStyle=(id)=>{
+		if (id===curQuestion.answerIndex){
+			return correctStyle;
+		}
+		else return defaultStyle;
 	}
 
 	useInterval(()=>{
@@ -184,16 +230,16 @@ const GameQuestionScreen = props => {
 			getNextQues(controls.diff,false);
 			setSeconds(5);	
 		}
-    },1000);
-	
+	},1000);
 
 	//render
 	return(
 		<View style={styles.questionContainer}>
-			<Text>{seconds}</Text>
+			<Text style={styles.timer}>{seconds}</Text>
+			<Text>Current score: {controls.score}</Text>
 			<Text style={styles.questionHeader} numberOfLines={5}>{curQuestion.question}</Text>
 			<View style={styles.questionBody}>
-				{curQuestion.options.map(res=>(<Text key={curQuestion.options.indexOf(res)} onPress={e=> checkAnswer(e,res)} style={styles.questionOptions}>
+				{curQuestion.options.map(res=>(<Text key={curQuestion.options.indexOf(res)} onPress={e=> checkAnswer(e,res)} style={chooseStyle(curQuestion.options.indexOf(res))}>
 				{res}</Text>))}
 			</View>
 		</View>

@@ -6,7 +6,7 @@ import {Text,
         Button} from 'react-native';
 
 const StageButton= props=>{
-    const {tid, wid, position, targetNav}=props;
+    const {tid, wid, score,position, targetNav}=props;
     const styles = StyleSheet.create({
         stageButton:{
             position: 'absolute',
@@ -17,9 +17,11 @@ const StageButton= props=>{
             backgroundColor: 'white'
         }
     });
+
     return(
         <View style={styles.stageButton}>
             <Button title={'Topic'+tid} style={styles.stagePic} onPress={()=>{targetNav.navigate('GameQuestion',{tid: tid, wid:wid})}}></Button>
+            <Text>Total score: {score}</Text>
         </View>
         );
 }

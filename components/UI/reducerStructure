@@ -1,0 +1,25 @@
+MapObject:
+    [{
+        wid: 
+        name: 
+        totalScore:
+    },
+    
+    ]
+
+TopicObject:
+    [{
+        sid: 
+        score:
+        name:
+        available:
+    }，
+    {
+
+    }
+    ]
+
+
+
+DB:
+
