@@ -11,13 +11,17 @@ import { composeWithDevTools } from 'redux-devtools-extension'; //todo: remove a
 //todo: import reducers
 import authReducer from './store/reducers/authReducer';
 import userReducer from './store/reducers/userReducer';
+import SMReducer from './store/reducers/userReducer';
+import challengeReducer from './store/reducers/challengeReducer';
 
 import NavigationContainer from './navigation/NavigationContainer';
 
 //add reducers
 const rootReducer = combineReducers({
   auth: authReducer,
-  user: userReducer
+  user: userReducer,
+  sm: SMReducer,
+  challenge: challengeReducer
 });
 
 //todo: remove devtools after dev is finished

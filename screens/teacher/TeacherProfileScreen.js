@@ -14,6 +14,7 @@ import * as Facebook from 'expo-facebook';
 
 import * as authActions from '../../store/actions/authActions';
 import * as userActions from '../../store/actions/userActions';
+import * as questionActions from '../../store/actions/questionActions';
 import Input from '../../components/UI/Input';
 
 const fbId = '445535162733845';
@@ -118,23 +119,21 @@ const TeacherProfileScreen = props => {
 			console.log(type);
 			console.log('token: '+ token);
 
-
 		    if (type === 'success') {
 		    	console.log('entered');
 		    	const response = await fetch(
 		    	`https://graph.facebook.com/me?fields=id,name,email,about,picture&access_token=${token}`);
-		    	const userId = await response.json();
-		    	console.log(JSON.stringify(userId));
+		    	const userInfo = await response.json();
+		    	console.log(JSON.stringify(userInfo));
 
-
-	      	    const test = await fetch(
-					`https://graph.facebook.com/${userId.id}/permissions`,
-					{
-						method : 'DELETE',
-						body: token
-					}
-				);
-	      	    console.log(JSON.stringify(await test.json()));
+	   			//  const test = await fetch(
+				// 	`https://graph.facebook.com/${userId.id}/permissions`,
+				// 	{
+				// 		method : 'DELETE',
+				// 		body: token
+				// 	}
+				// );
+	      	    // console.log(JSON.stringify(await test.json()));
 		    } else {
 		      	setError(type);
 		    }
@@ -200,6 +199,10 @@ const TeacherProfileScreen = props => {
 					}}
 				/>
 			</View>
+			<Button 
+				title='add questions'
+				onPress={()=>{dispatch(questionActions.addQuestions())}}
+			/>
 		</ScrollView>
 	);
 };
