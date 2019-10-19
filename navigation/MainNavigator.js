@@ -21,8 +21,10 @@ import TeacherHomeScreen from '../screens/teacher/TeacherHomeScreen';
 import TeacherProfileScreen from '../screens/teacher/TeacherProfileScreen';
 import SocialMediaScreen from '../screens/teacher/SocialMediaScreen';
 import ReportScreen from '../screens/teacher/ReportScreen';
+import StudentMainScreen from '../screens/student/StudentMainScreen';
 
 const StudentNavigator = createStackNavigator({
+	StudentMain: StudentMainScreen,
 	StudentProfile: StudentProfileScreen,
 	GameMap: GameMapScreen,
 	GameMapSelection: GameMapSelectionScreen,
@@ -34,7 +36,7 @@ const StudentNavigator = createStackNavigator({
 	ChallengeResult: ChallengeResultScreen,
 	LeaderBoard: LeaderBoardScreen,
 },{
-	initialRouteName: 'GameMapSelection',
+	initialRouteName: 'StudentMain',
 	headerMode: 'none',
     navigationOptions: {
         headerVisible: false,
