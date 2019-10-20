@@ -48,18 +48,7 @@ const GameMapSelectionScreen = props => {
 	return(
 		<View style={styles.mainContainer}>
 			<Text style={styles.mapSelection}>Map Selection</Text>
-			<Button 
-				title='user profile' 
-				onPress={()=>{
-					props.navigation.navigate('StudentProfile');
-				}}
-			/>
-			<Button 
-				title='challenge list' 
-				onPress={()=>{
-					props.navigation.navigate('ChallengeList');
-				}}
-			/>
+
 			<View style={styles.mapContainer}>
 				{state.map(res=>(
 					<Text key={res.wid} 
