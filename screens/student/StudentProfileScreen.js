@@ -123,6 +123,7 @@ const StudentProfileScreen = props => {
 
 	//update database after change
   	useEffect(() => {
+  		console.log('characterId changed')
   		const updateCharacter = async () => {
 	  	   	setError(null);
 			try{
@@ -143,7 +144,11 @@ const StudentProfileScreen = props => {
 		updateCharacter();
   	}, [characterId]);
 
-	//show authentication error
+  	useEffect(()=>{
+  		console.log(userInfo);
+  	},[userInfo]);
+
+	//show error
 	useEffect(() => {
     	if (error) {
       		Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);

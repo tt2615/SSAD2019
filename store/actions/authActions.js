@@ -6,7 +6,7 @@ export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 
 
-//handle signup acions
+//handle signup actions
 export const signup = (email,password) => {
 	return async (dispatch,getState) => {
 		const response = await fetch(

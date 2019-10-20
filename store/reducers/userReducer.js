@@ -1,7 +1,6 @@
 import { LOAD_USER, UPDATE_USER } from '../actions/userActions';
 import socialMediaCredential from '../../models/socialMediaCredential'
 
-// todo: add social media is bad design
 const initialState = {
 	userId: '',
 	userEmail: '',

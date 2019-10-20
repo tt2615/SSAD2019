@@ -42,7 +42,6 @@ const state=[{
 		picurl: "",
 		curres: "2"
 	}
-
 ];
 
 const GameMapSelectionScreen = props => {
@@ -53,6 +52,12 @@ const GameMapSelectionScreen = props => {
 				title='user profile' 
 				onPress={()=>{
 					props.navigation.navigate('StudentProfile');
+				}}
+			/>
+			<Button 
+				title='challenge list' 
+				onPress={()=>{
+					props.navigation.navigate('ChallengeList');
 				}}
 			/>
 			<View style={styles.mapContainer}>

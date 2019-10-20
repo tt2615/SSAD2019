@@ -131,8 +131,10 @@ export const updateStudent = (id, userEmail, userType, userName, character, tota
       userType: 'student',
       userName: userName,
       character: character,
-      userTotalScore: totalScore
+      totalScore: totalScore
     });
+    console.log('after dispatch:');
+    console.log(getState().user);
   };
 };
 
