@@ -3,7 +3,8 @@ import {
 	View,
 	Text,
 	StyleSheet,
-    Button
+    Button,
+    Image
 } from 'react-native';
 
 import * as authActions from '../../store/actions/authActions';
@@ -42,9 +43,13 @@ const StudentMainScreen = props => {
 	return(
 		<View style={styles.mainContainer}>
 			<View style={styles.infoContainer}>
-                <Text>Username: {userInfo.userName}</Text>
+                <Text style = {styles.username}>
+                    <Text>{userInfo.userName}</Text>
+                </Text>
                 <Text>Total score: {userInfo.userTotalScore}</Text>
             </View>
+            <Image style={styles.soloImage} source={require("../../assets/images/icons/sologame3.png")} />
+            <Image style={styles.challengeImage} source={require("../../assets/images/icons/challenge3.png")} />
             <View style={styles.buttonGroup}>
                 <Button title='Start Solo Game' style={styles.navButton} onPress={e=>nav('solo')}></Button>
                 <Button title='View Challenge List' style={styles.navButton} onPress={e=>nav('challenge')}></Button>
@@ -61,12 +66,31 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'100%',
         padding: 30,
-        backgroundColor: 'pink'
+        backgroundColor: '#C8DAD3',
     },
     infoContainer: {
         width: '100%',
         textAlign: 'center',
-        backgroundColor: 'blue',
+        backgroundColor: '#C8DAD3',
+    },
+    username: {
+        width: '100%',
+        textAlign: 'center',
+        marginTop: 20,
+        color: '#324755',
+        fontSize: 28,
+    },
+    soloImage: {
+        marginLeft: 5,
+        marginTop: 60,
+        height: 147,
+        width: 147,
+    },
+    challengeImage: {
+        marginLeft: 200,
+        marginTop: 0,
+        height: 147,
+        width: 147,
     },
     buttonGroup: {
         width:'100%',
