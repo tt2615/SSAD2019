@@ -58,7 +58,7 @@ export const getUser = (email) => {
   return async (dispatch,getState) => {
     // const token = getState().auth.token;
     const response = await fetch(
-      `https://ssad2019-1cc69.firebaseio.com/users/.json?`
+      `https://ssad2019-1cc69.firebaseio.com/users.json?`
     );
 
     if (!response.ok) {
@@ -133,8 +133,6 @@ export const updateStudent = (id, userEmail, userType, userName, character, tota
       character: character,
       totalScore: totalScore
     });
-    console.log('after dispatch:');
-    console.log(getState().user);
   };
 };
 

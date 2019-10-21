@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+    Button
 } from 'react-native';
 
 import * as authActions from '../../store/actions/authActions';
@@ -30,7 +31,7 @@ const StudentMainScreen = props => {
                 break;
                 // tbc params
             case 'challenge':
-                props.navigation.navigate('ChallengeCreation');
+                props.navigation.navigate('ChallengeList');
                 break;
             case 'scoreboard':
                 props.navigation.navigate('LeaderBoard');
@@ -46,7 +47,7 @@ const StudentMainScreen = props => {
             </View>
             <View style={styles.buttonGroup}>
                 <Button title='Start Solo Game' style={styles.navButton} onPress={e=>nav('solo')}></Button>
-                <Button title='Challenge a friend' style={styles.navButton} onPress={e=>nav('challenge')}></Button>
+                <Button title='View Challenge List' style={styles.navButton} onPress={e=>nav('challenge')}></Button>
                 <Button title='View Scoreboard' style={styles.navButton} onPress={e=>nav('scoreboard')}></Button>
                 <Button title='View Profile' style={styles.navButton} onPress={e=>nav('profile')}></Button>
                 <Button title='Logout' style={styles.navButton} onPress={e=>nav('logout')}></Button>

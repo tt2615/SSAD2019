@@ -7,36 +7,40 @@ export const ANSWER_CHALLENGE = 'ANSWER_CHALLENGE';
 export const COMPLETE_CHALLENGE = 'COMPLETE_CHALLENGE';
 
 //create challenge in ChallengeCreationScreen
-export const addChallenge = (diffLvl, challengerId, challengeeId) => {
+export const addChallenge = (diffLvl, challengerId, challengeeId,bidAmount) => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
 		const date = new Date();
+		try {
+			const response = await fetch(
+				`https://ssad2019-1cc69.firebaseio.com/challenges.json?auth=${token}`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						diffLvl,
+						challengerId,
+						challengeeId,
+						bid: bidAmount,
+						date: date.toISOString(),
+						stage:0,
+						winnerId:null,
+						challengerScore: 0,
+						challengeeScroe: 0,
+						isChallengerRead: true,	 
+						isChallengeeRead: false
+					})
+				}
+			);
 
-		const response = await fetch(
-			`https://rn-complete-guide.firebaseio.com/challenges.json?auth=${token}`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					diffLvl,
-					challengerId,
-					challengeeId,
-					date: date.toISOString(),
-					stage:0,
-					winnerId:null,
-					challengerScore: 0,
-					challengeeScroe: 0,
-					isChallengerRead: true,	 
-					isChallengeeRead: false
-				})
-			}
-		);
-
-		if (!response.ok) {	        
-			throw new Error('Something went wrong when create new challenge!');
-	    }
+			if (!response.ok) {	        
+				throw new Error('Something went wrong when create new challenge!');
+		    }
+		} catch(err){
+			throw err;
+		}
 	};
 };
 
@@ -45,7 +49,7 @@ export const loadChallenge = (userId) => {
 	return async (dispatch, getState) => {
 		try {
 			const response = await fetch(
-			`https://rn-complete-guide.firebaseio.com/challenges.json?}`,
+			`https://ssad2019-1cc69.firebaseio.com/challenges.json?`,
 			);
 
 			if (!response.ok) {	        
