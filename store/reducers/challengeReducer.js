@@ -19,12 +19,12 @@ export default (state=initialState, action) => {
 				unreadChallenges: state.unreadChallenges.filter(
 					challenge => challenge.id!==action.id
 				)
-			}
+			};
 		case ACCEPT_CHALLENGES:
-			selectedChallenge = unreadChallenges.filter(
+			const selectedChallenge = state.unreadChallenges.filter(
 				challenge => challenge.id===action.id
 			);
-			updatedChallenge = new Challenge(
+			const updatedChallenge = new Challenge(
 				selectedChallenge.id,
 				selectedChallenge.diffLvl,
 				selectedChallenge.challengerId,

@@ -120,6 +120,7 @@ const ChallengeListScreen = props => {
 	 	   	{challengeList.unreadChallenges.map((value, index) => {
         	return(
         		<ChallengeCard
+        			props={props}
         			key={value.id}
         			challenge={value}
         			userId={userInfo.userEmail}
@@ -130,6 +131,7 @@ const ChallengeListScreen = props => {
 				{challengeList.readChallenges.map((value, index) => {
         	return(
         		<ChallengeCard
+        			props={props}
         			key={value.id}
         			challenge={value}
         			userId={userInfo.userEmail}

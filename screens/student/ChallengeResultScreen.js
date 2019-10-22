@@ -2,14 +2,20 @@ import React from 'react';
 import {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	Button
 } from 'react-native';
 
 const ChallengeResultScreen = props => {
 
 	return(
 		<View>
-			<Text>ChallengeResultScreen Screen</Text>
+			<Button 
+				title='ok'
+				onPress={()=>{
+					props.navigation.navigate('ChallengeList');
+				}}
+			/>
 		</View>
 	);
 };
