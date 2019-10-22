@@ -157,32 +157,25 @@ const StudentProfileScreen = props => {
 		  keyboardVerticalOffset={50}
 		  style={styles.screen}
 		>
-			<ScrollView>
-				<View
-					style={styles.title}
-				>
-					<Text>Student Profile</Text>
+			<ScrollView style={styles.mainContainer}>
+				<View style={styles.headerContainer}>
+					<Text style = {styles.profile_text}>
+						<Text>PROFILE</Text>
+					</Text>
 				</View>
-				<View
-					style={styles.profileInfo}
-				>
-					<Text>Email: </Text>
-					<Text>{userInfo.userEmail}</Text>
+				<View style={styles.emailContainer}>
+					<Text style ={styles.email_text}>EMAIL ADDRESS{"\n"}</Text>
+					<Text style ={styles.email}>{userInfo.userEmail}</Text>
 				</View>
-
-				<View
-					style={styles.profileInfo}
-				>
-					<Text>Total Score: </Text>
-					<Text>{userInfo.userTotalScore}</Text>
+				<View style={styles.scoreContainer}>
+					<Text style={styles.score_text}>TOTAL SCORE{"\n"}</Text>
+					<Text style={styles.score}>{userInfo.userTotalScore}</Text>
 				</View>
-
-				<View
-					style={styles.editInput}
-				>	
-					<Input 
+				<View style={styles.editInput}>	
+					<Input
+						style={{flex:1, fontSize: 18}}
 						id='username'
-						label='User Name'
+						label='USERNAME'
 						editable={isEditing}
 						initialValue={formState.inputValues.username}
 						initialValidity={true}
@@ -193,13 +186,12 @@ const StudentProfileScreen = props => {
 					) : (
 					<Button 
 						title= {isEditing ? 'Save': 'Edit'}
+						color = '#324755'
 						onPress={()=>nameChangeSubmitHandler()}
 					/>)
 					}
 				</View>
-				<View
-					style={styles.characterList}
-				>
+				<View style={styles.characterList}>
 					<FlatList
 						numColumns={2}
 						data={CHARACTERS}
@@ -216,7 +208,7 @@ const StudentProfileScreen = props => {
 										<Image
 											source={images[itemData.item.id]}
 											borderWidth={itemData.item.id === characterId ? 5: 0}
-											borderColor='black'
+											borderColor='#C8DAD3'
 										/>
 									)}
 								</TouchableOpacity>
@@ -233,31 +225,86 @@ const StudentProfileScreen = props => {
 };
 
 const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		margin: 20
+	mainContainer: {
+		width:'100%',
+        height:'100%',
+        backgroundColor: '#87BCBF',
 	},
-	profileInfo: {
-		flexDirection: 'row'
+	headerContainer: {
+        width: '100%',
+        padding: 20,
+        textAlign: 'center',
+        backgroundColor: '#C8DAD3',
+	},
+	profile_text:{
+		width:'100%',
+		textAlign:'center',
+		marginTop: 20,
+		color: '#324755',
+        fontSize: 24,
+	},
+	emailContainer:{
+		width:'100%',
+		padding: 20,
+		textAlign:'center',
+	},
+	email:{
+		width:'100%',
+		textAlign:'left',
+		color: '#324755',
+        fontSize: 14,
+	},
+	email_text:{
+		width:'100%',
+		textAlign:'left',
+		marginTop:20,
+		color: '#324755',
+        fontSize: 18,
+	},
+	scoreContainer:{
+		width:'100%',
+		padding: 20,
+		textAlign:'center',
+	},
+	score_text:{
+		width:'100%',
+		textAlign:'left',
+		color: '#324755',
+        fontSize: 18,
+	},
+	score:{
+		width:'100%',
+		textAlign:'left',
+		color: '#324755',
+        fontSize: 14,
 	},
 	editInput: {
 		flexDirection: 'row',
 		width: '80%',
-		marginVertical: 100
+		padding: 20,
+		fontSize: 18,
+		color: '#324755',
+		//marginVertical: 70
+	},
+	input:{
+		width: '100%',
+		padding: 20,
+		fontSize: 18,
+		color: '#324755',
 	},
 	formState: {
-
+		
 	},
 	textInput: {
 		flex:8
 	},
-	buttonInput: {
-		flex:2
+	button: {
+		flex:2,
+		color:'#324755',
 	},
 	characterList:{
-
+		alignItems: 'center',
+		padding: 20,
 	}
 });
 

@@ -3,7 +3,9 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Button
+	Image,
+	Button,
+	ImageBackground
 } from 'react-native';
 
 const state=[{
@@ -46,34 +48,38 @@ const state=[{
 
 const GameMapSelectionScreen = props => {
 	return(
-		<View style={styles.mainContainer}>
-			<Text style={styles.mapSelection}>Map Selection</Text>
-
-			<View style={styles.mapContainer}>
-				{state.map(res=>(
-					<Text key={res.wid} 
-						onPress={()=>{
-							props.navigation.navigate(
-								'GameMap',
-								{wid: res.wid}
-							)
-						}}
-						style={styles.mapBlock}>{res.name}</Text>
-					
-					))}
+		<ImageBackground source={require('../../../assets/images/backgrounds/map_selection.png')} style={styles.background}>
+			<View style={styles.mainContainer}>
+				{/* <Text style={styles.mapSelection}>Map Selection</Text> */}
+				<View style={styles.mapContainer}>
+					{state.map(res=>(
+						<Text key={res.wid}
+							onPress={()=>{
+								props.navigation.navigate(
+									'GameMap',
+									{wid: res.wid}
+								)
+							}}
+							style={styles.mapBlock}>{res.name}</Text>
+						
+						))}
+				</View>
 			</View>
-		</View>
+		</ImageBackground>
 	);
 };
 
 const styles = StyleSheet.create({
+	background:{
+		flex:1,
+		width: null,
+		height: null,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	mainContainer: {
 		marginTop:50,
 		marginHorizontal:20
-	},
-
-	mapSelection:{
-		fontSize: 50
 	},
 
 	mapContainer:{
@@ -84,10 +90,12 @@ const styles = StyleSheet.create({
 	},
 
 	mapBlock:{
-		width:150,
-		height:150,
+		width:85,
+		height:29,
 		margin:10,
-		backgroundColor:'red'
+		textTransform: 'uppercase',
+		textAlign: 'center',
+		backgroundColor:'#63707E'
 	}
 });
 
