@@ -38,7 +38,7 @@ export default (state=initialState, action) => {
 				selectedChallenge.isChallengerRead,
 				selectedChallenge.isChallengeeRead
 			);
-			otherChallenge = unreadChallenges.filter(
+			otherChallenge = state.unreadChallenges.filter(
 				challenge => challenge.id!==action.id
 			);
 			return{

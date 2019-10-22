@@ -4,7 +4,8 @@ import {
 	View,
 	Text,
 	Button,
-	StyleSheet
+	StyleSheet,
+	ScrollView
 } from 'react-native';
 import useInterval from '../../../components/UI/intervalHook.js';
 import * as mapActions from '../../../store/actions/mapActions';
@@ -165,7 +166,7 @@ const GameQuestionScreen = props => {
 
 	//render
 	return(
-		<View style={styles.questionContainer}>
+		<ScrollView style={styles.questionContainer}>
 			<Text style={styles.timer}>{seconds}</Text>
 			<Text>Current score: {controls.score}</Text>
 			<Text style={styles.questionHeader} numberOfLines={5}>{curQuestion.questionText}</Text>
@@ -173,7 +174,7 @@ const GameQuestionScreen = props => {
 				{curQuestion.options.map(res=>(<Text key={curQuestion.options.indexOf(res)} onPress={e=> checkAnswer(e,res)} style={chooseStyle(curQuestion.options.indexOf(res))}>
 				{res}</Text>))}
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
