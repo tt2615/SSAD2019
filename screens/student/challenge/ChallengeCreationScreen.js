@@ -12,8 +12,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import NumericInput from 'react-native-numeric-input' //https://www.npmjs.com/package/react-native-numeric-input
 
-import * as challengeActions from '../../store/actions/challengeActions';
-import * as userActions from '../../store/actions/userActions';
+import * as challengeActions from '../../../store/actions/challengeActions';
+import * as userActions from '../../../store/actions/userActions';
 
 const ChallengeCreationScreen = props => {
 	const userInfo = useSelector(state=>state.user);

@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChallengeCard from '../../components/Student/ChallengeCard';
-import * as challengeActions from '../../store/actions/challengeActions';
+import ChallengeCard from '../../../components/Student/ChallengeCard';
+import * as challengeActions from '../../../store/actions/challengeActions';
 
 const ChallengeListScreen = props => {
 	const userInfo = useSelector( state=> state.user );

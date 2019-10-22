@@ -11,10 +11,10 @@ import GameMapSelectionScreen from '../screens/student/soloPlay/GameMapSelection
 import GameQuestionScreen from '../screens/student/soloPlay/GameQuestionScreen';
 import GameMapScreen from '../screens/student/soloPlay/GameMapScreen';
 import GameResultScreen from '../screens/student/soloPlay/GameResultScreen';
-import ChallengeListScreen from '../screens/student/ChallengeListScreen';
-import ChallengeCreationScreen from '../screens/student/ChallengeCreationScreen';
-import ChallengeQuestionScreen from '../screens/student/ChallengeQuestionScreen';
-import ChallengeResultScreen from '../screens/student/ChallengeResultScreen';
+import ChallengeListScreen from '../screens/student/challenge/ChallengeListScreen';
+import ChallengeCreationScreen from '../screens/student/challenge/ChallengeCreationScreen';
+import ChallengeQuestionScreen from '../screens/student/challenge/ChallengeQuestionScreen';
+import ChallengeResultScreen from '../screens/student/challenge/ChallengeResultScreen';
 import LeaderBoardScreen from '../screens/student/LeaderBoardScreen';
 
 import TeacherHomeScreen from '../screens/teacher/TeacherHomeScreen';
