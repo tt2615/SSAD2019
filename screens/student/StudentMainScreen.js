@@ -6,11 +6,13 @@ import {
     Button,
     Image,
     ScrollView
+    Dimensions,
 } from 'react-native';
 
 import * as authActions from '../../store/actions/authActions';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const StudentMainScreen = props => {
     //state: userInfo
@@ -47,10 +49,22 @@ const StudentMainScreen = props => {
                 <Text style = {styles.username}>
                     <Text>{userInfo.userName}</Text>
                 </Text>
-                <Text>Total score: {userInfo.userTotalScore}</Text>
+                <Text style = {styles.score}>
+                    <Text>Total score: {userInfo.userTotalScore}</Text>
+                </Text>
             </View>
-            <Image style={styles.soloImage} source={require("../../assets/images/icons/sologame3.png")} />
-            <Image style={styles.challengeImage} source={require("../../assets/images/icons/challenge3.png")} />
+            <View style={styles.imageContainer}>
+                <TouchableOpacity activeOpacity={.5} onPress={e=>nav('solo')}>
+                    <Image resizeMode='contain'
+                        style ={{width: 147, height: 147}}
+                        source={require("../../assets/images/icons/sologame3.png")}/>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={.5} onPress={e=>nav('challenge')}>
+                    <Image resizeMode='contain'
+                        style ={{width: 147, height: 147}}
+                        source={require("../../assets/images/icons/challenge3.png")}/>
+                </TouchableOpacity>
+            </View>
             <View style={styles.buttonGroup}>
                 <Button title='Start Solo Game' style={styles.navButton} onPress={e=>nav('solo')}></Button>
                 <Button title='View Challenge List' style={styles.navButton} onPress={e=>nav('challenge')}></Button>
@@ -66,32 +80,34 @@ const styles = StyleSheet.create({
     mainContainer:{
         width:'100%',
         height:'100%',
-        padding: 30,
-        backgroundColor: '#C8DAD3',
+        backgroundColor: '#87BCBF',
     },
     infoContainer: {
         width: '100%',
+        padding: 20,
         textAlign: 'center',
         backgroundColor: '#C8DAD3',
     },
     username: {
         width: '100%',
         textAlign: 'center',
+        textTransform: 'uppercase',
         marginTop: 20,
         color: '#324755',
-        fontSize: 28,
+        fontSize: 24,
     },
-    soloImage: {
-        marginLeft: 5,
-        marginTop: 60,
-        height: 147,
-        width: 147,
+    score: {
+        width:'100%',
+        textAlign: 'center',
+        color: '#324755',
+        fontSize: 18,
     },
-    challengeImage: {
-        marginLeft: 200,
-        marginTop: 0,
-        height: 147,
-        width: 147,
+    imageContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     buttonGroup: {
         width:'100%',
