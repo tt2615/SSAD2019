@@ -63,3 +63,55 @@ export const addQuestions = () => {
 		}
 	};
 };
+
+const formQuestionObject=(sourceObject,id)=>{
+	let options=[];
+	if (sourceObject.option1) options.push(sourceObject.option1);
+	if (sourceObject.option2) options.push(sourceObject.option2);
+	if (sourceObject.option3) options.push(sourceObject.option3);
+	if (sourceObject.option4) options.push(sourceObject.option4);
+	return {
+		qid: id,
+		diffLvl: sourceObject.diffLvl,
+		questionText: sourceObject.questionText,
+		options: options,
+		correctOption: sourceObject.correctOption,
+		score: sourceObject.score
+	};
+}
+
+export const getQuestions= (wid,sid)=>{
+    return async (dispatch,getState)=>{
+        const response = await fetch(
+            `https://ssad2019-1cc69.firebaseio.com/questions/${wid}/${sid}.json?`
+        );
+        
+        if (!response.ok){
+            throw new Error('Something went wrong when get Questions!');
+        }
+		let tempQuestionArray={easy:[],medium:[],difficult:[]};
+		let count=[0,0,0];
+        const resData = await response.json();
+        for (const key in resData){
+            if (count[0]<5&resData[key].diffLvl===1){
+				tempQuestionArray.easy.push(formQuestionObject(resData[key],key));
+				count[0]+=1;
+			}
+			else if (count[1]<2&resData[key].diffLvl===2){
+				tempQuestionArray.medium.push(formQuestionObject(resData[key],key));
+				count[1]+=1;
+			}
+			else if (count[2]<3&resData[key].diffLvl===3){
+				tempQuestionArray.difficult.push(formQuestionObject(resData[key],key));
+				count[2]+=1;
+			}
+		};
+
+        await dispatch({
+            type: LOAD_QUESTIONS,
+            payload: tempQuestionArray
+		});
+		
+        return;
+    }
+};

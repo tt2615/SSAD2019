@@ -16,6 +16,7 @@ const GameQuestionScreen = props => {
 	const dispatch=useDispatch();
 	const params=props.navigation.state.params;
 	const questionBase=useSelector(state=>state.questions);
+	const userInfo=useSelector(state=>state.user);
 	//current question states
 		//cursors to the next question retrieved and curScore
 	const [controls,setControls]=useState(
@@ -27,6 +28,14 @@ const GameQuestionScreen = props => {
 			visited:[]
 		}
 	);
+
+	const initControls={
+		score: 0,
+		diffLvl:1,
+		internalIndex: 0,
+		count:99999999999,
+		visited:[]
+	}
 		//location of current question
 	const curQuestionBaseMatch=(diffLvl)=>{
 		if (diffLvl===1) return questionBase.easy;
@@ -103,23 +112,29 @@ const GameQuestionScreen = props => {
 				visited: tempVisited
 			});
 		}
-		else {
+		else if (tempCount===6){
 			let pass=false;
 			if (tempScore>=6) {
 				pass=true;
 				if (tempScore>params.prevScore){
-					dispatch(mapActions.updateSection(params.tid,tempScore));
-					dispatch(worldsActions.updateWorlds(params.wid,tempScore-params.prevScore));
+					updateScore(tempScore);
+					setControls(initControls);
 				}
 			}
 			props.navigation.navigate('GameResult',
 				{wid: params.wid,
-				tid: params.tid, 
+				sid: params.sid, 
 				score: tempScore,
 				pass:pass
 				}
 			);
 		}
+	}
+	
+	const updateScore=async (score)=>{
+		console.log('updateScore');
+		await dispatch(mapActions.updateSection(userInfo.userId,params.wid,params.sid,score));
+		await dispatch(worldsActions.updateWorlds(userInfo.userId,params.wid,score-params.prevScore));
 	}
 
 	const checkVisited=(target, visited)=>{
@@ -142,9 +157,10 @@ const GameQuestionScreen = props => {
             setSeconds(seconds-1);
         }
         else {
-			getNextQues(controls.diff,false);
-			setSeconds(5);	
-		}
+				getNextQues(controls.diff,false);
+				setSeconds(5);
+			}
+
 	},1000);
 
 	//render

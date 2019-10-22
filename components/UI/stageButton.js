@@ -2,11 +2,15 @@ import React from 'react';
 import {Text,
         View,
         StyleSheet,
-
         Button} from 'react-native';
+
+import { useDispatch } from 'react-redux';
+
+import * as questionActions from '../../store/actions/questionActions';
 
 const StageButton= props=>{
     const {tid, name, wid, available,score,position, targetNav}=props;
+    const dispatch=useDispatch();
     const styles = StyleSheet.create({
         stageButton:{
             position: 'absolute',
@@ -32,10 +36,12 @@ const StageButton= props=>{
             <View style={styles.stageButton}>
                 <Button title={name} 
                         style={styles.stagePic} 
-                        onPress={()=>{targetNav.navigate('GameQuestion',
-                                                        {tid: tid, 
+                        onPress={async ()=>{
+                            await dispatch(questionActions.getQuestions(wid,tid));
+                            targetNav.navigate('GameQuestion',
+                                                        {sid: tid, 
                                                         wid:wid,
-                                                        prevScore: score})
+                                                        prevScore: score});
                                 }}></Button>
                 <Text>Total score: {score}</Text>
             </View>:

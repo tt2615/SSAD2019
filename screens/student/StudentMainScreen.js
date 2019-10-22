@@ -19,7 +19,7 @@ const StudentMainScreen = props => {
         switch (target){
             case 'solo':
                 props.navigation.navigate('GameMapSelection',{
-                    back:false
+                    wid:2
                 });
                 break;
             case 'logout':

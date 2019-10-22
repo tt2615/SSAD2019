@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useCallback} from 'react';
 import bgDic from '../../../assets/images/backgrounds/bgDic.js';
 import {
 	View,
@@ -10,11 +10,11 @@ import {
 import {useSelector,useDispatch} from 'react-redux';
 import StageButton from '../../../components/UI/stageButton.js';
 import * as mapActions from '../../../store/actions/mapActions';
-
+import * as userActions from '../../../store/actions/userActions';
 
 const GameMapScreen = props => {
 	const [worldInfo, setworldInfo]=useState(props.navigation.state.params.wid);
-	const [stagePosition, setStagePosition]=useState([
+	const [sectionPosition, setSectionPosition]=useState([
 		{
 			x: 10,
 			y:20
@@ -30,45 +30,45 @@ const GameMapScreen = props => {
 		]
 	);
 	const dispatch=useDispatch();
-	const stageInfo=useSelector(state=>state.map);
+	const sectionInfo=useSelector(state=>state.map);
+	// const userInfo=useSelector(state=>state.user);
 
-	// const updateStates =()=>{
-	// 	const navInfo=props.navigation.state.params;
-	// 	if (!(navInfo.tid===undefined)) {
-	// 		const tempTargetTopic={
-	// 			tid: navInfo.tid,
-	// 			score: navInfo.score
-	// 		};
-	// 		changeTargetTopic(tempTargetTopic);
-	// 	};
-	// 	setworldInfo(navInfo.wid);
-	// };
+	// const getSections =useCallback(async () => {
+	// 	try {
+	// 	  await dispatch(mapActions.getSections(userInfo.userId,worldInfo));
+	// 	} catch (err) {
+	// 	  setError(err.message);
+	// 	}
+	//   }, [dispatch]);
 
 	// useEffect(()=>{
 
 	// 	const refresh= props.navigation.addListener(
-	// 		'didFocus',
-	// 		updateStates
+	// 		'willFocus',
+	// 		getSections
 	// 	);
 
 	// 	return (()=>{
 	// 		refresh.remove();
 	// 	})
-	// },[updateStates]);
+	// },[getSections]);
+
 	return(
 		<View>
-			<ImageBackground source={bgDic(worldInfo)} style={styles.imageBackground}>
-				<Text style={styles.returnButton} onPress={e=>{props.navigation.navigate('GameMapSelection'),{back:true}}}>Return</Text>
-						{stageInfo.map(res=>
-						<StageButton key={res.tid} 
-									tid={res.tid} 
-									name={res.name}
-									wid={worldInfo} 
-									score={res.score} 
-									available={res.available}
-									position={{x:stagePosition[res.tid-1].x,y:stagePosition[res.tid-1].y}} 
-									targetNav={props.navigation}/>)}
-			</ImageBackground>
+			{sectionInfo.length===0?<Text>Loading...</Text>:
+				<ImageBackground source={bgDic(worldInfo)} style={styles.imageBackground}>
+					<Text style={styles.returnButton} onPress={e=>props.navigation.navigate('GameMapSelection',{wid:worldInfo})}>Return</Text>
+							{sectionInfo.map(res=>
+							<StageButton key={res.sid} 
+										tid={res.sid} 
+										name={res.name}
+										wid={worldInfo} 
+										score={res.score} 
+										available={res.available}
+										position={{x:sectionPosition[res.sid-1].x,y:sectionPosition[res.sid-1].y}} 
+										targetNav={props.navigation}/>)}
+				</ImageBackground>
+			}
 		</View>
 	);
 };

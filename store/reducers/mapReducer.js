@@ -1,29 +1,14 @@
 import {LOAD_SECTIONS, UPDATE_SECTION} from '../actions/mapActions';
 
-const initialState=[
-    {
-        tid: 1,
-        name: 'Topic 1',
-        score: 0,
-        available: true
-        },
-    {
-        tid:2,
-        name: 'Topic 2',
-        score: 0,
-        available: false
-    },
-    {
-        tid: 3,
-        name: 'Topic 3',
-        score: 0,
-        available: false
-    }
-];
+const initialState=[];
 
 export default (state=initialState, action) => {
     switch (action.type) {
         case LOAD_SECTIONS:
+            state=[];
+            for (let i=0; i<action.payload.length;i++){
+                state.push(action.payload[i]);
+            };
             return state;
         case UPDATE_SECTION:
             for (let i=0; i<state.length; i++){

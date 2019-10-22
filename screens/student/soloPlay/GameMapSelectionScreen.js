@@ -7,28 +7,29 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch} from 'react-redux';
 import * as worldsActions from '../../../store/actions/worldsActions';
+import * as mapActions from '../../../store/actions/mapActions';
+import * as userActions from '../../../store/actions/userActions';
 
 const GameMapSelectionScreen = props => {
-	const [fresh,setFresh]=useState(props.navigation.state.params.back);
-	console.log(fresh);
+	// const [fresh,setFresh]=useState(props.navigation.state.params.back);
+	// console.log(fresh);
 	const dispatch=useDispatch();
 	const worlds = useSelector(state=>state.worlds);
-
-	// const back=()=>{
-	// 	setFresh(true);
+	const userInfo=useSelector(state=>state.user);
+	// const reloadWorlds=()=>{
 	// };
 
 	// useEffect(()=>{
 
 	// const refresh= props.navigation.addListener(
-	// 	'didFocus',
-	// 	back
+	// 	'willFocus',
+	// 	reloadWorlds
 	// );
 
 	// return (()=>{
 	// 	refresh.remove();
 	// 	})
-	// },[back]);
+	// },[reloadWorlds]);
 
 	return(
 		<View style={styles.mainContainer}>
@@ -38,11 +39,12 @@ const GameMapSelectionScreen = props => {
 					if (res.available===true)
 						return (
 						<Text key={res.wid} 
-							onPress={()=>{
+							onPress={async ()=>{
+								await dispatch(mapActions.getSections(userInfo.userId,res.wid));
 								props.navigation.navigate(
 									'GameMap',
 									{wid: res.wid}
-								)
+								);
 							}}
 							style={styles.mapBlock}>
 							{res.name}

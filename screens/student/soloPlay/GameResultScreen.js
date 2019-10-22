@@ -4,10 +4,13 @@ import {
 	Text,
 	StyleSheet
 } from 'react-native';
+import {useDispatch,useSelector} from 'react-redux';
+import * as mapAction from '../../../store/actions/mapActions';
 
 const GameResultScreen = props => {
     const [topicInfo,setTopicInfo]=useState(null);
-
+    const userInfo=useSelector(state=>state.user);
+    const dispatch=useDispatch();
     useEffect(()=>{
         const params=props.navigation.state.params;
         const tempInfo={
@@ -21,8 +24,9 @@ const GameResultScreen = props => {
 
     const passView= (<Text>Congradulations!You have passed the topic!</Text>);
     const failView=<Text>You have failed the topic! Please try again!</Text>;
-    const goback=()=>{
+    const goback=async ()=>{
         //params are for tests only, not connected to db yet
+        await dispatch(mapAction.getSections(userInfo.userId,topicInfo.wid));
         props.navigation.navigate(
             'GameMap',
             {
