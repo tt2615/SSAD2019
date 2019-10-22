@@ -1,6 +1,5 @@
-import { LOAD_CHALLENGES } from '../actions/challengeActions';
+import { SET_CHALLENGES, DELETE_CHALLENGES } from '../actions/challengeActions';
 import Challenge from '../../models/challenge';
-import Question from '../../models/question';
 
 const initialState = {
 	unreadChallenges: [],
@@ -9,11 +8,21 @@ const initialState = {
 
 export default (state=initialState, action) => {
 	switch (action.type){
-		case LOAD_CHALLENGES:
+		case SET_CHALLENGES:
 			return{
 				unreadChallenges: action.unreadChallenges,
 				readChallenges: action.readChallenges
 			};
+		case DELETE_CHALLENGES:
+			console.log('delete challenge in store');
+			return {
+				unreadChallenges: state.unreadChallenges.filter(
+					challenge => challenge.id===action.id
+				),
+				readChallenges: state.readChallenges.filter(
+					challenge => challenge.id===action.id
+				)
+			}
 		default:
 			return state;
 	}
