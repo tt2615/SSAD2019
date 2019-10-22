@@ -1,7 +1,8 @@
 import { AsyncStorage } from 'react-native';
 
 import * as userActions from './userActions';
-
+import * as worldsActions from './worldsActions';
+import * as mapActions from './mapActions';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 
@@ -32,7 +33,6 @@ export const signup = (email,password) => {
 			}
 			throw new Error(message);
 		}
-
 		const resultData = await response.json();
 		dispatch(
 			authenticate(
@@ -55,10 +55,23 @@ export const signup = (email,password) => {
 			)
 			// userActions.addTeacher(email, 'teacher', 'Wu Ziqing','','','','')
 		);
-
 		//place userInfo to store
 		await dispatch(
 			userActions.getUser(email)
+		);
+			//get uid in the store
+		const uid=getState().user.userId;
+		// use uid as key to store basic sction and world info in db
+		dispatch(
+			worldsActions.addWorlds(uid)
+		);
+		
+		dispatch(
+			mapActions.addSections(uid)
+		);
+		// put basic world and section info in store
+		await dispatch(
+			worldsActions.getWorlds(uid)
 		);
 
 		const type = getState().user.userType;
@@ -111,6 +124,13 @@ export const login = (email, password) => {
 		//place userInfo to store
 		await dispatch(
 			userActions.getUser(email)
+		);
+		
+		//get uid in the store
+		const uid=getState().user.userId;
+		
+		await dispatch(
+			worldsActions.getWorlds(uid)
 		);
 
 		const type = getState().user.userType;

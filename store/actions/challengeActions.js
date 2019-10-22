@@ -126,7 +126,7 @@ export const cancelChallenge = (id, bid) => {
 		}
 		//update challenge store
 		await dispatch({
-			type: ACCEPT_CHALLENGES,
+			type: DELETE_CHALLENGES,
 			id:id
 		});
 		//return point to users
@@ -148,6 +148,9 @@ export const acceptChallenge = (id, bid) => {
 	    }
 
 	    const resData = await challengeResponse.json();
+	    if(!resData.auth){
+	    	throw new Error('The challenge has been deleted!')
+	    }
 	    const token = resData.auth;
 	    console.log(token);
 
@@ -171,7 +174,7 @@ export const acceptChallenge = (id, bid) => {
 			console.log('errorId: ' + errorId);
 			let message = 'Something went wrong when accept challenge!';
 			if (errorId === 'EMAIL_EXISTS') {
-				message = 'This email exists already!';
+				message = 'The challenge has been deleted!';
 			}
 			throw new Error(message);
 		}

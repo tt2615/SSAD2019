@@ -11,6 +11,12 @@ import { useDispatch } from 'react-redux';
 import Card from '../UI/Card';
 import * as challengeActions from '../../store/actions/challengeActions';
 
+const diff = {
+	'1':'Easy',
+	'2':'Medium',
+	'3':'Hard'
+};
+
 const ChallengeCard = props => {
 
 	const dispatch = useDispatch();
@@ -42,14 +48,27 @@ const ChallengeCard = props => {
 	};
 
 	const startDoQuestion = () => {
-		console.log('start do question');
-	}
+		Alert.alert('Confirm Start Challenge', 'Do you want to proceed with answering the questions?',
+			 [
+			 	{ text: 'Okay', onPress: () => {
+			 		props.props.navigation.navigate('ChallengeQuestion',
+			 			{
+			 				'challenge':props.challenge
+			 			}
+			 		);
+			 	}},
+			 	{ text: 'Cancel' }
+			 ]
+		);
+	};
 
 	const confirm = () => {
 		console.log('confirm');
-	}
+	};
 
 	const time = moment(props.challenge.time).format('MMMM DD YYYY, HH:mm:ss');
+	const diffLvl = diff[(props.challenge.diffLvl)];
+
 	//before accepted, challenger
 	if(props.challenge.stage===0 && props.userId===props.challenge.challengerId){
 		return(
@@ -57,6 +76,7 @@ const ChallengeCard = props => {
 				<Text>Waiting for opponent's response...</Text>
 				<Text>Opponent: {props.challenge.challengeeId}</Text>
 				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Cancel'
@@ -72,6 +92,7 @@ const ChallengeCard = props => {
 				<Text>You are challenged!</Text>
 				<Text>Opponent: {props.challenge.challengerId}</Text>
 				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Accept'
@@ -81,13 +102,17 @@ const ChallengeCard = props => {
 		);
 	}
 	//do question, challenger
+	//todo: count down
 	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId){
 		return(
 			<Card style={styles.card}>
 				<Text>Opponent: {props.challenge.challengeeId}</Text>
+				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
+				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Start Challenge'
-					onPress={startDoQuestion}
+					onPress={e=>startDoQuestion(props.challenge.id,props.challenge.diffLvl)}
 				/>
 			</Card>
 		);
@@ -97,6 +122,9 @@ const ChallengeCard = props => {
 		return(
 			<Card style={styles.card}>
 				<Text>Opponent: {props.challenge.challengerId}</Text>
+				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
+				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Start Challenge'
 					onPress={startDoQuestion}

@@ -3,13 +3,26 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	FlatList
+	FlatList,
+	Button
 } from 'react-native';
 
 const ChallengeQuestionScreen = props => {
+
 	return(
 		<View>
-			<Text>ChallengeQuestionScreen Screen</Text>
+			<Button 
+				title='correct'
+				onPress={()=>{
+					props.navigation.navigate('ChallengeResult');
+				}}
+			/>
+			<Button
+				title='wrong'
+				onPress={()=>{
+					props.navigation.navigate('ChallengeResult');
+				}}
+			/>
 		</View>
 	);
 };
