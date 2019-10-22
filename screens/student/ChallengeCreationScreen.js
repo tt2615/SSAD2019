@@ -67,7 +67,7 @@ const ChallengeCreationScreen = props => {
   	},[bid]);
 
   	useEffect(()=>{
-  		if (bid<maxBid||maxBid) {
+  		if (bid<maxBid) {
   			setBidWarning(null);
   		}
   		else if (totalPoint===0) {
@@ -87,42 +87,49 @@ const ChallengeCreationScreen = props => {
   			setMaxBid(Math.min(userInfo.userTotalScore,opponentUser[0].userTotalScore));
   		}
   		if(maxBid<=bid){
-  			setBid(0);
-  			console.log(bid);
+  			setBid(maxBid);
   		}
-  	},[opponent,maxBid,bid]);
+  	},[opponent,maxBid]);
 
 	//create opponent list
-	let otherUsersList = otherUsers.map( (s, i) => {
-        return <Picker.Item key={s.userId} value={s.userId} label={s.userEmail} />
+	let otherUsersList = otherUsers.map((s, i) => {
+        return <Picker.Item key={s.userId} value={s.userEmail} label={s.userEmail} />
     });
 
 	//create new challenge upon submit
 	const challengeSubmitHandler = async () => {
-		setIsLoading(true);
-		try{
-			await dispatch(
-				userActions.updateStudent(
-					userInfo.userId, 
-					userInfo.userEmail, 
-					'student',
-					userInfo.userName, 
-					userInfo.character,
-					totalPoint
-				)
-			);
-    		await dispatch(
-    			challengeActions.addChallenge(
-	    			diffLvl,
-	    			userInfo.userId,
-	    			opponent,
-	    			bid
-	    		)
-	    	);
-		} catch(err){
-			setErr(err.message);
-		}
-		setIsLoading(false);
+		Alert.alert('Confirm Challenge', 'Do you want to create a challenge with ' + bid + ' points?',
+			 [
+			 	{ text: 'Okay', onPress: async ()=>{
+	 				setIsLoading(true);
+	 				try{
+	 					await dispatch(
+	 						userActions.updateStudent(
+	 							userInfo.userId, 
+	 							userInfo.userEmail, 
+	 							'student',
+	 							userInfo.userName, 
+	 							userInfo.character,
+	 							totalPoint
+	 						)
+	 					);
+	 		    		await dispatch(
+	 		    			challengeActions.addChallenge(
+	 			    			diffLvl,
+	 			    			userInfo.userEmail,
+	 			    			opponent,
+	 			    			bid
+	 			    		)
+	 			    	);
+	 				} catch(err){
+	 					setErr(err.message);
+	 				}
+	 				setIsLoading(false);
+	 				props.navigation.navigate('ChallengeList');
+			 	}},
+			 	{ text: 'Cancel' }
+			 ]
+		);
 	};
 
   	//show error

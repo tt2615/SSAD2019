@@ -144,10 +144,6 @@ const StudentProfileScreen = props => {
 		updateCharacter();
   	}, [characterId]);
 
-  	useEffect(()=>{
-  		console.log(userInfo);
-  	},[userInfo]);
-
 	//show error
 	useEffect(() => {
     	if (error) {
@@ -229,15 +225,6 @@ const StudentProfileScreen = props => {
 								</Text>
 							</View>
 						)}
-					/>
-				</View>
-				<View>
-					<Button
-						title='Log out'
-						onPress={()=>{
-							dispatch(authActions.logout());
-							props.navigation.navigate('Auth');
-						}}
 					/>
 				</View>
 			</ScrollView>

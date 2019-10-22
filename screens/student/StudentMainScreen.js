@@ -5,6 +5,7 @@ import {
 	StyleSheet,
     Button,
     Image,
+    ScrollView
     Dimensions,
 } from 'react-native';
 
@@ -43,7 +44,7 @@ const StudentMainScreen = props => {
     };
 
 	return(
-		<View style={styles.mainContainer}>
+		<ScrollView style={styles.mainContainer}>
 			<View style={styles.infoContainer}>
                 <Text style = {styles.username}>
                     <Text>{userInfo.userName}</Text>
@@ -88,7 +89,7 @@ const StudentMainScreen = props => {
                 <Button title='View Profile' style={styles.navButton} onPress={e=>nav('profile')}></Button>
                 <Button title='Logout' style={styles.navButton} onPress={e=>nav('logout')}></Button>
             </View>
-		</View>
+		</ScrollView>
 	);
 };
 

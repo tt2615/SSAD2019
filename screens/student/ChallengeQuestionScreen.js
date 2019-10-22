@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	FlatList
 } from 'react-native';
 
 const ChallengeQuestionScreen = props => {
-
 	return(
 		<View>
 			<Text>ChallengeQuestionScreen Screen</Text>
