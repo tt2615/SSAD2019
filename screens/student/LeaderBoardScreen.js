@@ -61,9 +61,10 @@ const LeaderBoardScreen = props => {
 			<FlatList
 				data={userList}
 				keyExtractor={item=>item.userId}
-				renderItem={({item})=>{
+				renderItem={({item,index})=>{
 					return(
 						<Card>
+							<Text>Rank: {index+1}</Text>
 							<Text>{item.userName}</Text>
 							<Text>{item.userEmail}</Text>
 							<Text>{item.userTotalScore}</Text>

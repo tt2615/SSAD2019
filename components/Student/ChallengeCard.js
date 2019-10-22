@@ -66,7 +66,7 @@ const ChallengeCard = props => {
 		console.log('confirm');
 	};
 
-	const time = moment(props.challenge.time).format('MMMM DD YYYY, HH:mm:ss');
+	const time = moment(props.challenge.date).format('MMMM DD YYYY, HH:mm:ss');
 	const diffLvl = diff[(props.challenge.diffLvl)];
 
 	//before accepted, challenger

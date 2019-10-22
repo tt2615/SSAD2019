@@ -152,7 +152,6 @@ export const acceptChallenge = (id, bid) => {
 	    	throw new Error('The challenge has been deleted!')
 	    }
 	    const token = resData.auth;
-	    console.log(token);
 
 		const response = await fetch(
 		  `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
@@ -168,10 +167,8 @@ export const acceptChallenge = (id, bid) => {
 		);		
 
 		if(!response.ok) {
-			console.log(response);
 			const errorResult= await response.json();
 			const errorId = errorResult.error.message;
-			console.log('errorId: ' + errorId);
 			let message = 'Something went wrong when accept challenge!';
 			if (errorId === 'EMAIL_EXISTS') {
 				message = 'The challenge has been deleted!';

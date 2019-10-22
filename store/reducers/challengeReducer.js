@@ -43,7 +43,7 @@ export default (state=initialState, action) => {
 			);
 			return{
 				...state,
-				unreadChallenges: [...updatedChallenge, ...otherChallenge]
+				unreadChallenges: [updatedChallenge, ...otherChallenge]
 			};
 		default:
 			return state;
