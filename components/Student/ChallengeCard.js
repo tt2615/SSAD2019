@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	StyleSheet,
 	Text,
-	Button
+	Button,
+	Alert
 } from 'react-native';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
@@ -14,9 +15,15 @@ const ChallengeCard = props => {
 
 	const dispatch = useDispatch();
 
-	const cancelChallenge = (id) => {
-		console.log('cancel Challenge');
-		dispatch(challengeActions.cancelChallenge(id));
+	const cancelChallenge = async (id) => {
+			Alert.alert('Confirm Cancel Challenge', 'Do you want to cancel this challenge?',
+				 [
+				 	{ text: 'Okay', onPress: async ()=>{
+		 				await dispatch(challengeActions.cancelChallenge(id));
+				 	}},
+				 	{ text: 'Cancel' }
+				 ]
+			);
 	};
 
 	const acceptChallenge = () => {
@@ -63,7 +70,7 @@ const ChallengeCard = props => {
 		);
 	}
 	//do question, challenger
-	else if(props.stage===1&&props.userId===props.challenge.challengerId){
+	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId){
 		return(
 			<Card style={styles.card}>
 				<Text>Opponent: {props.challenge.challengeeId}</Text>
@@ -75,7 +82,7 @@ const ChallengeCard = props => {
 		);
 	}
 	//do question, challengee
-	else if(props.stage===1&&props.userId===props.challenge.challengeeId){
+	else if(props.challenge.stage===1&&props.userId===props.challenge.challengeeId){
 		return(
 			<Card style={styles.card}>
 				<Text>Opponent: {props.challenge.challengerId}</Text>
@@ -99,7 +106,7 @@ const ChallengeCard = props => {
 		);
 	}
 	//completed, challengee
-	else if(props.stage===3&&props.userId===props.challenge.challengeeId){
+	else if(props.challenge.stage===3&&props.userId===props.challenge.challengeeId){
 		return(
 			<Card style={styles.card}>
 				<Text>Opponent: {props.challenge.challengerId}</Text>

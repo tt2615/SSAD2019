@@ -17,10 +17,10 @@ export default (state=initialState, action) => {
 			console.log('delete challenge in store');
 			return {
 				unreadChallenges: state.unreadChallenges.filter(
-					challenge => challenge.id===action.id
+					challenge => challenge.id!==action.id
 				),
 				readChallenges: state.readChallenges.filter(
-					challenge => challenge.id===action.id
+					challenge => challenge.id!==action.id
 				)
 			}
 		default:

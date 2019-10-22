@@ -5,8 +5,8 @@ import {
 	StyleSheet,
     Button,
     Image,
-    ScrollView
-    Dimensions,
+    ScrollView,
+    Dimensions
 } from 'react-native';
 
 import * as authActions from '../../store/actions/authActions';
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
-    }
+    },
     buttonGroup: {
         width:'100%',
         padding: 20,

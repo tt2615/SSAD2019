@@ -37,6 +37,10 @@ const ChallengeListScreen = props => {
 	useEffect(()=>{
 		console.log('challengeList changes:');
 		console.log(challengeList);
+		props.navigation.navigate(
+			'ChallengeList',
+			{test:1}
+		);
 	},[challengeList])
 
 	//whenever enetering challenge list, load challenge

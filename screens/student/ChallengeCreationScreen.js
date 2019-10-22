@@ -27,7 +27,7 @@ const ChallengeCreationScreen = props => {
 	const [err, setErr] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [otherUsers, setOtherUsers] = useState([]);
-	const [maxBid, setMaxBid] = useState();
+	const [maxBid, setMaxBid] = useState(0);
 	const [bidWarning, setBidWarning] = useState();
 
 	//load other users
@@ -81,7 +81,7 @@ const ChallengeCreationScreen = props => {
   	useEffect(()=>{
   		let otherMaxBid = 0;
   		let opponentUser = otherUsers.filter((user)=>{
-  			return user.userId===opponent;
+  			return user.userEmail===opponent;
   		});
   		if(opponentUser[0]) {
   			setMaxBid(Math.min(userInfo.userTotalScore,opponentUser[0].userTotalScore));
