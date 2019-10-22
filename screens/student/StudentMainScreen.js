@@ -48,8 +48,9 @@ const StudentMainScreen = props => {
                 <Text style = {styles.username}>
                     <Text>{userInfo.userName}</Text>
                 </Text>
-                <Text>
-                    Total score: {userInfo.userTotalScore}</Text>
+                <Text style = {styles.score}>
+                    <Text>Total score: {userInfo.userTotalScore}</Text>
+                </Text>
             </View>
             <View style={styles.imageContainer}>
                 <TouchableOpacity activeOpacity={.5} onPress={e=>nav('solo')}>
@@ -78,24 +79,32 @@ const styles = StyleSheet.create({
     mainContainer:{
         width:'100%',
         height:'100%',
-        padding: 30,
-        backgroundColor: '#C8DAD3',
+        backgroundColor: '#87BCBF',
     },
     infoContainer: {
         width: '100%',
+        padding: 20,
         textAlign: 'center',
         backgroundColor: '#C8DAD3',
     },
     username: {
         width: '100%',
         textAlign: 'center',
+        textTransform: 'uppercase',
         marginTop: 20,
         color: '#324755',
-        fontSize: 28,
+        fontSize: 24,
+    },
+    score: {
+        width:'100%',
+        textAlign: 'center',
+        color: '#324755',
+        fontSize: 18,
     },
     imageContainer: {
         flex: 1,
         flexDirection: 'row',
+        padding: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
     },
