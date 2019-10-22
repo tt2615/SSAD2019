@@ -7,7 +7,8 @@ import {
 	Button,
 	Alert,
 	ActivityIndicator,
-	ScrollView
+	ScrollView,
+	SafeAreaView
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import NumericInput from 'react-native-numeric-input' //https://www.npmjs.com/package/react-native-numeric-input
@@ -140,54 +141,56 @@ const ChallengeCreationScreen = props => {
   	}, [err]);
 
 	return(
-		<ScrollView style={styles.screen}>
-			<Text>Difficulty Level</Text>
-			<Picker
-				selectedValue={diffLvl}
-				style={styles.diffcultyLvl}
-				onValueChange={(itemValue, itemIndex) => {setDiffLvl(itemValue);}
-				}>
-				<Picker.Item key="1" label="Easy" value="1" />
-				<Picker.Item key="2" label="Medium" value="2" />
-				<Picker.Item key="3" label="Hard" value="3" />
-			</Picker>
+		<SafeAreaView>
+			<ScrollView style={styles.screen}>
+				<Text>Difficulty Level</Text>
+				<Picker
+					selectedValue={diffLvl}
+					style={styles.diffcultyLvl}
+					onValueChange={(itemValue, itemIndex) => {setDiffLvl(itemValue);}
+					}>
+					<Picker.Item key="1" label="Easy" value="1" />
+					<Picker.Item key="2" label="Medium" value="2" />
+					<Picker.Item key="3" label="Hard" value="3" />
+				</Picker>
 
-			<Text>Choose Opponent</Text>
-			<Picker
-				selectedValue={opponent}
-				style={styles.opponentPicker}
-				onValueChange={(itemValue, itemIndex) =>
-				    {setOpponent(itemValue);}
-				}>
-				{otherUsersList}
-				
-			</Picker>
+				<Text>Choose Opponent</Text>
+				<Picker
+					selectedValue={opponent}
+					style={styles.opponentPicker}
+					onValueChange={(itemValue, itemIndex) =>
+						{setOpponent(itemValue);}
+					}>
+					{otherUsersList}
+					
+				</Picker>
 
-			<Text>Set Bid</Text>
-			<Text>Total Points: {totalPoint}</Text>
-			<NumericInput 
-	            value={bid} 
-	            onChange={value => {
-	            	setBid(value);
-	            }}
-	            valueType='integer'
-	            minValue={0}
-	            maxValue={maxBid}
-	            onLimitReached={(isMax,msg) => {
-	            	
-	            }}
-			/>
-			<Text>{bidWarning}</Text>
-
-			{isLoading ? (
-				 <ActivityIndicator size="small" />
-			):(
-				<Button
-					title='Challenge!'
-					onPress={challengeSubmitHandler}
+				<Text>Set Bid</Text>
+				<Text>Total Points: {totalPoint}</Text>
+				<NumericInput 
+					value={bid} 
+					onChange={value => {
+						setBid(value);
+					}}
+					valueType='integer'
+					minValue={0}
+					maxValue={maxBid}
+					onLimitReached={(isMax,msg) => {
+						
+					}}
 				/>
-			)}
-		</ScrollView>
+				<Text>{bidWarning}</Text>
+
+				{isLoading ? (
+					<ActivityIndicator size="small" />
+				):(
+					<Button
+						title='Challenge!'
+						onPress={challengeSubmitHandler}
+					/>
+				)}
+			</ScrollView>
+		</SafeAreaView>
 	);
 };
 

@@ -10,6 +10,7 @@ import {
 import useInterval from '../../../components/UI/intervalHook.js';
 import * as mapActions from '../../../store/actions/mapActions';
 import * as worldsActions from '../../../store/actions/worldsActions';
+import * as userActions from '../../../store/actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -36,7 +37,7 @@ const GameQuestionScreen = props => {
 		internalIndex: 0,
 		count:99999999999,
 		visited:[]
-	}
+	};
 		//location of current question
 	const curQuestionBaseMatch=(diffLvl)=>{
 		if (diffLvl===1) return questionBase.easy;
@@ -136,6 +137,7 @@ const GameQuestionScreen = props => {
 		console.log('updateScore');
 		await dispatch(mapActions.updateSection(userInfo.userId,params.wid,params.sid,score));
 		await dispatch(worldsActions.updateWorlds(userInfo.userId,params.wid,score-params.prevScore));
+		await dispatch(userActions.updateStudent(userInfo.userId,userInfo.userEmail,userInfo.userType,userInfo.userName,userInfo.character,userInfo.totalScore));
 	}
 
 	const checkVisited=(target, visited)=>{

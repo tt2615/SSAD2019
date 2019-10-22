@@ -5,6 +5,7 @@ import {
 	StyleSheet,
 	Button,
 	FlatList,
+	SafeAreaView,
 	ActivityIndicator,
 	ScrollView
 } from 'react-native';
@@ -35,8 +36,8 @@ const ChallengeListScreen = props => {
 	}, [dispatch, setIsLoading, setError]);
 
 	useEffect(()=>{
-		console.log('challengeList changes:');
-		console.log(challengeList);
+		// console.log('challengeList changes:');
+		// console.log(challengeList);
 		props.navigation.navigate(
 			'ChallengeList',
 			{test:1}
@@ -106,40 +107,42 @@ const ChallengeListScreen = props => {
  	}
 
 	return(
-		<View>
+		<SafeAreaView>
 			<View>
-				<Button
-	 	    		title='create new challenge'
-	 	    		onPress={()=>{
-	 	    			props.navigation.navigate('ChallengeCreation');
-	 	    		}}
-	 	    />
-	 	  </View>
-	 	  <ScrollView>
-	 	    <Text>Ongoing challenge:</Text>
-	 	   	{challengeList.unreadChallenges.map((value, index) => {
-        	return(
-        		<ChallengeCard
-        			props={props}
-        			key={value.id}
-        			challenge={value}
-        			userId={userInfo.userEmail}
-        		/>
-        	);
-      	})}
-				<Text>History:</Text>
-				{challengeList.readChallenges.map((value, index) => {
-        	return(
-        		<ChallengeCard
-        			props={props}
-        			key={value.id}
-        			challenge={value}
-        			userId={userInfo.userEmail}
-        		/>
-        	);
-      	})}
-			</ScrollView>
-		</View>
+				<View>
+					<Button
+						title='create new challenge'
+						onPress={()=>{
+							props.navigation.navigate('ChallengeCreation');
+						}}
+				/>
+			</View>
+			<ScrollView>
+				<Text>Ongoing challenge:</Text>
+				{challengeList.unreadChallenges.map((value, index) => {
+				return(
+					<ChallengeCard
+						props={props}
+						key={value.id}
+						challenge={value}
+						userId={userInfo.userEmail}
+					/>
+				);
+			})}
+					<Text>History:</Text>
+					{challengeList.readChallenges.map((value, index) => {
+				return(
+					<ChallengeCard
+						props={props}
+						key={value.id}
+						challenge={value}
+						userId={userInfo.userEmail}
+					/>
+				);
+			})}
+				</ScrollView>
+			</View>
+		</SafeAreaView>
 	);
 };
 

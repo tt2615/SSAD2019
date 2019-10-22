@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 
 import Card from '../UI/Card';
 import * as challengeActions from '../../store/actions/challengeActions';
+import * as challengeQuesActions from '../../store/actions/challengeQuesActions';
 
 const diff = {
 	'1':'Easy',
@@ -50,10 +51,11 @@ const ChallengeCard = props => {
 	const startDoQuestion = () => {
 		Alert.alert('Confirm Start Challenge', 'Do you want to proceed with answering the questions?',
 			 [
-			 	{ text: 'Okay', onPress: () => {
+			 	{ text: 'Okay', onPress: async() => {
+					 await dispatch(challengeQuesActions.getChallengeQues(props.challenge.diffLvl));
 			 		props.props.navigation.navigate('ChallengeQuestion',
 			 			{
-			 				'challenge':props.challenge
+			 				challenge: props.challenge
 			 			}
 			 		);
 			 	}},
@@ -66,7 +68,7 @@ const ChallengeCard = props => {
 		console.log('confirm');
 	};
 
-	const time = moment(props.challenge.time).format('MMMM DD YYYY, HH:mm:ss');
+	const time = moment(props.challenge.date).format('MMMM DD YYYY, HH:mm:ss');
 	const diffLvl = diff[(props.challenge.diffLvl)];
 
 	//before accepted, challenger
