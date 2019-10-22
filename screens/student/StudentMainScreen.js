@@ -82,13 +82,13 @@ const StudentMainScreen = props => {
                         source={require("../../assets/images/icons/logout_icon.png")}/>
                 </TouchableOpacity>
             </View>
-            <View style={styles.buttonGroup}>
+            {/* <View style={styles.buttonGroup}>
                 <Button title='Start Solo Game' style={styles.navButton} onPress={e=>nav('solo')}></Button>
                 <Button title='View Challenge List' style={styles.navButton} onPress={e=>nav('challenge')}></Button>
                 <Button title='View Scoreboard' style={styles.navButton} onPress={e=>nav('scoreboard')}></Button>
                 <Button title='View Profile' style={styles.navButton} onPress={e=>nav('profile')}></Button>
                 <Button title='Logout' style={styles.navButton} onPress={e=>nav('logout')}></Button>
-            </View>
+            </View> */}
 		</ScrollView>
 	);
 };
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         padding: 20,
+        marginTop: 70,
         alignItems: 'center',
         justifyContent: 'space-between',
     },
@@ -130,14 +131,20 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         padding: 20,
+        marginTop: 90,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     buttonGroup: {
         width:'100%',
         padding: 20,
         backgroundColor: 'red'
     },
+    // buttonGroup: {
+    //     width:'100%',
+    //     padding: 20,
+    //     backgroundColor: 'red'
+    // },
     navButton: {
     }
 
