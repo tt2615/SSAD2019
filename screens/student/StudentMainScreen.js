@@ -1,7 +1,8 @@
 import React from 'react';
 import {
 	View,
-	Text,
+    Text,
+    Button,
 	StyleSheet
 } from 'react-native';
 
@@ -18,7 +19,7 @@ const StudentMainScreen = props => {
         switch (target){
             case 'solo':
                 props.navigation.navigate('GameMapSelection',{
-                    userId: userInfo.userId
+                    back:false
                 });
                 break;
             case 'logout':

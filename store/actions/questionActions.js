@@ -2,6 +2,7 @@ import Question from '../../models/question';
 import QUESTIONS from '../../data/questions';
 
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const LOAD_QUESTIONS = 'LOAD_QUESTION';
 
 export const addQuestions = () => {
 	return async (dispatch, getState) => {

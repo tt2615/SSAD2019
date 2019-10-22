@@ -13,15 +13,19 @@ import authReducer from './store/reducers/authReducer';
 import userReducer from './store/reducers/userReducer';
 import SMReducer from './store/reducers/userReducer';
 import challengeReducer from './store/reducers/challengeReducer';
-
+import worldsReducer from './store/reducers/worldsReducer';
 import NavigationContainer from './navigation/NavigationContainer';
-
+import mapReducer from './store/reducers/mapReducer';
+import questionReducer from './store/reducers/questionReducer';
 //add reducers
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   sm: SMReducer,
-  challenge: challengeReducer
+  challenge: challengeReducer,
+  worlds: worldsReducer,
+  map: mapReducer,
+  questions: questionReducer
 });
 
 //todo: remove devtools after dev is finished
