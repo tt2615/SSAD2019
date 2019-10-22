@@ -16,18 +16,29 @@ const ChallengeCard = props => {
 	const dispatch = useDispatch();
 
 	const cancelChallenge = async (id) => {
-			Alert.alert('Confirm Cancel Challenge', 'Do you want to cancel this challenge?',
-				 [
-				 	{ text: 'Okay', onPress: async ()=>{
-		 				await dispatch(challengeActions.cancelChallenge(id));
-				 	}},
-				 	{ text: 'Cancel' }
-				 ]
-			);
+		Alert.alert('Confirm Cancel Challenge', 'Do you want to cancel this challenge?',
+			 [
+			 	{ text: 'Okay', onPress: async ()=>{
+	 				await dispatch(challengeActions.cancelChallenge(id, props.challenge.bid));
+			 	}},
+			 	{ text: 'Cancel' }
+			 ]
+		);
 	};
 
-	const acceptChallenge = () => {
-		console.log('accept challenge');
+	const acceptChallenge = async (id) => {
+		Alert.alert('Confirm Accept Challenge', 'Do you want to accept this challenge of points ?',
+			 [
+			 	{ text: 'Okay', onPress: async ()=>{
+			 		try{
+	 					await dispatch(challengeActions.acceptChallenge(id, props.challenge.bid));
+			 		} catch (err) {
+			 			Alert.alert('Acceptance Error!', err.message, [{text:'Okay' }]);
+			 		}
+			 	}},
+			 	{ text: 'Cancel' }
+			 ]
+		);
 	};
 
 	const startDoQuestion = () => {
@@ -49,7 +60,7 @@ const ChallengeCard = props => {
 				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Cancel'
-					onPress={e=>cancelChallenge(props.challenge.id)}
+					onPress={e=>cancelChallenge(props.challenge.id, props.challenge.bid)}
 				/>
 			</Card>
 		);
@@ -64,7 +75,7 @@ const ChallengeCard = props => {
 				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Accept'
-					onPress={acceptChallenge}
+					onPress={e=>acceptChallenge(props.challenge.id, props.challenge.bid)}
 				/>
 			</Card>
 		);

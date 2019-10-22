@@ -102,6 +102,7 @@ export const getUser = (email) => {
 
 export const updateStudent = (id, userEmail, userType, userName, character, totalScore) => {
   return async (dispatch, getState) => {
+    console.log(totalScore);
     const token = getState().auth.token;
     //update database
     const response = await fetch(

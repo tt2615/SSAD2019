@@ -1,4 +1,4 @@
-import { SET_CHALLENGES, DELETE_CHALLENGES } from '../actions/challengeActions';
+import { SET_CHALLENGES, DELETE_CHALLENGES, ACCEPT_CHALLENGES } from '../actions/challengeActions';
 import Challenge from '../../models/challenge';
 
 const initialState = {
@@ -14,15 +14,37 @@ export default (state=initialState, action) => {
 				readChallenges: action.readChallenges
 			};
 		case DELETE_CHALLENGES:
-			console.log('delete challenge in store');
 			return {
+				...state,
 				unreadChallenges: state.unreadChallenges.filter(
-					challenge => challenge.id!==action.id
-				),
-				readChallenges: state.readChallenges.filter(
 					challenge => challenge.id!==action.id
 				)
 			}
+		case ACCEPT_CHALLENGES:
+			selectedChallenge = unreadChallenges.filter(
+				challenge => challenge.id===action.id
+			);
+			updatedChallenge = new Challenge(
+				selectedChallenge.id,
+				selectedChallenge.diffLvl,
+				selectedChallenge.challengerId,
+				selectedChallenge.challengeeId,
+				selectedChallenge.bid,
+				selectedChallenge.date,
+				1,
+				selectedChallenge.winnerId,
+				selectedChallenge.ChallengerScore,
+				selectedChallenge.ChallengeeScore,
+				selectedChallenge.isChallengerRead,
+				selectedChallenge.isChallengeeRead
+			);
+			otherChallenge = unreadChallenges.filter(
+				challenge => challenge.id!==action.id
+			);
+			return{
+				...state,
+				unreadChallenges: [...updatedChallenge, ...otherChallenge]
+			};
 		default:
 			return state;
 	}
