@@ -41,7 +41,6 @@ export const getChallengeQues=(diffLvl)=>{
 
         while (count<5){
             random=Math.floor(Math.random()*Number(range)+1);
-            console.log(random);
             if (duplicate.indexOf(random)!=-1) continue;
             else {
                 duplicate.push(random);
