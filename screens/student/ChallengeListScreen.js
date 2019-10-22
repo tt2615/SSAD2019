@@ -106,16 +106,23 @@ const ChallengeListScreen = props => {
  	}
 
 	return(
-		<View>
-			<View>
+		<View style={styles.mainContainer}>
+			
+			<View style={styles.headerContainer}>
+				<Text style={styles.challengeList}>
+					<Text>CHALLENGE LIST</Text>
+				</Text>
+			</View>
+			<View style={styles.buttonStyle}>
 				<Button
-	 	    		title='create new challenge'
+					title='create new challenge'
 	 	    		onPress={()=>{
 	 	    			props.navigation.navigate('ChallengeCreation');
 	 	    		}}
-	 	    />
-	 	  </View>
-	 	  <ScrollView>
+	 	   		 />
+	 		</View>
+		</View>
+		<ScrollView>
 	 	    <Text>Ongoing challenge:</Text>
 	 	   	{challengeList.unreadChallenges.map((value, index) => {
         	return(
@@ -138,12 +145,39 @@ const ChallengeListScreen = props => {
         		/>
         	);
       	})}
-			</ScrollView>
-		</View>
+		</ScrollView>
 	);
 };
 
 const styles = StyleSheet.create({
+	mainContainer:{
+        width:'100%',
+        height:'100%',
+        backgroundColor: '#87BCBF',
+    },
+    headerContainer: {
+        width: '100%',
+        padding: 20,
+        textAlign: 'center',
+        backgroundColor: '#C8DAD3',
+	},
+	buttonStyle:{
+		width:'100%',
+		padding: 20,
+
+	},
+	button:{
+		padding:15,
+		borderRadius:20,
+		backgroundColor:'#F0F3F4'
+	},
+	challengeList:{
+		width: '100%',
+        textAlign: 'center',
+        marginTop: 20,
+        color: '#324755',
+        fontSize: 24,
+	},
 	centered:{
 		flex:1,
 		justifyContent: 'center',
