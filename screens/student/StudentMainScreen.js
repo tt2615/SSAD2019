@@ -64,6 +64,23 @@ const StudentMainScreen = props => {
                         source={require("../../assets/images/icons/challenge3.png")}/>
                 </TouchableOpacity>
             </View>
+            <View style = {styles.iconContainer}>
+                <TouchableOpacity activityOpacity={.5} onPress={e=>nav('scoreboard')}>
+                    <Image resizeMode = 'contain'
+                        style = {{width: 82, height:82}}
+                        source={require("../../assets/images/icons/trophy_icon.png")}/>
+                </TouchableOpacity>
+                <TouchableOpacity activityOpacity={.5} onPress={e=>nav('profile')}>
+                    <Image resizeMode = 'contain'
+                        style = {{width: 82, height:82}}
+                        source={require("../../assets/images/icons/profile_icon.png")}/>
+                </TouchableOpacity>
+                <TouchableOpacity activityOpacity={.5} onPress={e=>nav('logout')}>
+                    <Image resizeMode = 'contain'
+                        style = {{width: 82, height:82}}
+                        source={require("../../assets/images/icons/logout_icon.png")}/>
+                </TouchableOpacity>
+            </View>
             <View style={styles.buttonGroup}>
                 <Button title='Start Solo Game' style={styles.navButton} onPress={e=>nav('solo')}></Button>
                 <Button title='View Challenge List' style={styles.navButton} onPress={e=>nav('challenge')}></Button>
@@ -108,6 +125,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    iconContainer: {
+        flex:1,
+        flexDirection: 'row',
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    }
     buttonGroup: {
         width:'100%',
         padding: 20,
