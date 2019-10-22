@@ -17,6 +17,7 @@ import worldsReducer from './store/reducers/worldsReducer';
 import NavigationContainer from './navigation/NavigationContainer';
 import mapReducer from './store/reducers/mapReducer';
 import questionReducer from './store/reducers/questionReducer';
+import challengeQuesReducer from './store/reducers/challengeQuesReducer';
 //add reducers
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   challenge: challengeReducer,
   worlds: worldsReducer,
   map: mapReducer,
+  challengeQues: challengeQuesReducer,
   questions: questionReducer
 });
 

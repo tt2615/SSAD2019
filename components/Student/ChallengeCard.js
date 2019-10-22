@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 
 import Card from '../UI/Card';
 import * as challengeActions from '../../store/actions/challengeActions';
+import * as challengeQuesActions from '../../store/actions/challengeQuesActions';
 
 const diff = {
 	'1':'Easy',
@@ -50,10 +51,11 @@ const ChallengeCard = props => {
 	const startDoQuestion = () => {
 		Alert.alert('Confirm Start Challenge', 'Do you want to proceed with answering the questions?',
 			 [
-			 	{ text: 'Okay', onPress: () => {
+			 	{ text: 'Okay', onPress: async() => {
+					 await dispatch(challengeQuesActions.getChallengeQues(props.challenge.diffLvl));
 			 		props.props.navigation.navigate('ChallengeQuestion',
 			 			{
-			 				'challenge':props.challenge
+			 				challenge: props.challenge
 			 			}
 			 		);
 			 	}},

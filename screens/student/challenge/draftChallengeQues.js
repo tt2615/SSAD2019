@@ -4,7 +4,6 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	ScrollView,
 	SafeAreaView,
 	FlatList,
 	Button
@@ -15,7 +14,7 @@ import * as challengeQuesActions from '../../../store/actions/challengeQuesActio
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const ChallengeQuestionScreen = props => {
+const GameQuestionScreen = props => {
     const dispatch=useDispatch();
     const curChallenge=props.navigation.state.params.challenge;
     const userInfo=useSelector(state=>state.user);
@@ -65,10 +64,11 @@ const ChallengeQuestionScreen = props => {
 	//functions
 	const checkAnswer = (e,res) =>{
 		if (res===curQuestion.options[curQuestion.correctOption-1]){
-			getNextQues(0,true);
+			getNextQues(diff,true);
 		}
 		else{
-			getNextQues(0,false);
+
+			getNextQues(diff,false);
 		}
 	}
 
@@ -100,12 +100,7 @@ const ChallengeQuestionScreen = props => {
 			);
 		}
 	}
-	const chooseStyle=(id)=>{
-		if (id===curQuestion.answerIndex){
-			return correctStyle;
-		}
-		else return defaultStyle;
-	}
+
 	useInterval(()=>{
         if (seconds>0){
             setSeconds(seconds-1);
@@ -164,4 +159,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ChallengeQuestionScreen;
+export default GameQuestionScreen;
