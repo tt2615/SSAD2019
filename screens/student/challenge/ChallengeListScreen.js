@@ -36,8 +36,8 @@ const ChallengeListScreen = props => {
 	}, [dispatch, setIsLoading, setError]);
 
 	useEffect(()=>{
-		// console.log('challengeList changes:');
-		// console.log(challengeList);
+		console.log('challengeList changes:');
+		console.log(challengeList);
 		props.navigation.navigate(
 			'ChallengeList',
 			{test:1}
@@ -123,7 +123,7 @@ const ChallengeListScreen = props => {
 				return(
 					<ChallengeCard
 						props={props}
-						key={value.id}
+						key={index}
 						challenge={value}
 						userId={userInfo.userEmail}
 					/>
@@ -134,7 +134,7 @@ const ChallengeListScreen = props => {
 				return(
 					<ChallengeCard
 						props={props}
-						key={value.id}
+						key={index}
 						challenge={value}
 						userId={userInfo.userEmail}
 					/>

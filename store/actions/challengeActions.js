@@ -6,6 +6,7 @@ export const DELETE_CHALLENGES = 'DELETE_CHALLENGES';
 export const ACCEPT_CHALLENGES = 'ACCEPT_CHALLENGES';
 export const ANSWER_CHALLENGES = 'ANSWER_CHALLENGES';
 export const COMPLETE_CHALLENGES = 'COMPLETE_CHALLENGES';
+export const CONFIRM_CHALLENGES = 'CONFIRM_CHALLENGES';
 
 //create challenge in ChallengeCreationScreen
 export const addChallenge = (diffLvl, challengerId, challengeeId,bidAmount) => {
@@ -29,8 +30,8 @@ export const addChallenge = (diffLvl, challengerId, challengeeId,bidAmount) => {
 						stage: 0,
 						winnerId: null,
 						challengerScore: 0,
-						challengeeScroe: 0,
-						isChallengerRead: true,	 
+						challengeeScore: 0,
+						isChallengerRead: false,	 
 						isChallengeeRead: false,
 						auth:token
 					})
@@ -73,8 +74,8 @@ export const loadChallenge = (userId) => {
 		    				new Date(resData[key].date),
 		    				resData[key].stage,
 		    				resData[key].winnerId,
-		    				resData[key].ChallengerScore,
-		    				resData[key].ChallengeeScore,
+		    				resData[key].challengerScore,
+		    				resData[key].challengeeScore,
 		    				resData[key].isChallengerRead,
 		    				resData[key].isChallengeeRead
 		    			)
@@ -185,3 +186,177 @@ export const acceptChallenge = (id, bid) => {
 		await dispatch(userActions.updateStudent(userInfo.userId, userInfo.userEmail, 'student', userInfo.userName, userInfo.character, userInfo.userTotalScore-bid));
 	};
 }
+
+//update challenge information after answering
+export const answerChallenge = (id, bid, score) => {
+	return async (dispatch, getState) => {
+		//update firebase
+		const userInfo = getState().user;
+		const challengeResponse = await fetch(
+      		`https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json`
+    	);
+
+    	if (!challengeResponse.ok) {
+	        throw new Error('Something went wrong when get challenge!');
+	    }
+
+	    const resData = await challengeResponse.json();
+	    if(!resData.auth){
+	    	throw new Error('The challenge has been deleted!')
+	    }
+	    const token = resData.auth;
+
+	    let opponentAnswered = false;
+	    if(userInfo.userEmail===resData.challengeeId){//userIsChallengee
+	    	if(resData.isChallengerRead) {
+	    		opponentAnswered=true;
+	    	}
+	    	const response = await fetch(
+	    	  `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
+	    	    {
+	    	    method: 'PATCH',
+	    	    headers: {
+	    	      'Content-Type': 'application/json'
+	    	    },
+	    	    body: JSON.stringify({
+	    	      challengeeScore:score,
+	    	      isChallengeeRead:true
+	    	    })
+	    	  } 
+	    	);	
+
+	    	if(!response.ok) {
+	    		const errorResult= await response.json();
+	    		const errorId = errorResult.error.message;
+	    		let message = 'Something went wrong when update challenge answer!';
+	    		if (errorId === 'EMAIL_EXISTS') {
+	    			message = 'The challenge has been deleted!';
+	    		}
+	    		throw new Error(message);
+	    	}
+	    	
+
+	    	//update challenge store
+	    	await dispatch({
+	    		type:ANSWER_CHALLENGES,
+	    		id:id,
+	    		answerer:'challengee',
+	    		score: score
+	    	});
+	    } else {//challenger
+	    	if(resData.isChallengeeRead) {
+	    		opponentAnswered=true;
+	    	}
+	    	const response = await fetch(
+	    	  `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
+	    	    {
+	    	    method: 'PATCH',
+	    	    headers: {
+	    	      'Content-Type': 'application/json'
+	    	    },
+	    	    body: JSON.stringify({
+	    	      challengerScore:score,
+	    	      isChallengerRead:true,
+	    	    })
+	    	  } 
+	    	);	
+			
+			if(!response.ok) {
+				const errorResult= await response.json();
+				const errorId = errorResult.error.message;
+				let message = 'Something went wrong when update challenge answer!';
+				if (errorId === 'EMAIL_EXISTS') {
+					message = 'The challenge has been deleted!';
+				}
+				throw new Error(message);
+
+			}
+
+			//update challenge store
+			await dispatch({
+				type: ANSWER_CHALLENGES,
+				id:id,
+				answerer:'challenger',
+				score: score
+			});
+		}
+		//if both user answered, update challenge
+		if(opponentAnswered){
+			dispatch(completeChallenge(id,bid));
+		}
+	};
+};
+
+//complete challenge if both finished answering
+export const completeChallenge = (id, bid) => {
+	return async (dispatch, getState) => {
+		const userInfo = getState().user;
+		//increase challenge stage
+		const challengeResponse = await fetch(
+      		`https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json`
+    	);
+
+    	if (!challengeResponse.ok) {
+	        throw new Error('Something went wrong when get challenge!');
+	    }
+
+	    const resData = await challengeResponse.json();
+	    if(!resData.auth){
+	    	throw new Error('The challenge has been deleted!')
+	    }
+	    const token = resData.auth;
+	    const challengerScore = resData.challengerScore;
+	    const challengeeScore = resData.challengeeScore;
+	    const challengerId = resData.challengerId;
+	    const challengeeId = resData.challengeeId;
+
+	    const response = await fetch(
+	      `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
+	        {
+	        method: 'PATCH',
+	        headers: {
+	          'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({
+	          stage:2
+	        })
+	      } 
+	    );	
+	    if(!response.ok) {
+	    	const errorResult= await response.json();
+	    	const errorId = errorResult.error.message;
+	    	let message = 'Something went wrong when update challenge answer!';
+	    	if (errorId === 'EMAIL_EXISTS') {
+	    		message = 'The challenge has been deleted!';
+	    	}
+	    	throw new Error(message);
+	    }
+
+	    //update challenge list store
+	    dispatch({
+	    	type: COMPLETE_CHALLENGES,
+	    	id: id
+	    });
+
+	    //update user score
+	    if((challengerScore>challengeeScore&&challengerId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengeeId===userInfo.userEmail)){//user win: add point to user
+	    	await dispatch(userActions.updateStudent(userInfo.userId, userInfo.userEmail, 'student', userInfo.userName, userInfo.character, userInfo.userTotalScore+bid*2));
+	    } else if((challengerScore>challengeeScore&&challengeeId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengerId===userInfo.userEmail)) { //challengee win: add point to challengee
+	    	console.log('update opponent point');
+	    } else { //draw: return points to both players
+	    	await dispatch(userActions.updateStudent(userInfo.userId, userInfo.userEmail, 'student', userInfo.userName, userInfo.character, userInfo.userTotalScore+bid));
+	    	console.log('update opponent point');
+	    }
+	};
+};
+
+//complete challenge if both finished answering
+export const confirmChallenge = (id) => {
+	return async (dispatch, getState) => {
+		//update challenge list store
+	    dispatch({
+	    	type: CONFIRM_CHALLENGES,
+	    	id: id
+	    });
+	};
+};

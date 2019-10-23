@@ -64,8 +64,8 @@ const ChallengeCard = props => {
 		);
 	};
 
-	const confirm = () => {
-		console.log('confirm');
+	const confirm = (id) => {
+		dispatch(challengeActions.confirmChallenge(id));
 	};
 
 	const time = moment(props.challenge.date).format('MMMM DD YYYY, HH:mm:ss');
@@ -103,6 +103,35 @@ const ChallengeCard = props => {
 			</Card>
 		);
 	}
+
+	//challenger, has done question 1
+	//todo:countdown
+	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId&&props.challenge.isChallengerRead){
+		return(
+			<Card style={styles.card}>
+				<Text>Waiting for opponent to answer...</Text>	
+				<Text>Opponent: {props.challenge.challengeeId}</Text>
+				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
+				<Text>Challenge Time: {time}</Text>
+			</Card>
+		);
+	}
+
+	//challenger, has done question 1
+	//todo:countdown
+	else if(props.challenge.stage===1&&props.userId===props.challenge.challengeeId&&props.challenge.isChallengeeRead){
+		return(
+			<Card style={styles.card}>
+				<Text>Waiting for opponent to answer...</Text>	
+				<Text>Opponent: {props.challenge.challengeeId}</Text>
+				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
+				<Text>Challenge Time: {time}</Text>
+			</Card>
+		);
+	}
+
 	//do question, challenger
 	//todo: count down
 	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId){
@@ -134,26 +163,51 @@ const ChallengeCard = props => {
 			</Card>
 		);
 	}
+
 	//completed, challenger
-	else if(props.stage===3&&props.userId===props.challenge.challengerId){
+	else if(props.challenge.stage===2){
+		let resultMsg = 'You lose...';
+		if(props.challengerScore === props.challengeeScore){
+			resultMsg='Draw';
+		}
+		else if((props.challengerScore > props.challengeeScore && props.userId === props.challengerId)||(props.challengeeScore > props.challengerScore&&props.userId === props.challengeeId)){
+			resultMsg = 'You win!';
+		}
 		return(
 			<Card style={styles.card}>
+				<Text>Result: {resultMsg}</Text>
 				<Text>Opponent: {props.challenge.challengeeId}</Text>
+				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
+				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Confirm'
-					onPress={confirm}
+					onPress={e=>confirm(props.challenge.id)}
 				/>
 			</Card>
 		);
 	}
-	//completed, challengee
-	else if(props.challenge.stage===3&&props.userId===props.challenge.challengeeId){
+
+	//completed, challenger
+	else if(props.challenge.stage===3){
+		let resultMsg = 'You lose...';
+		if(props.challengerScore === props.challengeeScore){
+			resultMsg='Draw';
+		}
+		else if((props.challengerScore > props.challengeeScore && props.userId === props.challengerId)||(props.challengeeScore > props.challengerScore&&props.userId === props.challengeeId)){
+			resultMsg = 'You win!';
+		}
 		return(
 			<Card style={styles.card}>
-				<Text>Opponent: {props.challenge.challengerId}</Text>
+				<Text>Result: {resultMsg}</Text>
+				<Text>Opponent: {props.challenge.challengeeId}</Text>
+				<Text>Bid: {props.challenge.bid}</Text>
+				<Text>Difficulty: {diffLvl}</Text>
+				<Text>Challenge Time: {time}</Text>
 			</Card>
 		);
 	}
+
 	return null;
 };
 
