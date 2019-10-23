@@ -167,10 +167,10 @@ const ChallengeCard = props => {
 	//completed, challenger
 	else if(props.challenge.stage===2){
 		let resultMsg = 'You lose...';
-		if(props.challenge.challengerScore === props.challenge.challengeeScore){
+		if(props.challengerScore === props.challengeeScore){
 			resultMsg='Draw';
 		}
-		else if((props.challenge.challengerScore > props.challenge.challengeeScore && props.userId === props.challenge.challengerId)||(props.challenge.challengeeScore > props.challenge.challengerScore&&props.userId === props.challenge.challengeeId)){
+		else if((props.challengerScore > props.challengeeScore && props.userId === props.challengerId)||(props.challengeeScore > props.challengerScore&&props.userId === props.challengeeId)){
 			resultMsg = 'You win!';
 		}
 		return(
@@ -191,10 +191,10 @@ const ChallengeCard = props => {
 	//completed, challenger
 	else if(props.challenge.stage===3){
 		let resultMsg = 'You lose...';
-		if(props.challenge.challengerScore === props.challenge.challengeeScore){
+		if(props.challengerScore === props.challengeeScore){
 			resultMsg='Draw';
 		}
-		else if((props.challenge.challengerScore > props.challenge.challengeeScore && props.userId === props.challenge.challengerId)||(props.challenge.challengeeScore > props.challenge.challengerScore&&props.userId === props.challenge.challengeeId)){
+		else if((props.challengerScore > props.challengeeScore && props.userId === props.challengerId)||(props.challengeeScore > props.challengerScore&&props.userId === props.challengeeId)){
 			resultMsg = 'You win!';
 		}
 		return(

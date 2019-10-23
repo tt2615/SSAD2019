@@ -142,7 +142,6 @@ export const getUser = (email) => {
  */
 export const updateStudent = (id, userEmail, userType, userName, character, totalScore) => {
   return async (dispatch, getState) => {
-    const score = getState().user.userTotalScore+totalScore;
     const token = getState().auth.token;
     //update database
     const response = await fetch(
@@ -154,7 +153,7 @@ export const updateStudent = (id, userEmail, userType, userName, character, tota
         },
         body: JSON.stringify({
           character,
-          totalScore:score,
+          totalScore,
           userEmail,
           userName,
           userType
