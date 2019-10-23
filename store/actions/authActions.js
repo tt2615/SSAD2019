@@ -7,7 +7,13 @@ export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 
 
-//handle signup actions
+/**
+ * @method
+ * @desc The method handles user signup. When auth is passed, related user information and basic setup information will be added to database.
+ * @param {*} email
+ * @param {*} password
+ * 
+ */
 export const signup = (email,password) => {
 	return async (dispatch,getState) => {
 		const response = await fetch(
@@ -80,7 +86,14 @@ export const signup = (email,password) => {
 	};
 };
 
-//handle login actions
+
+/**
+ * @method
+ * @desc The method handles user login. The system returns different home pages based on userType. Information used for progress recording is also loaded to reducer after login.
+ * @param {*} email
+ * @param {*} password
+ * 
+ */
 export const login = (email, password) => {
 	return async (dispatch,getState) => {
 		const response = await fetch(
@@ -143,7 +156,14 @@ export const login = (email, password) => {
 	};
 };
 
-//function to dispatch authenticate to reducer
+/**
+ * @method
+ * @desc The mothod is used for aithentication.
+ * @param {*} userId
+ * @param {*} token
+ * @param {*} expiryTime
+ * 
+ */
 export const authenticate = (userId, token, expiryTime) => {
 	return dispatch => {
 		dispatch(setLogoutTimer(expiryTime));
@@ -151,6 +171,11 @@ export const authenticate = (userId, token, expiryTime) => {
 	};
 };
 
+/**
+ * @method
+ * @desc User logout. Login status will be cleared in local storage.
+ *
+ */
 export const logout = () => {
   	clearLogoutTimer();
   	AsyncStorage.removeItem('userData');
@@ -160,13 +185,24 @@ export const logout = () => {
 
 let timer;
 
+
+/**
+ * @method
+ * @desc Clear logout timer
+ */
 const clearLogoutTimer = () => {
 	if(timer) {
 		clearTimeout(timer);
 	}
 };
 
-//logout after a fixed amount of time
+
+/**
+ * @method
+ * @desc Use a timer to automatically logout after a fixed period of time
+ * @param {*} expirationTime
+ *
+ */
 const setLogoutTimer = expirationTime => {
   	return dispatch => {
     	timer = setTimeout(() => {
@@ -175,7 +211,16 @@ const setLogoutTimer = expirationTime => {
   	};
 };
 
-//store userData for auto checkin
+
+/**
+ * @method
+ * @desc Some basic login information is stored in local storage to help auto login.
+ * @param {*} token
+ * @param {*} userId
+ * @param {*} expirationDate
+ * @param {*} email
+ * @param {*} type
+ */
 const saveDataToStorage = (token, userId, expirationDate, email, type) => {
   	AsyncStorage.setItem(
     	'userData',

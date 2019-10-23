@@ -4,6 +4,12 @@ import WORLDS from '../../data/worlds';
 export const LOAD_WORLDS= 'LOAD_WORLDS';
 export const UPDATE_WORLDS= 'UPDATE_SCORE';
 
+/**
+ * @method
+ * @desc Add default worlds information into database after signup as students.
+ * @param {*} uid
+ * 
+ */
 export const addWorlds= (uid)=>{
     return async (dispatch, getState) => {
         for (const key in WORLDS){
@@ -28,6 +34,13 @@ export const addWorlds= (uid)=>{
     };
 };
 
+
+/**
+ * @method
+ * @desc Load worldsInformation from database to reducer after login as students.
+ * @param {*} uid
+ * 
+ */
 export const getWorlds =(uid)=>{
     return async (dispatch,getState)=>{
         const response = await fetch(
@@ -57,6 +70,14 @@ export const getWorlds =(uid)=>{
     }
 };
 
+/**
+ * @method
+ * @desc Update worlds information in both database and reducer if the score changes.
+ * @param {*} uid
+ * @param {*} wid
+ * @param {*} score
+ * 
+ */
 export const updateWorlds= (uid,wid,score)=>{
     return async(dispatch,getState)=>{
         const token= getState().auth.token;
