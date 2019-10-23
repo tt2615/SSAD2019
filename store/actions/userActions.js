@@ -1,6 +1,16 @@
 export const LOAD_USER = 'LOAD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 
+/**
+ * @method
+ * @desc After signup as a student, corresponding student default information is added in the database and also loaded to reducer.
+ * @param {*} email
+ * @param {*} type
+ * @param {*} name
+ * @param {*} character
+ * @param {*} totalScore
+ * 
+ */
 export const addStudent = (email, type, name, character, totalScore) => {
   return async (dispatch, getState) => {
     const response = await fetch(
@@ -26,7 +36,20 @@ export const addStudent = (email, type, name, character, totalScore) => {
   };
 };
 
-//add new teacher to database 
+
+
+/**
+ * @method
+ * @desc  After signup as a teacher, corresponding student default information is added in the database and also loaded to reducer.
+ * @param {*} email
+ * @param {*} type
+ * @param {*} name
+ * @param {*} fbAccount
+ * @param {*} fbPassword
+ * @param {*} TtAccount
+ * @param {*} TtPassword
+ * 
+ */
 export const addTeacher = (email, type, name, fbAccount, fbPassword, TtAccount, TtPassword) => {
   return async (dispatch, getState) => {
     const response = await fetch(
@@ -54,6 +77,12 @@ export const addTeacher = (email, type, name, fbAccount, fbPassword, TtAccount, 
   };
 };
 
+/**
+ * @method
+ * @desc Load user information from databse into reducer.
+ * @param {*} email
+ * 
+ */
 export const getUser = (email) => {
   return async (dispatch,getState) => {
     // const token = getState().auth.token;
@@ -100,6 +129,17 @@ export const getUser = (email) => {
   };
 };
 
+/**
+ * @method
+ * @desc Update student information in both database and reducer after modification is saved. 
+ * @param {*} id
+ * @param {*} userEmail
+ * @param {*} userType
+ * @param {*} userName
+ * @param {*} character
+ * @param {*} totalScore
+ * 
+ */
 export const updateStudent = (id, userEmail, userType, userName, character, totalScore) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
@@ -136,6 +176,19 @@ export const updateStudent = (id, userEmail, userType, userName, character, tota
   };
 };
 
+/**
+ * @method
+ * @desc Update teacher information in both database and reducer after modification is saved.
+ * @param {*} id
+ * @param {*} userEmail
+ * @param {*} userType
+ * @param {*} userName
+ * @param {*} userFbAccount
+ * @param {*} userFbPassword
+ * @param {*} userTtAccount
+ * @param {*} userTtPassword
+ * 
+ */
 export const updateTeacher = (id, userEmail, userType, userName, userFbAccount, userFbPassword, userTtAccount, userTtPassword) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;

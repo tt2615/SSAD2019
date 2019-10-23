@@ -74,6 +74,13 @@ export const addQuestions = () => {
 	};
 };
 
+/**
+ * @method
+ * @desc Create a new questionObject in a more convevient structure
+ * @param {*} sourceObject
+ * @param {*} id
+ * @returns {Object} A new question object
+ */
 const formQuestionObject=(sourceObject,id)=>{
 	let options=[];
 	if (sourceObject.option1) options.push(sourceObject.option1);
@@ -90,6 +97,14 @@ const formQuestionObject=(sourceObject,id)=>{
 	};
 }
 
+
+/**
+ * @method
+ * @desc Load questions from databse into reducer
+ * @param {*} wid
+ * @param {*} sid
+ * 
+ */
 export const getQuestions= (wid,sid)=>{
     return async (dispatch,getState)=>{
         const response = await fetch(

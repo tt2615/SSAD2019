@@ -1,5 +1,13 @@
 export const LOAD_QUESTIONS='LOAD_QUESTIONS';
 
+
+/**
+ * @method
+ * @desc Create a new questionObject in a more convevient structure
+ * @param {*} sourceObject
+ * @param {*} id
+ * @returns {Object} A new question Object
+ */
 const formQuestionObject=(sourceObject,id)=>{
 	let options=[];
 	if (sourceObject.option1) options.push(sourceObject.option1);
@@ -16,6 +24,12 @@ const formQuestionObject=(sourceObject,id)=>{
 	};
 }
 
+/**
+ * @method
+ * @desc Load questions of specific difficulty level from database and store them in the reducer.
+ * @param {*} diffLvl
+ * 
+ */
 export const getChallengeQues=(diffLvl)=>{
     return async (dispatch,getState)=>{
         const diff='d'+diffLvl;
