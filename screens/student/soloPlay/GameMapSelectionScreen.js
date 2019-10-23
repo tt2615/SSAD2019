@@ -35,6 +35,13 @@ const GameMapSelectionScreen = props => {
 		<View style={styles.mainContainer}>
 			<Text style={styles.mapSelection}>Map Selection</Text>
 			<View style={styles.mapContainer}>
+				<Button title='Return' onPress={async ()=>{
+					await dispatch(userActions.getUser(userInfo.userEmail));
+					props.navigation.navigate(
+						'StudentMain',
+						{ uid: userInfo.userId }
+					);
+				}}></Button>
 				{worlds.map(res=>{
 					if (res.available===true)
 						return (

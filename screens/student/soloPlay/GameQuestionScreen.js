@@ -137,7 +137,7 @@ const GameQuestionScreen = props => {
 		console.log('updateScore');
 		await dispatch(mapActions.updateSection(userInfo.userId,params.wid,params.sid,score));
 		await dispatch(worldsActions.updateWorlds(userInfo.userId,params.wid,score-params.prevScore));
-		await dispatch(userActions.updateStudent(userInfo.userId,userInfo.userEmail,userInfo.userType,userInfo.userName,userInfo.character,userInfo.totalScore));
+		await dispatch(userActions.updateStudent(userInfo.userId,userInfo.userEmail,userInfo.userType,userInfo.userName,userInfo.character,score-params.prevScore));
 	}
 
 	const checkVisited=(target, visited)=>{
