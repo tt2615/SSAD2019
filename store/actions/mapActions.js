@@ -5,12 +5,6 @@ import { onSessionInterruptionEnded } from 'expo/build/AR';
 export const LOAD_SECTIONS= 'LOAD_SECTIONS';
 export const UPDATE_SECTION= 'UPDATE_SECTION';
 
-/**
- * @method
- * @desc Add basic section information when users signup
- * @param {*} uid
- * 
- */
 export const addSections=(uid)=>{
     return async (dispatch, getState) => {
         for (const key in SECTIONS){
@@ -36,12 +30,6 @@ export const addSections=(uid)=>{
     };
 };
 
-/**
- * @method
- * @desc Load sections using userId and worldId from database into reducer.
- * @param {*} uid
- * @param {*} wid
- */
 export const getSections = (uid,wid)=>{
     return async (dispatch,getState)=>{
         const response = await fetch(
@@ -73,15 +61,6 @@ export const getSections = (uid,wid)=>{
 };
 
 
-/**
- * @method
- * @desc Update section score and availability once finished. 
- * @param {*} uid
- * @param {*} wid
- * @param {*} sid
- * @param {*} score
- * 
- */
 export const updateSection = (uid,wid,sid,score)=>{
     return async(dispatch, getState)=>{
         const response=await fetch(

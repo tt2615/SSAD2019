@@ -7,16 +7,7 @@ export const ACCEPT_CHALLENGES = 'ACCEPT_CHALLENGES';
 export const ANSWER_CHALLENGES = 'ANSWER_CHALLENGES';
 export const COMPLETE_CHALLENGES = 'COMPLETE_CHALLENGES';
 
-
-/**
- * @method
- * @desc Create a new challenge and add it to database
- * @param {*} diffLvl
- * @param {*} challengerId
- * @param {*} challengeeId
- * @param {*} bidAmount
- * 
- */
+//create challenge in ChallengeCreationScreen
 export const addChallenge = (diffLvl, challengerId, challengeeId,bidAmount) => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
@@ -55,13 +46,7 @@ export const addChallenge = (diffLvl, challengerId, challengeeId,bidAmount) => {
 	};
 };
 
-
-/**
- * @method
- * @desc Using userId as key, searching for challenges in the database and store the challenges in the reducer.
- * @param {*} userId
- * 
- */
+//load challenges when enter screens with challenger list 
 export const loadChallenge = (userId) => {
 	return async (dispatch, getState) => {
 		try {
@@ -124,14 +109,7 @@ export const loadChallenge = (userId) => {
 	};
 };
 
-
-/**
- * @method
- * @desc Delete a specific challenge in database
- * @param {*} id
- * @param {*} bid
- * 
- */
+//cancel challenge
 export const cancelChallenge = (id, bid) => {
 	return async (dispatch, getState) => {
 		//update firebase
@@ -156,14 +134,7 @@ export const cancelChallenge = (id, bid) => {
 	};
 };
 
-
-/**
- * @method
- * @desc After accepting a challenge, the method is used to update its status in database.
- * @param {*} id
- * @param {*} bid
- * @returns
- */
+//accept challenge
 export const acceptChallenge = (id, bid) => {
 	return async (dispatch, getState) => {
 		//update firebase
