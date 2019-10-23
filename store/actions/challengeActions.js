@@ -216,7 +216,15 @@ export const acceptChallenge = (id, bid) => {
 	};
 }
 
-//update challenge information after answering
+
+/**
+ * @method	
+ * @desc Updata user score after users answer challenge questionss
+ * @param {*} id
+ * @param {*} bid
+ * @param {*} score
+ * 
+ */
 export const answerChallenge = (id, bid, score) => {
 	return async (dispatch, getState) => {
 		//update firebase
@@ -316,7 +324,14 @@ export const answerChallenge = (id, bid, score) => {
 	};
 };
 
-//complete challenge if both finished answering
+
+/**
+ * @method
+ * @desc Update winner information after both users finished all 5 question.
+ * @param {*} id
+ * @param {*} bid
+ * @returns
+ */
 export const completeChallenge = (id, bid) => {
 	return async (dispatch, getState) => {
 		const userInfo = getState().user;
@@ -379,7 +394,13 @@ export const completeChallenge = (id, bid) => {
 	};
 };
 
-//complete challenge if both finished answering
+
+/**
+ * @method
+ * @desc Update both user scores after confirming the result
+ * @param {*} id
+ * 
+ */
 export const confirmChallenge = (id) => {
 	return async (dispatch, getState) => {
 		//update challenge list store
