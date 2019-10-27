@@ -130,30 +130,34 @@ const ChallengeListScreen = props => {
 					</TouchableOpacity>
 				</View>
 				<View style={styles.listContainer}>
-					<ScrollView style={styles.ongoingContainer}>
-						<Text style ={styles.ongoingText}>ONGOING CHALLENGE</Text>
-						{challengeList.unreadChallenges.map((value, index) => {
-						return(
+					<Text style ={styles.ongoingText}>ONGOING CHALLENGE</Text>
+					<FlatList
+						onRefresh={loadChallenges}
+						refreshing={isRefreshing}
+						data={challengeList.unreadChallenges}
+						keyExtractor={(item,index) => index.toString()}
+						renderItem={itemData => (
 							<ChallengeCard
 								props={props}
-								key={index}
-								challenge={value}
-								userId={userInfo.userEmail}
-						/>
-						);
-						})}
-						<Text style={styles.historyText}>HISTORY</Text>
-						{challengeList.readChallenges.map((value, index) => {
-						return(
-							<ChallengeCard
-								props={props}
-								key={index}
-								challenge={value}
+								challenge={itemData.item}
 								userId={userInfo.userEmail}
 							/>
-						);
-						})}
-					</ScrollView>
+						)}
+					/>
+				</View>
+				<View style={styles.listContainer}>
+					<Text style={styles.historyText}>HISTORY</Text>
+					<FlatList
+						data={challengeList.readChallenges}
+						keyExtractor={(item,index) => index.toString()}
+						renderItem={itemData => (
+							<ChallengeCard
+								props={props}
+								challenge={itemData.item}
+								userId={userInfo.userEmail}
+							/>
+						)}
+					/>
 				</View>
 			</ImageBackground>
 		</SafeAreaView>

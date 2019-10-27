@@ -52,6 +52,9 @@ const ChallengeCreationScreen = props => {
   				}
   			}
   			setOtherUsers(otherUsers);
+			if(otherUsers){
+				setOpponent(otherUsers[0].userEmail);
+			}
   		};
   		try{
   			setIsLoading(true);

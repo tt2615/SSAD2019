@@ -384,9 +384,20 @@ export const completeChallenge = (id, bid) => {
 
 	    //update user score
 	    if((challengerScore>challengeeScore&&challengerId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengeeId===userInfo.userEmail)){//user win: add point to user
-	    	await dispatch(userActions.updateStudent(userInfo.userId, userInfo.userEmail, 'student', userInfo.userName, userInfo.character, userInfo.userTotalScore+bid*2));
-	    } else if((challengerScore>challengeeScore&&challengeeId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengerId===userInfo.userEmail)) { //challengee win: add point to challengee
+	    	const newScore = userInfo.userTotalScore+bid*2;
+	    	await dispatch(
+	    		userActions.updateStudent(
+	    			userInfo.userId, 
+	    			userInfo.userEmail, 
+	    			'student', 
+	    			userInfo.userName, 
+	    			userInfo.character, 
+	    			newScore
+	    		)
+	    	);
+	    } else if((challengerScore>challengeeScore&&challengeeId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengerId===userInfo.userEmail)) { //opponent win: add point to opponent
 	    	console.log('update opponent point');
+
 	    } else { //draw: return points to both players
 	    	await dispatch(userActions.updateStudent(userInfo.userId, userInfo.userEmail, 'student', userInfo.userName, userInfo.character, userInfo.userTotalScore+bid));
 	    	console.log('update opponent point');

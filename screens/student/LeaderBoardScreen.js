@@ -5,7 +5,8 @@ import {
 	StyleSheet,
 	FlatList,
 	SafeAreaView,
-	Image
+	Image,
+	ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -50,7 +51,6 @@ const LeaderBoardScreen = props => {
   			    }
   			    return 0;
 			  });
-  			console.log(allUsers);
 			  setUserList(allUsers);
 			
 			//get user ranking and score
@@ -99,7 +99,7 @@ const LeaderBoardScreen = props => {
 					</View>
 				</View> 
 			</View>
-			<View>
+			<ScrollView>
 				<FlatList
 					data={userList}
 					keyExtractor={item=>item.userId}
@@ -114,7 +114,7 @@ const LeaderBoardScreen = props => {
 						);
 					}}
 				/>
-			</View>
+			</ScrollView>
 		</SafeAreaView>	
 	);
 };

@@ -90,7 +90,7 @@ const ChallengeCard = props => {
 		);
 	}
 	//before accepted, challengee
-	else if(props.challenge.stage===0&&props.userId===props.challenge.challengeeId){
+	else if(props.challenge.stage===0 && props.userId===props.challenge.challengeeId){
 		return(
 			<Card style={styles.card}>
 				<Text style={styles.challenged}>You are challenged!</Text>
@@ -107,9 +107,9 @@ const ChallengeCard = props => {
 		);
 	}
 
-	//challenger, has done question 1
+	//challenger, has done question
 	//todo:countdown
-	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId&&props.challenge.isChallengerRead){
+	else if(props.challenge.stage===1 && props.userId===props.challenge.challengerId && props.challenge.isChallengerRead){
 		return(
 			<Card style={styles.card}>
 				<Text style={styles.wait}>Waiting for opponent to answer...</Text>	
@@ -121,9 +121,9 @@ const ChallengeCard = props => {
 		);
 	}
 
-	//challenger, has done question 1
+	//challenger, has done question
 	//todo:countdown
-	else if(props.challenge.stage===1&&props.userId===props.challenge.challengeeId&&props.challenge.isChallengeeRead){
+	else if(props.challenge.stage===1 && props.userId===props.challenge.challengeeId && props.challenge.isChallengeeRead){
 		return(
 			<Card style={styles.card}>
 				<Text style={styles.wait}>Waiting for opponent to answer...</Text>	
@@ -137,7 +137,7 @@ const ChallengeCard = props => {
 
 	//do question, challenger
 	//todo: count down
-	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId){
+	else if(props.challenge.stage===1 && props.userId===props.challenge.challengerId){
 		return(
 			<Card style={styles.card}>
 				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
@@ -153,10 +153,9 @@ const ChallengeCard = props => {
 		);
 	}
 	//do question, challengee
-	else if(props.challenge.stage===1&&props.userId===props.challenge.challengeeId){
+	else if(props.challenge.stage===1 && props.userId===props.challenge.challengeeId){
 		return(
 			<Card style={styles.card}>
-
 				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
@@ -195,7 +194,7 @@ const ChallengeCard = props => {
 		);
 	}
 
-	//completed, challenger
+	//confirmed, put into history
 	else if(props.challenge.stage===3){
 		let resultMsg = 'You lose...';
 		if(props.challengerScore === props.challengeeScore){
