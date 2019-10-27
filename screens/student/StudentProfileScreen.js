@@ -219,10 +219,11 @@ const StudentProfileScreen = props => {
 											source={images[itemData.item.id]}
 											borderWidth={itemData.item.id === characterId ? 5: 0}
 											borderColor='#C8DAD3'
+											alignItems='center'
 										/>
 									)}
 								</TouchableOpacity>
-								<Text>
+								<Text style={{color:'#DAA520',fontSize: 12,	fontFamily: 'trajan-pro'}}>
 									{itemData.item.name}
 								</Text>
 							</View>
@@ -272,7 +273,7 @@ const styles = StyleSheet.create({
 		textAlign:'center',
 		color: '#ffffff',
 		fontSize: 18,
-		backgroundColor:'#00000066',
+		backgroundColor:'#00000080',
 		height: 50,
 		textAlignVertical:'center',
 	},
@@ -301,14 +302,14 @@ const styles = StyleSheet.create({
 		textAlign:'center',
 		color: '#ffffff',
 		fontSize: 18,
-		backgroundColor:'#00000066',
+		backgroundColor:'#00000080',
 		height: 50,
 		textAlignVertical:'center',
 	},
 	editInput: {
 		flexDirection: 'row',
 		width: '80%',
-		padding: 20,
+		padding: 40,
 		fontSize: 18,
 		color: '#324755',
 		//marginVertical: 70,
@@ -317,7 +318,8 @@ const styles = StyleSheet.create({
 		width: '100%',
 		padding: 20,
 		fontSize: 18,
-		color: '#324755',
+		color: '#DAA520',
+		fontFamily: 'trajan-pro'
 	},
 	formState: {
 		

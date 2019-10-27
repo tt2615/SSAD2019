@@ -101,13 +101,22 @@ const styles = StyleSheet.create({
 		width: '100%'
 	},
 	label: {
-
+		width:'100%',
+		textAlign:'center',
+		marginTop:20,
+		color: '#DAA520',
+		fontFamily: 'trajan-pro',
+		fontSize: 18,
 	},
 	input: {
 		paddingHorizontal: 2,
 		paddingVertical: 5,
 		borderBottomColor: '#ccc',
-		borderBottomWidth: 1
+		borderBottomWidth: 1,
+		color:'#ffffff',
+		backgroundColor:'#00000080',
+		width:'100%',
+		textAlign:'center'
 	},
 	errorContainer: {
 		marginVertical: 5

@@ -9,7 +9,9 @@ import {
 	ActivityIndicator,
 	ScrollView,
 	SafeAreaView,
-	ImageBackground
+	ImageBackground,
+	Image,
+	TouchableOpacity
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import NumericInput from 'react-native-numeric-input' //https://www.npmjs.com/package/react-native-numeric-input
@@ -198,7 +200,7 @@ const ChallengeCreationScreen = props => {
 							rightButtonBackgroundColor='#00000088'
 							leftButtonBackgroundColor='#00000088'
 							iconStyle={{color:'#DAA520'}}
-							borderColor='#868686'
+							borderColor='white'
 							style={styles.numericInput}
 							value={bid} 
 							onChange={value => {
@@ -213,15 +215,17 @@ const ChallengeCreationScreen = props => {
 						/>
 						<Text style={styles.bidWarning}>{bidWarning}</Text>
 					</View>
-
+					<View style={styles.buttonContainer}>
 						{isLoading ? (
 							<ActivityIndicator size="small" />
 						):(
-							<Button
-								title='Challenge!'
-								onPress={challengeSubmitHandler}
-							/>
+							<TouchableOpacity activeOpacity={.5} onPress={challengeSubmitHandler}>
+								<Image resizeMode='contain'
+								style ={{width: 283, height: 41}}
+								source={require("../../../assets/images/icons/challengeBut.png")}/>
+							</TouchableOpacity>
 						)}
+					</View>
 				</ScrollView>
 			</ImageBackground>
 		</SafeAreaView>
@@ -264,7 +268,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	diffcultyLvl:{
@@ -273,9 +277,13 @@ const styles = StyleSheet.create({
 		color:'#DAA520'
 	},
 	pickerDiffStyle:{
+		width: '100%',
+		height: 100,
 		textAlign: 'center',
 		fontFamily:'trajan-pro',
-		color: '#DAA520'
+		color: '#DAA520',
+		backgroundColor: '#00000088',
+		borderColor:'white'
 	},
 	oppContainer:{
 		width:'100%',
@@ -285,13 +293,16 @@ const styles = StyleSheet.create({
 		padding: 20,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	pickerOppStyle:{
+		width: '100%',
+		height: 150,
 		textAlign: 'center',
 		fontFamily:'trajan-pro',
-		color: '#DAA520'
+		color: '#DAA520',
+		backgroundColor: '#00000088'
 	},
 	opponentPicker:{
 		width:'100%',
@@ -306,9 +317,10 @@ const styles = StyleSheet.create({
 	},
 	setText:{
 		padding: 20,
+		height:30,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	totalPoint:{
@@ -329,6 +341,9 @@ const styles = StyleSheet.create({
 		width:'100%',
 		fontFamily:'trajan-pro',
 		color:'#DAA520'
+	},
+	buttonContainer:{
+		alignItems:'center'
 	}
 
 });
