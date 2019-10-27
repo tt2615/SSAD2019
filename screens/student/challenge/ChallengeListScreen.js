@@ -186,13 +186,14 @@ const styles = StyleSheet.create({
 		width: '100%',
         textTransform: 'uppercase',
 		textAlign:'center',
-		marginTop:35,
+		marginTop: 35,
         color: '#DAA520',
         fontSize: 20,
         fontFamily: 'trajan-pro',
 	},
 	buttonContainer:{
 		flex: 1,
+		marginTop: 70,
 		width: '100%',
 		alignItems: 'center'
 	},
@@ -202,19 +203,20 @@ const styles = StyleSheet.create({
 	},
 	ongoingContainer:{
 		width:'100%',
+		
 	},
 	ongoingText:{
 		padding: 20,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	historyText:{
 		padding: 20,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	centered:{
