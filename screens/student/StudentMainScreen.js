@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
     score: {
         width:'100%',
         textAlign: 'center',
-
         color: '#DAA520',
         fontSize: 18,
         fontFamily: 'trajan-pro',
