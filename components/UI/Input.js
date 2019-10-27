@@ -70,10 +70,17 @@ const Input = props => {
 	};
 
 	return (
+<<<<<<< Updated upstream
 		<View style={sytles.inputControl}>
 			<Text style={styles.label}>
+=======
+		<View style={styles.inputControl}>
+			<View style={{paddingTop: 20}}>
+				<Text style={styles.label}>
+>>>>>>> Stashed changes
 				{props.label}
-			</Text>
+				</Text>
+			</View>
 			<TextInput
 				{...props}
 				style={styles.input}
@@ -110,8 +117,8 @@ const styles = StyleSheet.create({
 		marginVertical: 5
 	},
 	errorText: {
-		color: 'red',
-		fontSize: 13
+		color: '#e74c3c',
+		fontSize: 11
 	}
 });
 
