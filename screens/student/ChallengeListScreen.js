@@ -4,15 +4,7 @@ import {
 	Text,
 	StyleSheet
 } from 'react-native';
-<<<<<<< Updated upstream
 
-const ChallengeListScreen = props => {
-
-	return(
-		<View>
-			<Text>ChallengeListScreen Screen</Text>
-		</View>
-=======
 import { useDispatch, useSelector } from 'react-redux';
 
 import ChallengeCard from '../../components/Student/ChallengeCard';
@@ -164,14 +156,10 @@ const ChallengeListScreen = props => {
 				</ScrollView>
 			</ImageBackground>
 		</SafeAreaView>
->>>>>>> Stashed changes
 	);
 };
 
 const styles = StyleSheet.create({
-<<<<<<< Updated upstream
-	
-=======
 	mainContainer:{
         width:'100%',
         height:'100%',
@@ -210,7 +198,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	}
->>>>>>> Stashed changes
 });
 
 export default ChallengeListScreen;
