@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { useState,useEffect,useCallback } from 'react';
 import {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	FlatList,
+	Button,
+	SafeAreaView,
+	ActivityIndicator,
+	ScrollView,
+	ImageBackground,
+	Image
 } from 'react-native';
-<<<<<<< Updated upstream
-
-const ChallengeListScreen = props => {
-
-	return(
-		<View>
-			<Text>ChallengeListScreen Screen</Text>
-		</View>
-=======
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChallengeCard from '../../components/Student/ChallengeCard';
-import * as challengeActions from '../../store/actions/challengeActions';
-import { SafeAreaView } from 'react-navigation';
+import ChallengeCard from '../../../components/Student/ChallengeCard';
+import * as challengeActions from '../../../store/actions/challengeActions';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ChallengeListScreen = props => {
 	const userInfo = useSelector( state=> state.user );
@@ -101,8 +99,7 @@ const ChallengeListScreen = props => {
  	  return (
  	    <View style={styles.centered}>
  	    	<Button
-				title='create new challenge'
-				color='#F0F3F4'
+ 	    		title='create new challenge'
  	    		onPress={()=>{
  	    			props.navigation.navigate('ChallengeCreation');
  	    		}}
@@ -114,103 +111,116 @@ const ChallengeListScreen = props => {
 
 	return(
 		<SafeAreaView>
-			<ImageBackground source={require('../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+			<ImageBackground source={require('../../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
 				<View style={styles.headerContainer}>
-                    <ImageBackground source={require('../../assets/images/icons/header.png')} style={styles.header}>  
+                    <ImageBackground source={require('../../../assets/images/icons/header.png')} style={styles.header}>  
                         <View>
                             <Text style = {styles.challengeText}>
-								CHALLENGE LIST
+                                CHALLENGE LIST
                             </Text>
                         </View>
                     </ImageBackground>
                 </View>
-				{/* <View style={styles.headerContainer}>
-					<Text style={styles.challengeList}>
-						<Text>CHALLENGE LIST</Text>
-					</Text>
-				</View> */}
-				<View style={styles.buttonStyle}>
-					<Button
-						title='create new challenge'
-						color='#F0F3F4'
-						onPress={()=>{
-							props.navigation.navigate('ChallengeCreation');
-						}}
-					/>
+
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity activeOpacity={.5} onPress={()=>{props.navigation.navigate('ChallengeCreation');}}>
+						<Image resizeMode='contain'
+                            style ={{width: 360, height: 41}}
+                            source={require("../../../assets/images/icons/createChallenge.png")}/>
+					</TouchableOpacity>
 				</View>
-				<ScrollView>
-					<Text>Ongoing challenge:</Text>
-					{challengeList.unreadChallenges.map((value, index) => {
-					return(
-						<ChallengeCard
-							props={props}
-							key={value.id}
-							challenge={value}
-							userId={userInfo.userEmail}
+				<View style={styles.listContainer}>
+					<ScrollView style={styles.ongoingContainer}>
+						<Text style ={styles.ongoingText}>ONGOING CHALLENGE</Text>
+						{challengeList.unreadChallenges.map((value, index) => {
+						return(
+							<ChallengeCard
+								props={props}
+								key={index}
+								challenge={value}
+								userId={userInfo.userEmail}
 						/>
-					);
-				})}
-						<Text>History:</Text>
+						);
+						})}
+						<Text style={styles.historyText}>HISTORY</Text>
 						{challengeList.readChallenges.map((value, index) => {
-					return(
-						<ChallengeCard
-							props={props}
-							key={value.id}
-							challenge={value}
-							userId={userInfo.userEmail}
-						/>
-					);
-				})}
-				</ScrollView>
+						return(
+							<ChallengeCard
+								props={props}
+								key={index}
+								challenge={value}
+								userId={userInfo.userEmail}
+							/>
+						);
+						})}
+					</ScrollView>
+				</View>
 			</ImageBackground>
 		</SafeAreaView>
->>>>>>> Stashed changes
 	);
 };
 
 const styles = StyleSheet.create({
-<<<<<<< Updated upstream
-	
-=======
 	mainContainer:{
-        width:'100%',
+		width:'100%',
         height:'100%',
+        alignItems: 'center',
     },
-    headerContainer: {
+	headerContainer: {
+		flex:2,
+		marginTop:50,
         width: '100%',
-        padding: 20,
-        alignItems: 'center'
+		alignItems: 'center',
+		textAlignVertical:'center',
+	},
+	header:{
+		width: 316,
+		height: 102,
+		alignItems: 'center',
 	},
 	challengeText:{
 		width: '100%',
         textTransform: 'uppercase',
-        textAlign:'center',
+		textAlign:'center',
+		marginTop:35,
         color: '#DAA520',
         fontSize: 20,
         fontFamily: 'trajan-pro',
 	},
-	buttonStyle:{
-		width:'100%',
-		padding: 20,
-	},
-	button:{
-		padding:15,
-		borderRadius:20,
-		backgroundColor:'#F0F3F4'
-	},
-	challengeList:{
+	buttonContainer:{
+		flex: 1,
 		width: '100%',
-        textAlign: 'center',
-        marginTop: 20,
-        color: '#324755',
-        fontSize: 24,
+		alignItems: 'center'
+	},
+	listContainer:{
+		flex: 5,
+		width: '100%'
+	},
+	ongoingContainer:{
+		width:'100%',
+	},
+	ongoingText:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
+	},
+	historyText:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
 	},
 	centered:{
 		flex:1,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	empty:{
+		flex:1
 	}
->>>>>>> Stashed changes
 });
 
 export default ChallengeListScreen;
