@@ -92,7 +92,7 @@ const LeaderBoardScreen = props => {
 								Your Rank
 							</Text>
 							<Text style={{fontSize: 15, color: '#DAA520',fontFamily: 'trajan-pro-bold'}}>
-								{ranking}
+								{ranking+1}
 							</Text>
 						</View>
 						<View  style={{ flex: 1,  alignItems: 'center'}}>
@@ -106,31 +106,6 @@ const LeaderBoardScreen = props => {
 					</View> 
 				</View>
 				<View style={{ flex: 0.5}}></View>
-				{/*<View colors={[, '#1da2c6', '#1695b7']}
-					style={{ backgroundColor: '#119abf', padding: 15, paddingTop: 35, alignItems: 'center' }}>
-					<Text style={{ fontSize: 25, color: 'white', }}>Leaderboard</Text>
-					<View style={{
-						flexDirection: 'row',
-						marginBottom: 20, marginTop: 20
-					}}>
-						<View  style={{ flex: 1,  alignItems: 'center' }}>
-							<Text style={{ fontSize: 20, color: 'white'}}>
-								Your Rank
-							</Text>
-							<Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
-								{ranking}
-							</Text>
-						</View>
-						<View  style={{ flex: 1,  alignItems: 'center' }}>
-							<Text style={{ fontSize: 20, color: 'white'}}>
-								Your Score
-							</Text>
-							<Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
-								{score}
-							</Text>
-						</View>
-					</View> 
-				</View>*/}
 				<View style={{ flex: 6 }}>
 					<FlatList
 						data={userList}
@@ -138,10 +113,12 @@ const LeaderBoardScreen = props => {
 						renderItem={({item,index})=>{
 							return(
 								<View style={{
-									backgroundColor: '#555555',borderColor: '#333333', borderWidth:0.5, flexDirection:'row',paddingBottom: 10, paddingTop: 10}}>
-									<Text style={{ color: 'white', fontSize: 15, flex: 1, marginLeft: 10 }}>{index+1}</Text>
-									<Text style={{ color: 'white', fontSize: 15, flex: 5, marginLeft: 0 }}>{item.userName}</Text>
-									<Text style={{ color: 'white', fontSize: 17, flex: 1, textAlign: 'right', fontWeight: 'bold', marginRight: 40 }}>{item.userTotalScore}</Text>
+									backgroundColor: '#00000088',borderColor: '#DAA520', borderWidth:0.5, flexDirection:'row',paddingBottom: 10, paddingTop: 10}}>
+									<Text style={{ color: '#DAA520', fontSize: 20, flex: 1, marginLeft: 10 ,fontFamily: 'trajan-pro-bold'}}>{index+1}</Text>
+									<Text style={{ color: '#DAA520', fontSize: 17, flex: 4, marginLeft: 0,fontFamily: 'trajan-pro-bold' }}>{item.userName}{"\n"}
+										<Text style={{ color: '#DAA520', fontSize: 12,marginLeft: 0 }}>{item.userEmail}</Text>
+									</Text>
+									<Text style={{ color: '#DAA520', fontSize: 17, flex: 1.5, textAlign: 'right', fontWeight: 'bold', marginRight: 10,fontFamily: 'trajan-pro-bold' }}>{item.userTotalScore}</Text>
 								</View>
 							);
 						}}
