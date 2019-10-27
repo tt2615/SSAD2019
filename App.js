@@ -39,6 +39,7 @@ const fetchFont = () => {
     'open-sans' : require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
     'trajan-pro' : require('./assets/fonts/TrajanPro-Regular.ttf'),
+    'trajan-pro-bold' : require('./assets/fonts/TrajanPro-Bold.otf'),
   });
 };
 
