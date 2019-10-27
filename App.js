@@ -46,7 +46,7 @@ const fetchFont = () => {
 export default function App() {
 
   //suppress the irritating timer warning
-  YellowBox.ignoreWarnings(['Setting a timer']);
+  YellowBox.ignoreWarnings(['Setting a timer','Can\'t perform a React state update on an unmounted component. This is a no-op']);
 
   //load elements
   const [isReady, setIsReady] = useState(false);

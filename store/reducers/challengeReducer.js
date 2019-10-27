@@ -125,20 +125,37 @@ export default (state=initialState, action) => {
 			const selected4Challenge = state.unreadChallenges.filter(
 				challenge => challenge.id===action.id
 			)[0];
-			const updated4Challenge = new Challenge(
-				selected4Challenge.id,
-				selected4Challenge.diffLvl,
-				selected4Challenge.challengerId,
-				selected4Challenge.challengeeId,
-				selected4Challenge.bid,
-				selected4Challenge.date,
-				3,
-				selected4Challenge.winnerId,
-				selected4Challenge.ChallengerScore,
-				selected4Challenge.ChallengeeScore,
-				selected4Challenge.isChallengerRead,
-				selected4Challenge.isChallengeeRead
-			);
+			if(action.answerer==='challenger'){ //challenger
+				updated4Challenge = new Challenge(
+					selected4Challenge.id,
+					selected4Challenge.diffLvl,
+					selected4Challenge.challengerId,
+					selected4Challenge.challengeeId,
+					selected4Challenge.bid,
+					selected4Challenge.date,
+					3, //stage
+					selected4Challenge.winnerId,
+					selected4Challenge.ChallengerScore,
+					selected4Challenge.ChallengeeScore,
+					3, //isChallengerRead
+					selected4Challenge.isChallengeeRead
+				);
+			} else { //challengee
+				updated4Challenge = new Challenge(
+					selected4Challenge.id,
+					selected4Challenge.diffLvl,
+					selected4Challenge.challengerId,
+					selected4Challenge.challengeeId,
+					selected4Challenge.bid,
+					selected4Challenge.date,
+					3, //stage
+					selected4Challenge.winnerId,
+					selected4Challenge.ChallengerScore,
+					selected4Challenge.ChallengeeScore,
+					selected4Challenge.isChallengerRead,
+					3 //isChallengeeRead
+				);
+			}
 			otherChallenge = state.unreadChallenges.filter(
 				challenge => challenge.id!==action.id
 			);

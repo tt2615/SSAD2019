@@ -31,7 +31,7 @@ const ChallengeListScreen = props => {
 	  setError(null);
 	  setIsRefreshing(true);
 	  try {
-	    await dispatch(challengeActions.loadChallenge(userInfo.userId));
+	    await dispatch(challengeActions.loadChallenge(userInfo.userEmail));
 	  } catch (err) {
 	    setError(err.message);
 	  }
@@ -54,7 +54,7 @@ const ChallengeListScreen = props => {
 	    loadChallenges
 	  );
 
-	  return () => {
+	return () => {
 	    willFocusSub.remove();
 	  };
 	}, [loadChallenges]);

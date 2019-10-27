@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	StyleSheet,
 	Text,
 	Button,
-	Alert
+	Alert,
+	ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
@@ -21,12 +22,23 @@ const diff = {
 const ChallengeCard = props => {
 
 	const dispatch = useDispatch();
+	const [err, setErr] = useState();
+	const [isConfirmLoading, setIsConfirmLoading] = useState(false);
+	const [isAcceptLoading, setIsAcceptLoading] = useState(false);
+	const [isCancelLoading, setIsCancelLoading] = useState(false);
+	const [isDoQuesLoading, setIsDoQuesLoading] = useState(false);
 
 	const cancelChallenge = async (id) => {
 		Alert.alert('Confirm Cancel Challenge', 'Do you want to cancel this challenge?',
 			 [
 			 	{ text: 'Okay', onPress: async ()=>{
-	 				await dispatch(challengeActions.cancelChallenge(id, props.challenge.bid));
+			 		setIsCancelLoading(true);
+			 		try{
+	 					await dispatch(challengeActions.cancelChallenge(id, props.challenge.bid));
+			 		} catch (err) {
+			 			setErr(err.message);
+			 		}
+			 		setIsCancelLoading(false);
 			 	}},
 			 	{ text: 'Cancel' }
 			 ]
@@ -37,11 +49,13 @@ const ChallengeCard = props => {
 		Alert.alert('Confirm Accept Challenge', 'Do you want to accept this challenge of points ?',
 			 [
 			 	{ text: 'Okay', onPress: async ()=>{
+			 		setIsAcceptLoading(true);
 			 		try{
 	 					await dispatch(challengeActions.acceptChallenge(id, props.challenge.bid));
 			 		} catch (err) {
-			 			Alert.alert('Acceptance Error!', err.message, [{text:'Okay' }]);
+			 			setErr(err.message);
 			 		}
+			 		setIsAcceptLoading(false);
 			 	}},
 			 	{ text: 'Cancel' }
 			 ]
@@ -52,7 +66,13 @@ const ChallengeCard = props => {
 		Alert.alert('Confirm Start Challenge', 'Do you want to proceed with answering the questions?',
 			 [
 			 	{ text: 'Okay', onPress: async() => {
-					 await dispatch(challengeQuesActions.getChallengeQues(props.challenge.diffLvl));
+			 		setIsDoQuesLoading(true);
+			 		try{
+					 	await dispatch(challengeQuesActions.getChallengeQues(props.challenge.diffLvl));
+					} catch (err){
+					 		setErr(err.message);
+					}
+					setIsDoQuesLoading(false);
 			 		props.props.navigation.navigate('ChallengeQuestion',
 			 			{
 			 				challenge: props.challenge
@@ -64,12 +84,26 @@ const ChallengeCard = props => {
 		);
 	};
 
-	const confirm = (id) => {
-		dispatch(challengeActions.confirmChallenge(id));
+	const confirm = async (id) => {
+		setIsConfirmLoading(true);
+		try{
+			await dispatch(challengeActions.confirmChallenge(id));
+		} catch (err){
+			setErr(err.message);
+		}
+		setIsConfirmLoading(false);
 	};
 
 	const time = moment(props.challenge.date).format('MMMM DD YYYY, HH:mm:ss');
 	const diffLvl = diff[(props.challenge.diffLvl)];
+
+  	//show error
+	useEffect(() => {
+    	if (err) {
+      		Alert.alert('An Error Occurred!', err, [{ text: 'Okay' }]);
+    	}
+    	setErr(null);
+  	}, [err]);
 
 	//before accepted, challenger
 	if(props.challenge.stage===0 && props.userId===props.challenge.challengerId){
@@ -81,11 +115,16 @@ const ChallengeCard = props => {
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text style={styles.time}>Challenge Time: {time}</Text>
-				<Button 
-					title='Cancel'
-					color = '#324755'
-					onPress={e=>cancelChallenge(props.challenge.id, props.challenge.bid)}
-				/>
+				{isCancelLoading?(
+					<ActivityIndicator size='small'/>
+				) : (
+					<Button 
+						title='Cancel'
+						color = '#324755'
+						onPress={e=>cancelChallenge(props.challenge.id, props.challenge.bid)}
+					/>
+				)}
+				
 			</Card>
 		);
 	}
@@ -98,11 +137,15 @@ const ChallengeCard = props => {
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
-				<Button 
-					title='Accept'
-					color = '#324755'
-					onPress={e=>acceptChallenge(props.challenge.id, props.challenge.bid)}
-				/>
+				{isAcceptLoading?(
+					<ActivityIndicator size='small'/>
+				) : (
+					<Button 
+						title='Accept'
+						color = '#324755'
+						onPress={e=>acceptChallenge(props.challenge.id, props.challenge.bid)}
+					/>
+				)}
 			</Card>
 		);
 	}
@@ -121,13 +164,13 @@ const ChallengeCard = props => {
 		);
 	}
 
-	//challenger, has done question
+	//challengee, has done question
 	//todo:countdown
 	else if(props.challenge.stage===1 && props.userId===props.challenge.challengeeId && props.challenge.isChallengeeRead){
 		return(
 			<Card style={styles.card}>
 				<Text style={styles.wait}>Waiting for opponent to answer...</Text>	
-				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
@@ -144,14 +187,19 @@ const ChallengeCard = props => {
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
-				<Button 
-					title='Start Challenge'
-					color = '#324755'
-					onPress={e=>startDoQuestion(props.challenge.id,props.challenge.diffLvl)}
-				/>
+				{isDoQuesLoading?(
+					<ActivityIndicator size='small'/>
+				) : (
+					<Button 
+						title='Start Challenge'
+						color = '#324755'
+						onPress={e=>startDoQuestion(props.challenge.id,props.challenge.diffLvl)}
+					/>
+				)}
 			</Card>
 		);
 	}
+
 	//do question, challengee
 	else if(props.challenge.stage===1 && props.userId===props.challenge.challengeeId){
 		return(
@@ -160,22 +208,26 @@ const ChallengeCard = props => {
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text style={styles.time}>Challenge Time: {time}</Text>
-				<Button 
-					title='Start Challenge'
-					color = '#324755'
-					onPress={startDoQuestion}
-				/>
+				{isDoQuesLoading?(
+					<ActivityIndicator size='small'/>
+				) : (
+					<Button 
+						title='Start Challenge'
+						color = '#324755'
+						onPress={startDoQuestion}
+					/>
+				)}
 			</Card>
 		);
 	}
 
 	//completed, challenger
-	else if(props.challenge.stage===2){
+	else if(props.challenge.stage===2 && props.challenge.challengerId===props.userId){
 		let resultMsg = 'You lose...';
-		if(props.challengerScore === props.challengeeScore){
+		if(props.challenge.ChallengerScore === props.challenge.ChallengeeScore){
 			resultMsg='Draw';
 		}
-		else if((props.challengerScore > props.challengeeScore && props.userId === props.challengerId)||(props.challengeeScore > props.challengerScore&&props.userId === props.challengeeId)){
+		else if(props.challenge.ChallengerScore > props.challenge.ChallengeeScore){
 			resultMsg = 'You win!';
 		}
 		return(
@@ -185,28 +237,81 @@ const ChallengeCard = props => {
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text style={styles.time}>Challenge Time: {time}</Text>
-				<Button 
-					title='Confirm'
-					color = '#324755'
-					onPress={e=>confirm(props.challenge.id)}
-				/>
+				{isConfirmLoading?(
+					<ActivityIndicator size='small'/>
+				) : (
+					<Button 
+						title='Confirm'
+						color = '#324755'
+						onPress={e=>confirm(props.challenge.id)}
+					/>
+				)}
 			</Card>
 		);
 	}
 
-	//confirmed, put into history
-	else if(props.challenge.stage===3){
+	//completed, challengee
+	else if(props.challenge.stage===2 && props.challenge.challengeeId===props.userId){
 		let resultMsg = 'You lose...';
-		if(props.challengerScore === props.challengeeScore){
+		if(props.challenge.ChallengerScore === props.challenge.ChallengeeScore){
 			resultMsg='Draw';
 		}
-		else if((props.challengerScore > props.challengeeScore && props.userId === props.challengerId)||(props.challengeeScore > props.challengerScore&&props.userId === props.challengeeId)){
+		else if(props.challenge.ChallengeeScore > props.challenge.ChallengerScore){
+			resultMsg = 'You win!';
+		}
+		return(
+			<Card style={styles.card}>
+				<Text style={styles.resultText}>Result: {resultMsg}</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
+				{isConfirmLoading?(
+					<ActivityIndicator size='small'/>
+				) : (
+					<Button 
+						title='Confirm'
+						color = '#324755'
+						onPress={e=>confirm(props.challenge.id)}
+					/>
+				)}
+			</Card>
+		);
+	}
+
+	//confirmed, challenger
+	else if(props.challenge.isChallengerRead===3&&props.challenge.challengerId===props.userId){
+		let resultMsg = 'You lose...';
+		if(props.challenge.ChallengerScore === props.challenge.ChallengeeScore){
+			resultMsg='Draw';
+		}
+		else if(props.challenge.ChallengerScore > props.challenge.ChallengeeScore){
 			resultMsg = 'You win!';
 		}
 		return(
 			<Card style={styles.card}>
 				<Text style={styles.resultText}>Result: {resultMsg}</Text>
 				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
+			</Card>
+		);
+	}
+
+	//confirmed, challengee
+	else if(props.challenge.isChallengeeRead===3&&props.challenge.challengeeId===props.userId){
+		let resultMsg = 'You lose...';
+		if(props.challenge.ChallengerScore === props.challenge.ChallengeeScore){
+			resultMsg='Draw';
+		}
+		else if(props.challenge.ChallengeeScore > props.challenge.ChallengerScore){
+			resultMsg = 'You win!';
+		}
+		return(
+			<Card style={styles.card}>
+				<Text style={styles.resultText}>Result: {resultMsg}</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text style={styles.time}>Challenge Time: {time}</Text>
