@@ -10,6 +10,7 @@ import {
 	Image,
 	Alert,
 	ActivityIndicator,
+	ImageBackground,
 	TouchableOpacity
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as authActions from '../../store/actions/authActions';
 import * as userActions from '../../store/actions/userActions';
 import Input from '../../components/UI/Input';
+import { SafeAreaView } from 'react-navigation';
 import CHARACTERS from '../../data/characters'
 
 const LOGIN_INPUT_UPDATE = 'LOGIN_INPUT_UPDATE';
@@ -152,17 +154,25 @@ const StudentProfileScreen = props => {
   	}, [error]);
 
 	return(
+	<SafeAreaView>
+		<ImageBackground source={require('../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+			<View style={styles.headerContainer}>
+				<ImageBackground source={require('../../assets/images/icons/header.png')} style={styles.header}>  
+					<View>
+						<Text style = {styles.profile_text}>
+							PROFILE
+						</Text>
+					</View>
+				</ImageBackground>
+			</View>
+		
 		<KeyboardAvoidingView
 		  behavior='padding'
 		  keyboardVerticalOffset={50}
 		  style={styles.screen}
 		>
 			<ScrollView style={styles.mainContainer}>
-				<View style={styles.headerContainer}>
-					<Text style = {styles.profile_text}>
-						<Text>PROFILE</Text>
-					</Text>
-				</View>
+				
 				<View style={styles.emailContainer}>
 					<Text style ={styles.email_text}>EMAIL ADDRESS{"\n"}</Text>
 					<Text style ={styles.email}>{userInfo.userEmail}</Text>
@@ -221,6 +231,8 @@ const StudentProfileScreen = props => {
 				</View>
 			</ScrollView>
 		</KeyboardAvoidingView>
+		</ImageBackground>
+	</SafeAreaView>
 	);
 };
 
@@ -228,20 +240,27 @@ const styles = StyleSheet.create({
 	mainContainer: {
 		width:'100%',
         height:'100%',
-        backgroundColor: '#87BCBF',
 	},
 	headerContainer: {
-        width: '100%',
-        padding: 20,
+		marginTop:50,
+		width: '100%',
+        alignItems: 'center',
         textAlign: 'center',
-        backgroundColor: '#C8DAD3',
+	},
+	
+	header:{
+		width: 316,
+		height: 102,
+		alignItems: 'center',
 	},
 	profile_text:{
-		width:'100%',
+		width: '100%',
+        textTransform: 'uppercase',
 		textAlign:'center',
-		marginTop: 20,
-		color: '#324755',
-        fontSize: 24,
+		marginTop:35,
+        color: '#DAA520',
+        fontSize: 20,
+		fontFamily: 'trajan-pro',
 	},
 	emailContainer:{
 		width:'100%',
@@ -250,16 +269,20 @@ const styles = StyleSheet.create({
 	},
 	email:{
 		width:'100%',
-		textAlign:'left',
-		color: '#324755',
-        fontSize: 14,
+		textAlign:'center',
+		color: '#ffffff',
+		fontSize: 18,
+		backgroundColor:'#00000066',
+		height: 50,
+		textAlignVertical:'center',
 	},
 	email_text:{
 		width:'100%',
-		textAlign:'left',
+		textAlign:'center',
 		marginTop:20,
-		color: '#324755',
-        fontSize: 18,
+		color: '#DAA520',
+		fontFamily: 'trajan-pro',
+		fontSize: 18,
 	},
 	scoreContainer:{
 		width:'100%',
@@ -268,15 +291,19 @@ const styles = StyleSheet.create({
 	},
 	score_text:{
 		width:'100%',
-		textAlign:'left',
-		color: '#324755',
-        fontSize: 18,
+		textAlign:'center',
+		color: '#DAA520',
+		fontFamily: 'trajan-pro',
+		fontSize: 18,
 	},
 	score:{
 		width:'100%',
-		textAlign:'left',
-		color: '#324755',
-        fontSize: 14,
+		textAlign:'center',
+		color: '#ffffff',
+		fontSize: 18,
+		backgroundColor:'#00000066',
+		height: 50,
+		textAlignVertical:'center',
 	},
 	editInput: {
 		flexDirection: 'row',
@@ -284,7 +311,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		fontSize: 18,
 		color: '#324755',
-		//marginVertical: 70
+		//marginVertical: 70,
 	},
 	input:{
 		width: '100%',
@@ -296,7 +323,7 @@ const styles = StyleSheet.create({
 		
 	},
 	textInput: {
-		flex:8
+		flex:8,
 	},
 	button: {
 		flex:2,
