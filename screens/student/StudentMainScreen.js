@@ -52,11 +52,11 @@ const StudentMainScreen = props => {
                     <ImageBackground source={require('../../assets/images/icons/window.png')} style={styles.window}>  
                         <View>
                             <Text style = {styles.username}>
-                                {userInfo.userName}{"\n"}
+                                {userInfo.userName}{"\n"}{"\n"}Total Score: {userInfo.userTotalScore}
                             </Text>
-                            <Text style = {styles.score}>
+                            {/* <Text style = {styles.score}>
                             <Text>Total Score: {userInfo.userTotalScore}</Text>
-                            </Text>
+                            </Text> */}
                         </View>
                     </ImageBackground>
                 </View>
@@ -125,9 +125,8 @@ const styles = StyleSheet.create({
     },
     score: {
         width:'100%',
-        marginTop:50,
         textAlign: 'center',
-        position: 'absolute',
+
         color: '#DAA520',
         fontSize: 18,
         fontFamily: 'trajan-pro',
