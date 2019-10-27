@@ -130,30 +130,34 @@ const ChallengeListScreen = props => {
 					</TouchableOpacity>
 				</View>
 				<View style={styles.listContainer}>
-					<ScrollView style={styles.ongoingContainer}>
-						<Text style ={styles.ongoingText}>ONGOING CHALLENGE</Text>
-						{challengeList.unreadChallenges.map((value, index) => {
-						return(
+					<Text style ={styles.ongoingText}>ONGOING CHALLENGE</Text>
+					<FlatList
+						onRefresh={loadChallenges}
+						refreshing={isRefreshing}
+						data={challengeList.unreadChallenges}
+						keyExtractor={(item,index) => index.toString()}
+						renderItem={itemData => (
 							<ChallengeCard
 								props={props}
-								key={index}
-								challenge={value}
-								userId={userInfo.userEmail}
-						/>
-						);
-						})}
-						<Text style={styles.historyText}>HISTORY</Text>
-						{challengeList.readChallenges.map((value, index) => {
-						return(
-							<ChallengeCard
-								props={props}
-								key={index}
-								challenge={value}
+								challenge={itemData.item}
 								userId={userInfo.userEmail}
 							/>
-						);
-						})}
-					</ScrollView>
+						)}
+					/>
+				</View>
+				<View style={styles.listContainer}>
+					<Text style={styles.historyText}>HISTORY</Text>
+					<FlatList
+						data={challengeList.readChallenges}
+						keyExtractor={(item,index) => index.toString()}
+						renderItem={itemData => (
+							<ChallengeCard
+								props={props}
+								challenge={itemData.item}
+								userId={userInfo.userEmail}
+							/>
+						)}
+					/>
 				</View>
 			</ImageBackground>
 		</SafeAreaView>
@@ -182,13 +186,14 @@ const styles = StyleSheet.create({
 		width: '100%',
         textTransform: 'uppercase',
 		textAlign:'center',
-		marginTop:35,
+		marginTop: 35,
         color: '#DAA520',
         fontSize: 20,
         fontFamily: 'trajan-pro',
 	},
 	buttonContainer:{
 		flex: 1,
+		marginTop: 70,
 		width: '100%',
 		alignItems: 'center'
 	},
@@ -198,19 +203,20 @@ const styles = StyleSheet.create({
 	},
 	ongoingContainer:{
 		width:'100%',
+		
 	},
 	ongoingText:{
 		padding: 20,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	historyText:{
 		padding: 20,
 		textAlign: 'center',
 		fontSize: 18,
-		fontFamily: 'trajan-pro',
+		fontFamily: 'trajan-pro-bold',
 		color: '#DAA520'
 	},
 	centered:{
