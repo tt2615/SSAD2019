@@ -75,13 +75,15 @@ const ChallengeCard = props => {
 	if(props.challenge.stage===0 && props.userId===props.challenge.challengerId){
 		return(
 			<Card style={styles.card}>
-				<Text>Waiting for opponent's response...</Text>
-				<Text>Opponent: {props.challenge.challengeeId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+
+				<Text style={styles.wait}>Waiting for opponent's response...</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 				<Button 
 					title='Cancel'
+					color = '#324755'
 					onPress={e=>cancelChallenge(props.challenge.id, props.challenge.bid)}
 				/>
 			</Card>
@@ -91,13 +93,14 @@ const ChallengeCard = props => {
 	else if(props.challenge.stage===0&&props.userId===props.challenge.challengeeId){
 		return(
 			<Card style={styles.card}>
-				<Text>You are challenged!</Text>
-				<Text>Opponent: {props.challenge.challengerId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
+				<Text style={styles.challenged}>You are challenged!</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Accept'
+					color = '#324755'
 					onPress={e=>acceptChallenge(props.challenge.id, props.challenge.bid)}
 				/>
 			</Card>
@@ -109,10 +112,10 @@ const ChallengeCard = props => {
 	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId&&props.challenge.isChallengerRead){
 		return(
 			<Card style={styles.card}>
-				<Text>Waiting for opponent to answer...</Text>	
-				<Text>Opponent: {props.challenge.challengeeId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
+				<Text style={styles.wait}>Waiting for opponent to answer...</Text>	
+				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
 			</Card>
 		);
@@ -123,10 +126,10 @@ const ChallengeCard = props => {
 	else if(props.challenge.stage===1&&props.userId===props.challenge.challengeeId&&props.challenge.isChallengeeRead){
 		return(
 			<Card style={styles.card}>
-				<Text>Waiting for opponent to answer...</Text>	
-				<Text>Opponent: {props.challenge.challengeeId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
+				<Text style={styles.wait}>Waiting for opponent to answer...</Text>	
+				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
 			</Card>
 		);
@@ -137,12 +140,13 @@ const ChallengeCard = props => {
 	else if(props.challenge.stage===1&&props.userId===props.challenge.challengerId){
 		return(
 			<Card style={styles.card}>
-				<Text>Opponent: {props.challenge.challengeeId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
 				<Text>Challenge Time: {time}</Text>
 				<Button 
 					title='Start Challenge'
+					color = '#324755'
 					onPress={e=>startDoQuestion(props.challenge.id,props.challenge.diffLvl)}
 				/>
 			</Card>
@@ -152,12 +156,14 @@ const ChallengeCard = props => {
 	else if(props.challenge.stage===1&&props.userId===props.challenge.challengeeId){
 		return(
 			<Card style={styles.card}>
-				<Text>Opponent: {props.challenge.challengerId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+
+				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 				<Button 
 					title='Start Challenge'
+					color = '#324755'
 					onPress={startDoQuestion}
 				/>
 			</Card>
@@ -175,13 +181,14 @@ const ChallengeCard = props => {
 		}
 		return(
 			<Card style={styles.card}>
-				<Text>Result: {resultMsg}</Text>
-				<Text>Opponent: {props.challenge.challengeeId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+				<Text style={styles.resultText}>Result: {resultMsg}</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 				<Button 
 					title='Confirm'
+					color = '#324755'
 					onPress={e=>confirm(props.challenge.id)}
 				/>
 			</Card>
@@ -199,11 +206,11 @@ const ChallengeCard = props => {
 		}
 		return(
 			<Card style={styles.card}>
-				<Text>Result: {resultMsg}</Text>
-				<Text>Opponent: {props.challenge.challengeeId}</Text>
-				<Text>Bid: {props.challenge.bid}</Text>
-				<Text>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+				<Text style={styles.resultText}>Result: {resultMsg}</Text>
+				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
+				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
+				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 			</Card>
 		);
 	}
@@ -212,8 +219,38 @@ const ChallengeCard = props => {
 };
 
 const styles = StyleSheet.create({
-	card:{
-
+	wait:{
+		textAlign: 'center',
+		width:'100%',
+		color: '#D97D54',
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	opp:{
+		color:'#324755',
+	},
+	bid:{
+		color:'#324755',
+	},
+	diff:{
+		color:'#324755',
+	},
+	time:{
+		color:'#324755',
+	},
+	challenged:{
+		textAlign: 'center',
+		width:'100%',
+		color: '#D97D54',
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	resultText:{
+		textAlign: 'center',
+		width:'100%',
+		color: '#D97D54',
+		fontSize: 16,
+		fontWeight: 'bold',
 	}
 });
 

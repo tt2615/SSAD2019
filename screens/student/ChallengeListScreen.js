@@ -13,6 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import ChallengeCard from '../../components/Student/ChallengeCard';
 import * as challengeActions from '../../store/actions/challengeActions';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import ChallengeCard from '../../components/Student/ChallengeCard';
+import * as challengeActions from '../../store/actions/challengeActions';
+import { SafeAreaView } from 'react-navigation';
+
 const ChallengeListScreen = props => {
 	const userInfo = useSelector( state=> state.user );
 	const challengeList = useSelector( state => state.challenge );
@@ -95,7 +101,8 @@ const ChallengeListScreen = props => {
  	  return (
  	    <View style={styles.centered}>
  	    	<Button
- 	    		title='create new challenge'
+				title='create new challenge'
+				color='#F0F3F4'
  	    		onPress={()=>{
  	    			props.navigation.navigate('ChallengeCreation');
  	    		}}
@@ -106,46 +113,57 @@ const ChallengeListScreen = props => {
  	}
 
 	return(
-		<View style={styles.mainContainer}>
-			
-			<View style={styles.headerContainer}>
-				<Text style={styles.challengeList}>
-					<Text>CHALLENGE LIST</Text>
-				</Text>
-			</View>
-			<View style={styles.buttonStyle}>
-				<Button
-					title='create new challenge'
-	 	    		onPress={()=>{
-	 	    			props.navigation.navigate('ChallengeCreation');
-	 	    		}}
-	 	   		 />
-	 		</View>
-		</View>
-		<ScrollView>
-	 	    <Text>Ongoing challenge:</Text>
-	 	   	{challengeList.unreadChallenges.map((value, index) => {
-        	return(
-        		<ChallengeCard
-        			props={props}
-        			key={value.id}
-        			challenge={value}
-        			userId={userInfo.userEmail}
-        		/>
-        	);
-      	})}
-				<Text>History:</Text>
-				{challengeList.readChallenges.map((value, index) => {
-        	return(
-        		<ChallengeCard
-        			props={props}
-        			key={value.id}
-        			challenge={value}
-        			userId={userInfo.userEmail}
-        		/>
-        	);
-      	})}
-		</ScrollView>
+		<SafeAreaView>
+			<ImageBackground source={require('../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+				<View style={styles.headerContainer}>
+                    <ImageBackground source={require('../../assets/images/icons/header.png')} style={styles.header}>  
+                        <View>
+                            <Text style = {styles.challengeText}>
+								CHALLENGE LIST
+                            </Text>
+                        </View>
+                    </ImageBackground>
+                </View>
+				{/* <View style={styles.headerContainer}>
+					<Text style={styles.challengeList}>
+						<Text>CHALLENGE LIST</Text>
+					</Text>
+				</View> */}
+				<View style={styles.buttonStyle}>
+					<Button
+						title='create new challenge'
+						color='#F0F3F4'
+						onPress={()=>{
+							props.navigation.navigate('ChallengeCreation');
+						}}
+					/>
+				</View>
+				<ScrollView>
+					<Text>Ongoing challenge:</Text>
+					{challengeList.unreadChallenges.map((value, index) => {
+					return(
+						<ChallengeCard
+							props={props}
+							key={value.id}
+							challenge={value}
+							userId={userInfo.userEmail}
+						/>
+					);
+				})}
+						<Text>History:</Text>
+						{challengeList.readChallenges.map((value, index) => {
+					return(
+						<ChallengeCard
+							props={props}
+							key={value.id}
+							challenge={value}
+							userId={userInfo.userEmail}
+						/>
+					);
+				})}
+				</ScrollView>
+			</ImageBackground>
+		</SafeAreaView>
 	);
 };
 
@@ -160,11 +178,19 @@ const styles = StyleSheet.create({
         padding: 20,
         textAlign: 'center',
         backgroundColor: '#C8DAD3',
+        alignItems: 'center'
+	},
+	challengeText:{
+		width: '100%',
+        textTransform: 'uppercase',
+        textAlign:'center',
+        color: '#DAA520',
+        fontSize: 20,
+        fontFamily: 'trajan-pro',
 	},
 	buttonStyle:{
 		width:'100%',
 		padding: 20,
-
 	},
 	button:{
 		padding:15,

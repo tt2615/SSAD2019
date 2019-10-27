@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5,
     borderRadius: 10,
-    backgroundColor: 'white'
+    backgroundColor: '#F0F3F4',
+    padding: 20,
   }
 });
 

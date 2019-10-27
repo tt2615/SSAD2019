@@ -141,7 +141,12 @@ const ChallengeCreationScreen = props => {
   	}, [err]);
 
 	return(
-		<SafeAreaView>
+		<SafeAreaView style={styles.mainContainer}>
+			<View style={styles.headerContainer}>
+                <Text style = {styles.challengeText}>
+                    <Text>CHALLENGE CREATION</Text>
+                </Text>
+            </View>
 			<ScrollView style={styles.screen}>
 				<Text>Difficulty Level</Text>
 				<Picker
@@ -195,6 +200,17 @@ const ChallengeCreationScreen = props => {
 };
 
 const styles = StyleSheet.create({
+	mainContainer:{
+        width:'100%',
+        height:'100%',
+        backgroundColor: '#87BCBF',
+	},
+	headerContainer: {
+        width: '100%',
+        padding: 20,
+        textAlign: 'center',
+        backgroundColor: '#C8DAD3',
+	},
 	screen: {
 
 	},

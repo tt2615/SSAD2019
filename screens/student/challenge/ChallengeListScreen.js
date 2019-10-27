@@ -3,16 +3,19 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Button,
 	FlatList,
+	Button,
 	SafeAreaView,
 	ActivityIndicator,
-	ScrollView
+	ScrollView,
+	ImageBackground,
+	Image
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ChallengeCard from '../../../components/Student/ChallengeCard';
 import * as challengeActions from '../../../store/actions/challengeActions';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ChallengeListScreen = props => {
 	const userInfo = useSelector( state=> state.user );
@@ -108,49 +111,115 @@ const ChallengeListScreen = props => {
 
 	return(
 		<SafeAreaView>
-			<View>
-				<View>
-					<Button
-						title='create new challenge'
-						onPress={()=>{
-							props.navigation.navigate('ChallengeCreation');
-						}}
-				/>
-			</View>
-			<ScrollView>
-				<Text>Ongoing challenge:</Text>
-				{challengeList.unreadChallenges.map((value, index) => {
-				return(
-					<ChallengeCard
-						props={props}
-						key={index}
-						challenge={value}
-						userId={userInfo.userEmail}
-					/>
-				);
-			})}
-					<Text>History:</Text>
-					{challengeList.readChallenges.map((value, index) => {
-				return(
-					<ChallengeCard
-						props={props}
-						key={index}
-						challenge={value}
-						userId={userInfo.userEmail}
-					/>
-				);
-			})}
-				</ScrollView>
-			</View>
+			<ImageBackground source={require('../../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+				<View style={styles.headerContainer}>
+                    <ImageBackground source={require('../../../assets/images/icons/header.png')} style={styles.header}>  
+                        <View>
+                            <Text style = {styles.challengeText}>
+                                CHALLENGE LIST
+                            </Text>
+                        </View>
+                    </ImageBackground>
+                </View>
+
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity activeOpacity={.5} onPress={()=>{props.navigation.navigate('ChallengeCreation');}}>
+						<Image resizeMode='contain'
+                            style ={{width: 360, height: 41}}
+                            source={require("../../../assets/images/icons/createChallenge.png")}/>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.listContainer}>
+					<ScrollView style={styles.ongoingContainer}>
+						<Text style ={styles.ongoingText}>ONGOING CHALLENGE</Text>
+						{challengeList.unreadChallenges.map((value, index) => {
+						return(
+							<ChallengeCard
+								props={props}
+								key={index}
+								challenge={value}
+								userId={userInfo.userEmail}
+						/>
+						);
+						})}
+						<Text style={styles.historyText}>HISTORY</Text>
+						{challengeList.readChallenges.map((value, index) => {
+						return(
+							<ChallengeCard
+								props={props}
+								key={index}
+								challenge={value}
+								userId={userInfo.userEmail}
+							/>
+						);
+						})}
+					</ScrollView>
+				</View>
+			</ImageBackground>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
+	mainContainer:{
+		width:'100%',
+        height:'100%',
+        alignItems: 'center',
+    },
+	headerContainer: {
+		flex:2,
+		marginTop:50,
+        width: '100%',
+		alignItems: 'center',
+		textAlignVertical:'center',
+	},
+	header:{
+		width: 316,
+		height: 102,
+		alignItems: 'center',
+	},
+	challengeText:{
+		width: '100%',
+        textTransform: 'uppercase',
+		textAlign:'center',
+		marginTop:35,
+        color: '#DAA520',
+        fontSize: 20,
+        fontFamily: 'trajan-pro',
+	},
+	buttonContainer:{
+		flex: 1,
+		width: '100%',
+		alignItems: 'center'
+	},
+	listContainer:{
+		flex: 5,
+		width: '100%'
+	},
+	ongoingContainer:{
+		width:'100%',
+	},
+	ongoingText:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
+	},
+	historyText:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
+	},
 	centered:{
 		flex:1,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	empty:{
+		flex:1
 	}
 });
 
