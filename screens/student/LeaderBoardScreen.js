@@ -2,25 +2,15 @@ import React from 'react';
 import {
 	View,
 	Text,
-<<<<<<< Updated upstream
-	StyleSheet
-=======
 	StyleSheet,
 	FlatList,
 	SafeAreaView,
 	Image
->>>>>>> Stashed changes
 } from 'react-native';
 import { useSelector } from 'react-redux';
 
 const LeaderBoardScreen = props => {
-<<<<<<< Updated upstream
 
-	return(
-		<View>
-			<Text>LeaderBoardScreen Screen</Text>
-		</View>
-=======
 	const [userList, setUserList] = useState([]); 
 	const [err, setErr] = useState();
 	const [isLoading, setIsLoading] = useState(false);
@@ -124,7 +114,6 @@ const LeaderBoardScreen = props => {
 				/>
 			</View>
 		</SafeAreaView>
->>>>>>> Stashed changes
 	);
 };
 
