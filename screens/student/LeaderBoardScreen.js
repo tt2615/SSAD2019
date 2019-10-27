@@ -42,14 +42,15 @@ const LeaderBoardScreen = props => {
   				}
   			}
   			allUsers.sort((a, b)=>{
-  			    if (a.totalScore > b.totalScore) {
+  			    if (a.userTotalScore > b.userTotalScore) {
   			        return -1;
   			    }
-  			    if (a.totalScore < b.totalScore) {
+  			    if (a.userTotalScore < b.userTotalScore) {
   			        return 1;
   			    }
   			    return 0;
 			  });
+  			console.log(allUsers);
 			  setUserList(allUsers);
 			
 			//get user ranking and score
@@ -107,7 +108,7 @@ const LeaderBoardScreen = props => {
 							<View style={{
 								backgroundColor: '#555555',borderColor: '#333333', borderWidth:0.5, flexDirection:'row',paddingBottom: 10, paddingTop: 10}}>
 								<Text style={{ color: 'white', fontSize: 15, flex: 1, marginLeft: 10 }}>{index+1}</Text>
-								<Text style={{ color: 'white', fontSize: 15, flex: 5, marginLeft: 0 }}>{item.userName}</Text>
+								<Text style={{ color: 'white', fontSize: 15, flex: 5, marginLeft: 0 }}>{item.userName}{"\n"}{item.userEmail}</Text>
 								<Text style={{ color: 'white', fontSize: 17, flex: 1, textAlign: 'right', fontWeight: 'bold', marginRight: 40 }}>{item.userTotalScore}</Text>
 							</View>
 						);
