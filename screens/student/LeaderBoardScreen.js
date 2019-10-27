@@ -42,14 +42,15 @@ const LeaderBoardScreen = props => {
   				}
   			}
   			allUsers.sort((a, b)=>{
-  			    if (a.totalScore > b.totalScore) {
+  			    if (a.userTotalScore > b.userTotalScore) {
   			        return -1;
   			    }
-  			    if (a.totalScore < b.totalScore) {
+  			    if (a.userTotalScore < b.userTotalScore) {
   			        return 1;
   			    }
   			    return 0;
 			  });
+  			console.log(allUsers);
 			  setUserList(allUsers);
 			
 			//get user ranking and score
