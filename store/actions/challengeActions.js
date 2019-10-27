@@ -573,6 +573,5 @@ export const confirmChallenge = (id) => {
     	    	answerer:'challenger'
     	    });
 	    }
-	
 	};
 };

@@ -148,11 +148,6 @@ const ChallengeCard = props => {
 	                        source={require("../../assets/images/icons/accept.png")}/>
 					</TouchableOpacity>
 				)}
-				<TouchableOpacity style={{alignItems:'center'}} activeOpacity={.5} onPress={e=>acceptChallenge(props.challenge.id, props.challenge.bid)}>
-					<Image resizeMode='contain'
-                        style ={{width: 213, height: 35}}
-                        source={require("../../assets/images/icons/accept.png")}/>
-				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -250,9 +245,10 @@ const ChallengeCard = props => {
 					<TouchableOpacity style={{alignItems:'center'}} activeOpacity={.5} onPress={e=>confirm(props.challenge.id)}>
 						<Image resizeMode='contain'
 	                        style ={{width: 213, height: 35}}
-	                        source={require("../../assets/images/icons/start.png")}/>
+	                        source={require("../../assets/images/icons/confirm.png")}/>
 					</TouchableOpacity>
 				)}
+			</View>
 		);
 	}
 
@@ -266,7 +262,7 @@ const ChallengeCard = props => {
 			resultMsg = 'You win!';
 		}
 		return(
-			<Card style={styles.card}>
+			<View style={styles.card}>
 				<Text style={styles.resultText}>Result: {resultMsg}</Text>
 				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
@@ -282,6 +278,8 @@ const ChallengeCard = props => {
 					</TouchableOpacity>
 				)}
 			</View>
+		);
+	}
 
 	//confirmed, challenger
 	else if(props.challenge.isChallengerRead===3&&props.challenge.challengerId===props.userId){
