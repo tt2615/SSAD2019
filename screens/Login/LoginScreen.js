@@ -5,16 +5,12 @@ import {
 	KeyboardAvoidingView,
 	Text,
 	StyleSheet,
-<<<<<<< Updated upstream
-	Button
-=======
 	ImageBackground,
 	Button,
 	ActivityIndicator,
 	Image,
 	Alert,
 	AsyncStorage
->>>>>>> Stashed changes
 } from 'react-native';
 
 import Input from '../../components/UI/Input';
@@ -22,19 +18,6 @@ import Input from '../../components/UI/Input';
 const LoginScreen = props => {
 
 	return(
-<<<<<<< Updated upstream
-		<View style={styles.screen}>
-			<Text>Login Screen</Text>
-			<Button 
-				title='Login'
-				onPress={()=>{
-					props.navigation.navigate({
-						routeName: 'GameMap'
-					})
-				}}
-			/>
-		</View>
-=======
 		<ImageBackground source={require('../../assets/images/backgrounds/login.jpg')} style={{width: '100%', height: '100%'}}>
 			<KeyboardAvoidingView
 			behavior='padding'
@@ -81,14 +64,10 @@ const LoginScreen = props => {
 				</Card>
 			</KeyboardAvoidingView>
 		</ImageBackground>
->>>>>>> Stashed changes
 	);
 };
 
 const styles = StyleSheet.create({
-<<<<<<< Updated upstream
-	
-=======
 	loginImage: {
 		width: '90%',
 		marginBottom: 20,
@@ -109,7 +88,6 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		marginTop: 10
 	},
->>>>>>> Stashed changes
 });
 
 export default LoginScreen;
