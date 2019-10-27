@@ -8,7 +8,8 @@ import {
 	Alert,
 	ActivityIndicator,
 	ScrollView,
-	SafeAreaView
+	SafeAreaView,
+	ImageBackground
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import NumericInput from 'react-native-numeric-input' //https://www.npmjs.com/package/react-native-numeric-input
@@ -141,84 +142,190 @@ const ChallengeCreationScreen = props => {
   	}, [err]);
 
 	return(
-		<SafeAreaView style={styles.mainContainer}>
-			<View style={styles.headerContainer}>
-                <Text style = {styles.challengeText}>
-                    <Text>CHALLENGE CREATION</Text>
-                </Text>
-            </View>
-			<ScrollView style={styles.screen}>
-				<Text>Difficulty Level</Text>
-				<Picker
-					selectedValue={diffLvl}
-					style={styles.diffcultyLvl}
-					onValueChange={(itemValue, itemIndex) => {setDiffLvl(itemValue);}
-					}>
-					<Picker.Item key="1" label="Easy" value="1" />
-					<Picker.Item key="2" label="Medium" value="2" />
-					<Picker.Item key="3" label="Hard" value="3" />
-				</Picker>
+		<SafeAreaView>
+			<ImageBackground source={require('../../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+				<ScrollView style={styles.screen}>	
+					<View style={styles.headerContainer}>
+						<ImageBackground source={require('../../../assets/images/icons/header.png')} style={styles.header}>  
+							<View>
+								<Text style = {styles.creationText}>
+									CHALLENGE CREATION
+								</Text>
+							</View>
+						</ImageBackground>
+					</View>
 
-				<Text>Choose Opponent</Text>
-				<Picker
-					selectedValue={opponent}
-					style={styles.opponentPicker}
-					onValueChange={(itemValue, itemIndex) =>
-						{setOpponent(itemValue);}
-					}>
-					{otherUsersList}
+					<View style={styles.diffContainer}>
+						<Text style={styles.diff}>Difficulty Level</Text>
+						<Picker
+							selectedValue={diffLvl}
+							style={styles.diffcultyLvl}
+							itemStyle={styles.pickerDiffStyle}
+							onValueChange={(itemValue, itemIndex) => {setDiffLvl(itemValue);}
+							
+							}>
+							<Picker.Item key="1" label="Easy" value="1" />
+							<Picker.Item key="2" label="Medium" value="2"/>
+							<Picker.Item key="3" label="Hard" value="3" />
+						</Picker>
+					</View>
+
+					<View style={styles.oppContainer}>
+						<Text style={styles.oppText}>Choose Opponent</Text>
+						<Picker
+							selectedValue={opponent}
+							style={styles.opponentPicker}
+							itemStyle={styles.pickerOppStyle}
+							onValueChange={(itemValue, itemIndex) =>
+								{setOpponent(itemValue);}
+							}>
+							{otherUsersList}
+						</Picker>
+					</View>
 					
-				</Picker>
+					<View style={styles.setBidContainer}>
+						<Text style={styles.setText}>Set Bid</Text>
+						<Text style={styles.totalPoint}>Total Points: {totalPoint}</Text>
+						<NumericInput
+							totalWidth={240}
+							totalHeight={50}
+							iconSize={25}
+							textColor='#DAA520'
+							rounded
+							rightButtonBackgroundColor='#00000088'
+							leftButtonBackgroundColor='#00000088'
+							iconStyle={{color:'#DAA520'}}
+							borderColor='#868686'
+							style={styles.numericInput}
+							value={bid} 
+							onChange={value => {
+								setBid(value);
+							}}
+							valueType='integer'
+							minValue={0}
+							maxValue={maxBid}
+							onLimitReached={(isMax,msg) => {
+								
+							}}
+						/>
+						<Text style={styles.bidWarning}>{bidWarning}</Text>
+					</View>
 
-				<Text>Set Bid</Text>
-				<Text>Total Points: {totalPoint}</Text>
-				<NumericInput 
-					value={bid} 
-					onChange={value => {
-						setBid(value);
-					}}
-					valueType='integer'
-					minValue={0}
-					maxValue={maxBid}
-					onLimitReached={(isMax,msg) => {
-						
-					}}
-				/>
-				<Text>{bidWarning}</Text>
-
-				{isLoading ? (
-					<ActivityIndicator size="small" />
-				):(
-					<Button
-						title='Challenge!'
-						onPress={challengeSubmitHandler}
-					/>
-				)}
-			</ScrollView>
+						{isLoading ? (
+							<ActivityIndicator size="small" />
+						):(
+							<Button
+								title='Challenge!'
+								onPress={challengeSubmitHandler}
+							/>
+						)}
+				</ScrollView>
+			</ImageBackground>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	mainContainer:{
-        width:'100%',
+		width:'100%',
         height:'100%',
-        backgroundColor: '#87BCBF',
-	},
-	headerContainer: {
-        width: '100%',
-        padding: 20,
-        textAlign: 'center',
-        backgroundColor: '#C8DAD3',
+        alignItems: 'center',
 	},
 	screen: {
 
 	},
+	headerContainer: {
+		flex:2,
+		marginTop:50,
+        width: '100%',
+		alignItems: 'center',
+		textAlignVertical:'center',
+	},
+	header:{
+		width: 316,
+		height: 102,
+		alignItems: 'center',
+	},
+	creationText:{
+		width: '100%',
+		textAlign:'center',
+		marginTop: 35,
+        color: '#DAA520',
+        fontSize: 20,
+        fontFamily: 'trajan-pro',
+	},
+	diffContainer:{
+		width:'100%',
+	},
+	diff:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
+	},
 	diffcultyLvl:{
-
+		width:'100%',
+		fontFamily:'trajan-pro',
+		color:'#DAA520'
+	},
+	pickerDiffStyle:{
+		textAlign: 'center',
+		fontFamily:'trajan-pro',
+		color: '#DAA520'
+	},
+	oppContainer:{
+		width:'100%',
+		alignItems: 'center'
+	},
+	oppText:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
+	},
+	pickerOppStyle:{
+		textAlign: 'center',
+		fontFamily:'trajan-pro',
+		color: '#DAA520'
 	},
 	opponentPicker:{
-
+		width:'100%',
+		fontFamily:'trajan-pro',
+		color:'#DAA520',
+	},
+	setBidContainer:{
+		width:'100%',
+		alignItems:'center',
+		fontFamily:'trajan-pro',
+		color:'#DAA520'
+	},
+	setText:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 18,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520'
+	},
+	totalPoint:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 16,
+		fontFamily: 'trajan-pro',
+		color: '#DAA520',
+	},
+	bidWarning:{
+		padding: 20,
+		textAlign: 'center',
+		fontSize: 12,
+		fontFamily: 'trajan-pro',
+		color: '#D97D54'
+	},
+	numericInput:{
+		width:'100%',
+		fontFamily:'trajan-pro',
+		color:'#DAA520'
 	}
 
 });
