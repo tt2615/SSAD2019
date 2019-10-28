@@ -5,6 +5,7 @@ import {
 	StyleSheet,
 	SafeAreaView,
 	ImageBackground,
+	TouchableOpacity,
 	Button,
 	FlatList
 } from 'react-native';
@@ -50,55 +51,32 @@ const GameMapSelectionScreen = props => {
                 </View>
 				<View style={{ flex: 0.5}}></View>
 				<View style={{ flex: 5}}>
-				<Text
-					style={{backgroundColor:"#ffffff"}}
-					onPress={
-						item.available ? 
-						(async ()=>{
-							await dispatch(mapActions.getSections(userInfo.userId,item.wid));
-							props.navigation.navigate(
-								'GameMap',
-								{wid: item.wid}
-							);
-						}) : 
-						(e=>alert('Not unlocked!'))
-					}
-				>{item.name}
-				</Text>
 				<FlatList
 					data={worlds}
 					keyExtractor={item=>item.wid.toString()}
 					renderItem={({item,index})=>{
 						return(
-							<View style={{flex: 2, width: '100%', alignItems: 'center'}}
-								onPress={
-									item.available ? 
-									(async ()=>{
-										await dispatch(mapActions.getSections(userInfo.userId,item.wid));
-										props.navigation.navigate(
-											'GameMap',
-											{wid: item.wid}
-										);
-									}) : 
-									(e=>alert('Not unlocked!'))}>
-								<ImageBackground source={index===1? (require('../../../assets/images/backgrounds/Castle.jpg')):(require('../../../assets/images/backgrounds/Laketown.jpg'))} style={styles.window}>  
-									<View>
-										<Text
-											style={styles.username}
-											onPress={
-												item.available ? 
-												(async ()=>{
-													await dispatch(mapActions.getSections(userInfo.userId,item.wid));
-													props.navigation.navigate(
-														'GameMap',
-														{wid: item.wid}
-													);
-												}) : 
-												(e=>alert('Not unlocked!'))
-											}
-										>{item.name}</Text>
-									</View>
-								</ImageBackground>
+							<View style={{height:150,alignItems: 'center'}}>
+								<TouchableOpacity 
+									activityOpacity={0.5} 
+									onPress={
+										item.available ? 
+										(async ()=>{
+											await dispatch(mapActions.getSections(userInfo.userId,item.wid));
+											props.navigation.navigate(
+												'GameMap',
+												{wid: item.wid}
+											);
+										}) : 
+										(e=>alert('Not unlocked!'))}>
+									<ImageBackground source={index===1? (require('../../../assets/images/backgrounds/Castle1.jpg')):(require('../../../assets/images/backgrounds/Laketown1.jpg'))} style={styles.world}>  
+										<View>
+											<Text
+												style={styles.worldword}
+											>{item.name}</Text>
+										</View>
+									</ImageBackground>
+								</TouchableOpacity>
 							</View>
 						);
 					}}
@@ -130,7 +108,32 @@ const styles = StyleSheet.create({
         height: 131,
         padding: 30,
         justifyContent: 'center',
-        alignItems: 'center',
+		alignItems: 'center'
+	},
+	world:{
+        width: 306,
+        height: 131,
+        padding: 30,
+        justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius:3,
+		shadowColor: '#000',
+		shadowOffset: { width: 3, height: 3 },
+		shadowOpacity: 1,
+		shadowRadius: 3,
+
+		},
+	worldword: {
+        width: '100%',
+        textTransform: 'uppercase',
+        textAlign:'center',
+		fontSize: 15,
+		color: '#DAA520',
+		fontFamily: 'trajan-pro-bold',
+		shadowColor: '#000',
+		shadowOffset: { width: 3, height: 3 },
+		shadowOpacity: 1,
+		shadowRadius: 3,
 	},
 	username: {
         width: '100%',
