@@ -2,7 +2,8 @@ import React, {useState,useEffect} from 'react';
 import {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	SafeAreaView
 } from 'react-native';
 
 const ReportScreen = props => {
@@ -117,36 +118,69 @@ const ReportScreen = props => {
 	},[])
 
 	return(
-		<View>
-			{
-				worldAveScore===null?<Text>Loading</Text>:
-				<View>
+		<SafeAreaView>
+			<View>
 				{
-					worldAveScore.map(res=>
-							<View style={styles.worldStat} key={res.wid}>
-								<Text>{res.wname}</Text>
-								<Text>{res.aveScore}</Text>
-								<View style={styles.sectionContainer}>
-								{sectionAveScore[worldAveScore.indexOf(res)].map(subres=>
-									<View style={styles.sectionStat} key={subres.sid}>
-										<Text>{subres.sname}</Text>
-										<Text>{subres.aveScore}</Text>
+					worldAveScore===null?<Text>Loading</Text>:
+					<View style = {styles.mainContainer}>
+					{
+						worldAveScore.map(res=>
+								<View style={styles.worldStat} key={res.wid}>
+
+									<Text style={styles.worldText}>{res.wname}</Text>
+									<Text style={styles.worldText}>{res.aveScore}</Text>
+									<View style={styles.sectionContainer}>
+									{sectionAveScore[worldAveScore.indexOf(res)].map(subres=>
+										<View style={styles.sectionStat} key={subres.sid}>
+											<Text style={styles.sectionText}>{subres.sname}</Text>
+											<Text style={styles.sectionText}>{subres.aveScore}</Text>
+										</View>
+									)}
 									</View>
-								)}
 								</View>
-							</View>
-						)
+							)
+					}
+					</View>
 				}
-				</View>
-			}
-		</View>
+			</View>
+		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
-	worldStat: {},
+	mainContainer:{
+		backgroundColor:'#000',
+        width:'100%',
+		height:'100%',
+		alignItems:'center',
+    },
+	worldStat: {
+		paddingVertical:10,
+		width:'100%',
+        borderWidth:5,
+		borderColor:'#DAA520',
+        backgroundColor: '#000000',
+        alignItems:'center',
+        marginTop:40
+	},
+	worldText: {
+		fontSize:20,
+        color: '#DAA520',
+        fontFamily: 'trajan-pro',
+	},
 	sectionContainer: {},
-	sectionStat: {}
+	sectionStat: {
+		paddingTop:10,
+		borderWidth:1,
+		width:350,
+		borderColor:'#DAA520',
+	},
+	sectionText: {
+		textAlign:'center',
+		fontSize:15,
+        color: '#DAA520',
+        fontFamily: 'trajan-pro',
+	},
 });
 
 export default ReportScreen;
