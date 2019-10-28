@@ -43,32 +43,62 @@ const GameMapSelectionScreen = props => {
                     <ImageBackground source={require('../../../assets/images/icons/window.png')} style={styles.window}>  
                         <View>
                             <Text style = {styles.username}>
-                                LEADERBOARD
+                                Worlds
                             </Text>
                         </View>
                     </ImageBackground>
                 </View>
 				<View style={{ flex: 0.5}}></View>
-				<View>
+				<View style={{ flex: 5}}>
+				<Text
+					style={{backgroundColor:"#ffffff"}}
+					onPress={
+						item.available ? 
+						(async ()=>{
+							await dispatch(mapActions.getSections(userInfo.userId,item.wid));
+							props.navigation.navigate(
+								'GameMap',
+								{wid: item.wid}
+							);
+						}) : 
+						(e=>alert('Not unlocked!'))
+					}
+				>{item.name}
+				</Text>
 				<FlatList
 					data={worlds}
 					keyExtractor={item=>item.wid.toString()}
 					renderItem={({item,index})=>{
 						return(
-							<View>
-								<Text
-									onPress={
-										item.available ? 
-										(async ()=>{
-											await dispatch(mapActions.getSections(userInfo.userId,item.wid));
-											props.navigation.navigate(
-												'GameMap',
-												{wid: item.wid}
-											);
-										}) : 
-										(e=>alert('Not unlocked!'))
-									}
-								>{item.name}</Text>
+							<View style={{flex: 2, width: '100%', alignItems: 'center'}}
+								onPress={
+									item.available ? 
+									(async ()=>{
+										await dispatch(mapActions.getSections(userInfo.userId,item.wid));
+										props.navigation.navigate(
+											'GameMap',
+											{wid: item.wid}
+										);
+									}) : 
+									(e=>alert('Not unlocked!'))}>
+								<ImageBackground source={index===1? (require('../../../assets/images/backgrounds/Castle.jpg')):(require('../../../assets/images/backgrounds/Laketown.jpg'))} style={styles.window}>  
+									<View>
+										<Text
+											style={styles.username}
+											onPress={
+												item.available ? 
+												(async ()=>{
+													await dispatch(mapActions.getSections(userInfo.userId,item.wid));
+													props.navigation.navigate(
+														'GameMap',
+														{wid: item.wid}
+													);
+												}) : 
+												(e=>alert('Not unlocked!'))
+											}
+										>{item.name}</Text>
+									</View>
+								</ImageBackground>
 							</View>
 						);
 					}}
