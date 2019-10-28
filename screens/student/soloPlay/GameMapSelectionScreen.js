@@ -3,7 +3,8 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Button
+	Button,
+	FlatList
 } from 'react-native';
 import { useSelector, useDispatch} from 'react-redux';
 import * as worldsActions from '../../../store/actions/worldsActions';
@@ -32,8 +33,34 @@ const GameMapSelectionScreen = props => {
 	// },[reloadWorlds]);
 
 	return(
+
 		<View style={styles.mainContainer}>
 			<Text style={styles.mapSelection}>Map Selection</Text>
+
+			<FlatList
+				data={worlds}
+				keyExtractor={item=>item.wid.toString()}
+				renderItem={({item,index})=>{
+					return(
+						<View>
+							<Text
+								onPress={
+									item.available ? 
+									(async ()=>{
+										await dispatch(mapActions.getSections(userInfo.userId,item.wid));
+										props.navigation.navigate(
+											'GameMap',
+											{wid: item.wid}
+										);
+									}) : 
+									(e=>alert('Not unlocked!'))
+								}
+							>{item.name}</Text>
+						</View>
+					);
+				}}
+			/>
+
 			<View style={styles.mapContainer}>
 				{worlds.map(res=>{
 					if (res.available===true)
