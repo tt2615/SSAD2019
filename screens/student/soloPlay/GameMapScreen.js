@@ -11,6 +11,8 @@ import {useSelector,useDispatch} from 'react-redux';
 import StageButton from '../../../components/UI/stageButton.js';
 import * as mapActions from '../../../store/actions/mapActions';
 import * as userActions from '../../../store/actions/userActions';
+import * as worldsActions from '../../../store/actions/worldsActions';
+
 
 const GameMapScreen = props => {
 	const [worldInfo, setworldInfo]=useState(props.navigation.state.params.wid);
@@ -31,6 +33,7 @@ const GameMapScreen = props => {
 	);
 	const dispatch=useDispatch();
 	const sectionInfo=useSelector(state=>state.map);
+	const userInfo=useSelector(state=>state.user);
 	// const userInfo=useSelector(state=>state.user);
 
 	// const getSections =useCallback(async () => {
@@ -57,7 +60,12 @@ const GameMapScreen = props => {
 		<View>
 			{sectionInfo.length===0?<Text>Loading...</Text>:
 				<ImageBackground source={bgDic(worldInfo)} style={styles.imageBackground}>
-					<Text style={styles.returnButton} onPress={e=>props.navigation.navigate('GameMapSelection',{wid:worldInfo})}>Return</Text>
+					<Text style={styles.returnButton} 
+						onPress={async ()=>{
+							await dispatch(worldsActions.getWorlds(userInfo.userId));
+							props.navigation.navigate('GameMapSelection',{wid:worldInfo})}
+							}>Return</Text>
+							
 							{sectionInfo.map(res=>
 							<StageButton key={res.sid} 
 										tid={res.sid} 
