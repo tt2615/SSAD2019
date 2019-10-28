@@ -132,6 +132,11 @@ const LoginScreen = props => {
 					source={require('../../assets/images/login/title.png')}
 					style={styles.loginImage}
 				/>
+				<Image 
+					source={require('../../assets/images/login/title2.png')}
+					style={styles.loginImage2}
+				/>
+
 				<Card style={styles.authContainer}>
 					<ScrollView>
 						<Input 
@@ -174,7 +179,10 @@ const LoginScreen = props => {
 const styles = StyleSheet.create({
 	loginImage: {
 		width: '90%',
-		marginBottom: 20,
+		resizeMode: 'contain'
+	},
+	loginImage2: {
+		width: '90%',
 		resizeMode: 'contain'
 	},
 	screen: {
@@ -187,7 +195,7 @@ const styles = StyleSheet.create({
 		maxWidth: 400,
 		maxHeight: 400,
 		padding: 20,
-		backgroundColor:'#ffffff66'
+		backgroundColor:'#00000066'
 	},
 	buttonContainer: {
 		marginTop: 10

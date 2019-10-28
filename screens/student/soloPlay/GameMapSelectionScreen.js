@@ -49,80 +49,33 @@ const GameMapSelectionScreen = props => {
                     </ImageBackground>
                 </View>
 				<View style={{ flex: 0.5}}></View>
-				<View style={{flex: 5, width: '100%', alignItems: 'center'}}>
-					<FlatList
-						data={worlds}
-						keyExtractor={item=>item.wid.toString()}
-						renderItem={({item,index})=>{
-							return(
-								<View>
-									{item.map(res=>{
-										if (res.available===true)
-											return (
-											<Text key={res.wid} 
-												onPress={async ()=>{
-													await dispatch(mapActions.getSections(userInfo.userId,res.wid));
-													props.navigation.navigate(
-														'GameMap',
-														{wid: res.wid}
-													);
-												}}
-												style={styles.mapBlock}>
-												{res.name}
-												<Text>
-													Score: {res.score}
-												</Text>
-											</Text>);
-										else return (
-											<Text key={res.wid}
-												onPress={e=>alert('Not unlocked!')}
-												style={styles.mapBlockLocked}>
-												{res.name}
-												<Text>
-													Score: {res.score}
-												</Text>
-											</Text>);
-										}
-										)
-										}
-								</View>
-							);
-						}}
-					/>
-					<View>
-						{worlds.map(res=>{
-							if (res.available===true)
-								return (
-								<Text key={res.wid} 
-									onPress={async ()=>{
-										await dispatch(mapActions.getSections(userInfo.userId,res.wid));
-										props.navigation.navigate(
-											'GameMap',
-											{wid: res.wid}
-										);
-									}}
-									style={styles.mapBlock}>
-									{res.name}
-									<Text>
-										Score: {res.score}
-									</Text>
-								</Text>);
-							else return (
-								<Text key={res.wid}
-									onPress={e=>alert('Not unlocked!')}
-									style={styles.mapBlockLocked}>
-									{res.name}
-									<Text>
-										Score: {res.score}
-									</Text>
-								</Text>);
-							}
-							)
-							}
-					</View>
+				<View>
+				<FlatList
+					data={worlds}
+					keyExtractor={item=>item.wid.toString()}
+					renderItem={({item,index})=>{
+						return(
+							<View>
+								<Text
+									onPress={
+										item.available ? 
+										(async ()=>{
+											await dispatch(mapActions.getSections(userInfo.userId,item.wid));
+											props.navigation.navigate(
+												'GameMap',
+												{wid: item.wid}
+											);
+										}) : 
+										(e=>alert('Not unlocked!'))
+									}
+								>{item.name}</Text>
+							</View>
+						);
+					}}
+				/>
 				</View>
 			</ImageBackground>
-		</SafeAreaView>
+		</SafeAreaView> 	
 	);
 };
 

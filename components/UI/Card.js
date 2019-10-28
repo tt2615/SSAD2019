@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5,
     borderRadius: 10,
-    backgroundColor: '#F0F3F4',
+    backgroundColor: '#ffffff88',
     padding: 20,
   }
 });

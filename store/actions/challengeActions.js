@@ -78,7 +78,7 @@ export const loadChallenge = (userId) => {
 	    	const readChallenges = [];
 
 	    	for (const key in resData) {
-	    		if (resData[key].stage!==3) {
+	    		if (!((resData[key].isChallengerRead===3&&resData[key].challengerId===userId)||(resData[key].isChallengeeRead===3&&resData[key].challengeeId===userId))) {
 		    		unreadChallenges.push(
 		    			new Challenge(
 		    				key,
@@ -198,11 +198,17 @@ export const acceptChallenge = (id, bid) => {
 
 		if(!response.ok) {
 			const errorResult= await response.json();
-			const errorId = errorResult.error.message;
+			const errorId = errorResult.error;
 			let message = 'Something went wrong when accept challenge!';
 			if (errorId === 'EMAIL_EXISTS') {
 				message = 'The challenge has been deleted!';
 			}
+			if (errorId === 'Auth token is expired') {
+					async () => {
+						await dispatch(cancelChallenge(id,bid));
+					}
+	    			message = 'The challenge has expired!';
+	    		}
 			throw new Error(message);
 		}
 
@@ -264,10 +270,18 @@ export const answerChallenge = (id, bid, score) => {
 
 	    	if(!response.ok) {
 	    		const errorResult= await response.json();
-	    		const errorId = errorResult.error.message;
+	    		const errorId = errorResult.error;
+	    		console.log(errorId);
 	    		let message = 'Something went wrong when update challenge answer!';
 	    		if (errorId === 'EMAIL_EXISTS') {
 	    			message = 'The challenge has been deleted!';
+	    		}
+	    		if (errorId === 'Auth token is expired') {
+	    			console.log(1);
+	    			async () => {
+	    				await dispatch(completeChallenge(id));
+	    			}
+	    			message = 'The challenge has expired!';
 	    		}
 	    		throw new Error(message);
 	    	}
@@ -300,11 +314,17 @@ export const answerChallenge = (id, bid, score) => {
 			
 			if(!response.ok) {
 				const errorResult= await response.json();
-				const errorId = errorResult.error.message;
+				const errorId = errorResult.error;
+				console.log(errorId);
 				let message = 'Something went wrong when update challenge answer!';
 				if (errorId === 'EMAIL_EXISTS') {
 					message = 'The challenge has been deleted!';
 				}
+				if (errorId === 'Auth token is expired') {
+					console.log(2);
+					dispatch(completeChallenge(id))
+	    			message = 'The challenge has expired!';
+	    		}
 				throw new Error(message);
 
 			}
@@ -319,7 +339,7 @@ export const answerChallenge = (id, bid, score) => {
 		}
 		//if both user answered, update challenge
 		if(opponentAnswered){
-			dispatch(completeChallenge(id,bid));
+			dispatch(completeChallenge(id));
 		}
 	};
 };
@@ -332,7 +352,8 @@ export const answerChallenge = (id, bid, score) => {
  * @param {*} bid
  * @returns
  */
-export const completeChallenge = (id, bid) => {
+export const completeChallenge = (id) => {
+	console.log('enter completeChallenge');
 	return async (dispatch, getState) => {
 		const userInfo = getState().user;
 		//increase challenge stage
@@ -353,6 +374,8 @@ export const completeChallenge = (id, bid) => {
 	    const challengeeScore = resData.challengeeScore;
 	    const challengerId = resData.challengerId;
 	    const challengeeId = resData.challengeeId;
+	    const bid = resData.bid;
+	    const opponentEmail = challengeeId===userInfo.userEmail?challengerId:challengeeId;
 
 	    const response = await fetch(
 	      `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
@@ -369,7 +392,7 @@ export const completeChallenge = (id, bid) => {
 	    if(!response.ok) {
 	    	const errorResult= await response.json();
 	    	const errorId = errorResult.error.message;
-	    	let message = 'Something went wrong when update challenge answer!';
+	    	let message = 'Something went wrong when update challenge completion!';
 	    	if (errorId === 'EMAIL_EXISTS') {
 	    		message = 'The challenge has been deleted!';
 	    	}
@@ -384,7 +407,6 @@ export const completeChallenge = (id, bid) => {
 
 	    //update user score
 	    if((challengerScore>challengeeScore&&challengerId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengeeId===userInfo.userEmail)){//user win: add point to user
-	    	const newScore = userInfo.userTotalScore+bid*2;
 	    	await dispatch(
 	    		userActions.updateStudent(
 	    			userInfo.userId, 
@@ -392,15 +414,70 @@ export const completeChallenge = (id, bid) => {
 	    			'student', 
 	    			userInfo.userName, 
 	    			userInfo.character, 
-	    			newScore
+	    			userInfo.userTotalScore+bid*2
 	    		)
 	    	);
 	    } else if((challengerScore>challengeeScore&&challengeeId===userInfo.userEmail)||(challengeeScore>challengerScore&&challengerId===userInfo.userEmail)) { //opponent win: add point to opponent
-	    	console.log('update opponent point');
+	    	//get opponent info
+	    	const response = await fetch(
+	    	  `https://ssad2019-1cc69.firebaseio.com/users.json?`
+	    	);
+
+	    	if (!response.ok) {
+	    	    throw new Error('Something went wrong when get user!');
+	    	}
+
+	    	const resData = await response.json();
+	    	for (const key in resData) {
+	    	  if (resData[key].userEmail===opponentEmail){
+	    	    if(resData[key].userType==='student'){ 
+	    	      //load student Info to store
+	    	      await dispatch(userActions.updateStudent(
+      	    		resData[key].userId,
+      	    		resData[key].userEmail, 
+      	    		'student', 
+      	    		resData[key].userName, 
+      	    		resData[key].character, 
+      	    		resData[key].userTotalScore+bid*2));
+	    	      return;
+	    	    }
+	    	  }
+	        }
 
 	    } else { //draw: return points to both players
-	    	await dispatch(userActions.updateStudent(userInfo.userId, userInfo.userEmail, 'student', userInfo.userName, userInfo.character, userInfo.userTotalScore+bid));
-	    	console.log('update opponent point');
+	    	await dispatch(userActions.updateStudent(
+	    		userInfo.userId, 
+	    		userInfo.userEmail, 
+	    		'student', 
+	    		userInfo.userName, 
+	    		userInfo.character, 
+	    		userInfo.userTotalScore+bid));
+
+	    	//get opponent info
+	    	const response = await fetch(
+	    	  `https://ssad2019-1cc69.firebaseio.com/users.json?`
+	    	);
+
+	    	if (!response.ok) {
+	    	    throw new Error('Something went wrong when get user!');
+	    	}
+
+	    	const resData = await response.json();
+	    	for (const key in resData) {
+	    	  if (resData[key].userEmail===opponentEmail){
+	    	    if(resData[key].userType==='student'){ 
+	    	      //load student Info to store
+	    	      await dispatch(userActions.updateStudent(
+      	    		resData[key].userId,
+      	    		resData[key].userEmail, 
+      	    		'student', 
+      	    		resData[key].userName, 
+      	    		resData[key].character, 
+      	    		resData[key].userTotalScore+bid*2));
+	    	      return;
+	    	    }
+	    	  }
+	    	}
 	    }
 	};
 };
@@ -413,11 +490,88 @@ export const completeChallenge = (id, bid) => {
  * 
  */
 export const confirmChallenge = (id) => {
+	console.log('enter confirmChallenge');
 	return async (dispatch, getState) => {
-		//update challenge list store
-	    dispatch({
-	    	type: CONFIRM_CHALLENGES,
-	    	id: id
-	    });
+		//update firebase
+		const userInfo = getState().user;
+		const challengeResponse = await fetch(
+      		`https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json`
+    	);
+
+    	if (!challengeResponse.ok) {
+	        throw new Error('Something went wrong when get challenge!');
+	    }
+
+	    const resData = await challengeResponse.json();
+	    if(!resData.auth){
+	    	throw new Error('The challenge has been deleted!')
+	    }
+	    const token = resData.auth;
+	    console.log(token);
+
+	    if(userInfo.userEmail===resData.challengeeId){//challengee
+	    	console.log('enter challengee');
+			const response = await fetch(
+			  `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
+			    {
+			    method: 'PATCH',
+			    headers: {
+			      'Content-Type': 'application/json'
+			    },
+			    body: JSON.stringify({
+			      isChallengeeRead:3,
+			      stage:3
+			    })
+			  } 
+			);		
+
+			if(!response.ok) {
+	    		const errorResult= await response.json();
+	    		const errorId = errorResult.error;
+	    		let message = 'Something went wrong when confirm challenge!';
+	    		if (errorId === 'Auth token is expired') {
+	    			message = 'The challenge has expired!';
+	    		}
+	    		throw new Error(message);
+	    	}
+
+			//update challenge list store
+		    dispatch({
+		    	type: CONFIRM_CHALLENGES,
+		    	id: id,
+		    	answerer:'challengee'
+		    });
+	    } else {//challenger
+	    	console.log('enter challenger');
+	    	const response = await fetch(
+	    	  `https://ssad2019-1cc69.firebaseio.com/challenges/${id}.json?auth=${token}`,
+	    	    {
+	    	    method: 'PATCH',
+	    	    headers: {
+	    	      'Content-Type': 'application/json'
+	    	    },
+	    	    body: JSON.stringify({
+	    	      isChallengerRead:3,
+	    	      stage:3
+	    	    })
+	    	  } 
+	    	);		
+
+	    	if(!response.ok) {
+	    		const errorResult= await response.json();
+	    		const errorId = errorResult.error;	    		let message = 'Something went wrong when confirm challenge!';
+	    		if (errorId === 'Auth token is expired') {
+	    			message = 'The challenge has expired!';
+	    		}
+	    		throw new Error(message);
+	    	}
+
+    		//update challenge list store
+    	    dispatch({
+    	    	type: CONFIRM_CHALLENGES,
+    	    	id: id,
+    	    	answerer:'challenger'
+    	    });
+	    }
 	};
 };
