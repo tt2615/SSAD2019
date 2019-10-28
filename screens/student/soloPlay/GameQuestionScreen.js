@@ -53,22 +53,32 @@ const GameQuestionScreen = props => {
 		//styles for question options
 	const [correctStyle, setCorrectStyle]=useState(
 		{
+			flex:1,
 			backgroundColor: 'green',
-			fontSize: 20,
+			fontSize: 15,
 			paddingTop:5,
+			borderWidth:10,
+			borderColor:'#DAA520',
 			textAlign: 'center',
-			width: 'auto'
+			width: 'auto',
+			color: '#DAA520',
+			justifyContent:'center'
 		}
 	);
 
 	const defaultStyle={
-		backgroundColor: '#76de9155',
-		fontSize: 20,
+		flex:1,
+		backgroundColor: '#000',
+		borderWidth:2,
+		borderColor:'#DAA520',
+		fontSize: 15,
 		paddingTop:5,
 		paddingBottom:5,
 		marginVertical: 5,
 		textAlign: 'center',
-		width: 'auto'
+		width: 'auto',
+		color: '#DAA520',
+		justifyContent:'center'
 	}
 
 	//functions
@@ -168,22 +178,23 @@ const GameQuestionScreen = props => {
 	//render
 	return(
 		<SafeAreaView>
-			<ScrollView style={styles.questionContainer}>
+			<View style={styles.questionContainer}>
+				<View style={{flex:0.5}}></View>
 				<View style={{flex:1}}>
-					<View style={{flexDirection: 'row',paddingBottom: 5, paddingTop: 5}}>
-						<View  style={{ flex: 1,  alignItems: 'center' }}>
-							<Text style={{ fontSize: 15, color: '#DAA520',fontFamily: 'trajan-pro'}}>
+					<View style={{flexDirection: 'row',paddingBottom: 5, paddingTop: 0}}>
+						<View  style={{ flex: 1,  alignItems: 'center'}}>
+							<Text style={{ fontSize: 20, color: '#DAA520',fontFamily: 'trajan-pro'}}>
 								Time Left
 							</Text>
-							<Text style={{ fontSize: 15, color: '#DAA520',fontFamily: 'trajan-pro'}}>
+							<Text style={{ fontSize: 20, color: '#DAA520',fontFamily: 'trajan-pro'}}>
 								{seconds}
 							</Text>
 						</View>
 						<View  style={{ flex: 1,  alignItems: 'center'}}>
-							<Text style={{ fontSize: 15 , color: '#DAA520',fontFamily: 'trajan-pro' }}>
+							<Text style={{ fontSize: 20 , color: '#DAA520',fontFamily: 'trajan-pro' }}>
 								Score 
 							</Text>
-							<Text style={{ fontSize: 15 , color: '#DAA520',fontFamily: 'trajan-pro' }}>
+							<Text style={{ fontSize: 20 , color: '#DAA520',fontFamily: 'trajan-pro' }}>
 								{controls.score}
 							</Text>
 						</View>
@@ -196,29 +207,33 @@ const GameQuestionScreen = props => {
 					{curQuestion.options.map(res=>(<Text key={curQuestion.options.indexOf(res)} onPress={e=> checkAnswer(e,res)} style={chooseStyle(curQuestion.options.indexOf(res))}>
 					{res}</Text>))}
 				</View>
-			</ScrollView>
+			</View>
+			<View style={{flex:1}}></View>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	questionContainer:{
-		paddingTop: 20,
-		paddingHorizontal: 20,
+		width:'100%',
+		height:'100%',
+		backgroundColor:'#000000',
 	},
 	questionHeader:{
 		flex:3,
 		justifyContent:'center',
 		alignItems:'center',
+		borderWidth:5,
+		borderColor:'#DAA520',
 		backgroundColor: '#000000',
 		width: 'auto',
-		paddingTop: 30,
-		paddingBottom: 30,
-		paddingHorizontal: 8
+		paddingTop: 20,
+		paddingBottom: 20,
+		paddingHorizontal: 10,
 	},
 	questionBody:{
 		flex:5,
-		backgroundColor: '#ffffff',
+		backgroundColor: '#000',
 		paddingHorizontal: 10,
 		height: 'auto'
 	},
