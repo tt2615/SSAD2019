@@ -28,19 +28,17 @@ const TeacherHomeScreen = props => {
 						</View>
 					</ImageBackground>
 				</View>
-				<View style={{ flex: 3, alignItems:'center'}}>
-					<TouchableOpacity activityOpacity={.5} onPress = { () => {props.navigation.navigate('TeacherProfile');}}>
+				<View style={styles.iconContainer}>
+					<TouchableOpacity style={{paddingBottom:20}} activityOpacity={.5} onPress = { () => {props.navigation.navigate('TeacherProfile');}}>
                         <Image resizeMode = 'contain'
                             style = {{width: 283, height:46}}
                             source={require("../../assets/images/icons/profile.png")}/>
                     </TouchableOpacity>
-					<Button 
-						title='View Report'
-						onPress = { () => {
-							props.navigation.navigate('Report');
-							}
-						}
-					/>
+					<TouchableOpacity style={{paddingBottom:20}} activityOpacity={.5} onPress = { () => {props.navigation.navigate('Report');}}>
+                        <Image resizeMode = 'contain'
+                            style = {{width: 283, height:46}}
+                            source={require("../../assets/images/icons/report.png")}/>
+                    </TouchableOpacity>
 				</View>
 				<View style={{ flex: 0.5}}></View>
 			</View>
@@ -70,6 +68,13 @@ const styles = StyleSheet.create({
 		color: '#DAA520',
         fontFamily: 'trajan-pro',
 	},
+	iconContainer: {
+        flex:3,
+        width: '100%',
+        height: 200,
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
 });
 
 export default TeacherHomeScreen;
