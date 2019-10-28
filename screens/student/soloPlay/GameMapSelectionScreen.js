@@ -23,7 +23,7 @@ const GameMapSelectionScreen = props => {
 	const userInfo=useSelector(state=>state.user);
 	// const reloadWorlds=()=>{
 	// };
-
+	
 	// useEffect(()=>{
 
 	// const refresh= props.navigation.addListener(
@@ -40,6 +40,12 @@ const GameMapSelectionScreen = props => {
 		<SafeAreaView>
 			<ImageBackground source={require('../../../assets/images/backgrounds/worldselection.jpg')} style={styles.mainContainer}>
 				<View style={{ flex: 0.5}}></View>
+				<Text style={styles.returnButton} 
+						onPress={async ()=>{
+							await dispatch(userActions.getUser(userInfo.userEmail));
+							props.navigation.navigate('StudentMain',{uid:userInfo.userId});}
+							}>Return</Text>
+							
 				<View style={{flex: 2, width: '100%', alignItems: 'center'}}>
                     <ImageBackground source={require('../../../assets/images/icons/window.png')} style={styles.window}>  
                         <View>
