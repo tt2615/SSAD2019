@@ -9,7 +9,8 @@ import {
 	ActivityIndicator,
 	Image,
 	Alert,
-	AsyncStorage
+	AsyncStorage,
+	Text
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 
@@ -139,13 +140,19 @@ const LoginScreen = props => {
 
 				<Card style={styles.authContainer}>
 					<ScrollView>
+						<Text style={{width:'100%', textAlign:'center', color: '#DAA520',fontFamily: 'trajan-pro',fontSize: 18,}}>
+							EMAIL
+						</Text>
 						<Input 
-							label='Email'
+							//label='Email'
 							id='email'
 							onInputChange={inputChangeHandler}
 						/>
+						<Text style={{width:'100%', textAlign:'center', color: '#DAA520',fontFamily: 'trajan-pro',fontSize: 18, marginTop:20}}>
+							PASSWORD
+						</Text>
 						<Input 
-							label='Password'
+							//label='Password'
 							id='password'
 							onInputChange={inputChangeHandler}
 							secureTextEntry={true}

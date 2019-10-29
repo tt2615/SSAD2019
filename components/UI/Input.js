@@ -72,10 +72,12 @@ const Input = props => {
 
 	return (
 		<View style={styles.inputControl}>
-			<View style={{paddingTop: 20}}>
-				<Text style={styles.label}>
+			<View 
+			// style={{paddingTop: 20}}
+			>
+				{/* <Text style={styles.label}>
 				{props.label}
-				</Text>
+				</Text> */}
 			</View>
 			<TextInput
 				{...props}
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
 		borderBottomColor: '#ccc',
 		borderBottomWidth: 1,
 		color:'#ffffff',
-		backgroundColor:'#00000080',
+		backgroundColor:'#00000088',
 		width:'100%',
 		textAlign:'center'
 	},
