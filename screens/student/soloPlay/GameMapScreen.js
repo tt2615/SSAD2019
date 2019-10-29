@@ -5,7 +5,8 @@ import {
 	Text,
 	StyleSheet,
 	Button,
-	ImageBackground
+	ImageBackground,
+	SafeAreaView
 } from 'react-native';
 import {useSelector,useDispatch} from 'react-redux';
 import StageButton from '../../../components/UI/stageButton.js';
@@ -18,16 +19,16 @@ const GameMapScreen = props => {
 	const [worldInfo, setworldInfo]=useState(props.navigation.state.params.wid);
 	const [sectionPosition, setSectionPosition]=useState([
 		{
-			x: 10,
-			y:20
+			x:50,
+			y:60
 		},
 		{
-			x:300,
-			y:400
+			x:105,
+			y:220
 		},
 		{
-			x:10,
-			y:500
+			x:160,
+			y:410
 		}
 		]
 	);
@@ -57,7 +58,7 @@ const GameMapScreen = props => {
 	// },[getSections]);
 
 	return(
-		<View>
+		<SafeAreaView>
 			{sectionInfo.length===0?<Text>Loading...</Text>:
 				<ImageBackground source={bgDic(worldInfo)} style={styles.imageBackground}>
 					<Text style={styles.returnButton} 
@@ -77,7 +78,7 @@ const GameMapScreen = props => {
 										targetNav={props.navigation}/>)}
 				</ImageBackground>
 			}
-		</View>
+		</SafeAreaView>
 	);
 };
 
