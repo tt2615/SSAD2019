@@ -14,7 +14,7 @@ const TeacherHomeScreen = props => {
 
 	return(
 		<SafeAreaView>
-			<View style = {styles.mainContainer}>
+			<ImageBackground source={require('../../assets/images/backgrounds/teacherbg.png')} style={styles.mainContainer}>
 				<View style={{ flex: 0.5}}></View>
 				<View style={{flex: 2, width: '100%', alignItems: 'center'}}>
 					<ImageBackground source={require('../../assets/images/icons/window.png')} style={styles.window}>  
@@ -39,16 +39,22 @@ const TeacherHomeScreen = props => {
                             style = {{width: 283, height:46}}
                             source={require("../../assets/images/icons/report.png")}/>
                     </TouchableOpacity>
+					<TouchableOpacity activityOpacity={.5} onPress={()=>{
+									props.navigation.navigate('Auth');
+								}}>
+                        <Image resizeMode = 'contain'
+                            style = {{width: 283, height:46}}
+                            source={require("../../assets/images/icons/logout.png")}/>
+                    </TouchableOpacity>
 				</View>
 				<View style={{ flex: 0.5}}></View>
-			</View>
+			</ImageBackground>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	mainContainer:{
-		backgroundColor:'#000',
         width:'100%',
 		height:'100%',
 		alignItems:'center',
