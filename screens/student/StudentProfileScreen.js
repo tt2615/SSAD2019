@@ -155,7 +155,7 @@ const StudentProfileScreen = props => {
 
 	return(
 	<SafeAreaView>
-		<ImageBackground source={require('../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+		<ImageBackground source={require('../../assets/images/icons/profilebg.png')} style={styles.mainContainer}>
 			<ScrollView>
 				<KeyboardAvoidingView
 				behavior='padding'
@@ -225,12 +225,12 @@ const StudentProfileScreen = props => {
 											<Image
 												source={images[itemData.item.id]}
 												borderWidth={itemData.item.id === characterId ? 5: 0}
-												borderColor='#C8DAD3'
+												borderColor='#DAA520'
 												alignItems='center'
 											/>
 										)}
 									</TouchableOpacity>
-									<Text style={{color:'#DAA520',fontSize: 10,	fontFamily: 'trajan-pro'}}>
+									<Text style={{color:'#DAA520',fontSize: 10,	fontFamily: 'trajan-pro-bold'}}>
 										{itemData.item.name}
 									</Text>
 								</View>

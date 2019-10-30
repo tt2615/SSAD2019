@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 		color:'#ffffff',
 		backgroundColor:'#00000088',
 		width:'100%',
-		textAlign:'center'
+		textAlign:'center',
 	},
 	errorContainer: {
 		marginVertical: 5
