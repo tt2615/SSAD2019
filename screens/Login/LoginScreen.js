@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
 	},
 	loginImage2: {
 		width: '90%',
-		resizeMode: 'contain'
+		resizeMode: 'contain',
+		marginTop:-20,
 	},
 	screen: {
 		flex: 1,
