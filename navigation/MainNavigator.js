@@ -46,7 +46,7 @@ const StudentNavigator = createStackNavigator({
 const TeacherNavigator = createStackNavigator({
 	TeacherHome: TeacherHomeScreen,
 	TeacherProfile: TeacherProfileScreen,
-	SocialMediaScreen: SocialMediaScreen,
+	SocialMedia: SocialMediaScreen,
 	Report: ReportScreen
 },{
 	initialRouteName: 'TeacherHome',

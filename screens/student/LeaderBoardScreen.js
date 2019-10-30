@@ -31,7 +31,6 @@ const LeaderBoardScreen = props => {
   			    throw new Error('Something went wrong when get user list!');
   			}
   			const resData = await response.json();
-  			console.log(resData);
   			let allUsers=[];
   			for (const key in resData){
   				if(resData[key].userType==='student'){
@@ -53,6 +52,7 @@ const LeaderBoardScreen = props => {
   			    return 0;
 			  });
 			  setUserList(allUsers);
+			  console.log(allUsers);
 			
 			//get user ranking and score
 			for(let i=0;i<allUsers.length;i++){
