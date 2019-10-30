@@ -79,7 +79,7 @@ const GameMapScreen = props => {
 						onPress={async ()=>{
 							await dispatch(worldsActions.getWorlds(userInfo.userId));
 							props.navigation.navigate('GameMapSelection',{wid:worldInfo})}
-							}>Return</Text>
+							}></Text>
 							
 							{sectionInfo.map(res=>
 							<StageButton key={res.sid} 
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
 		marginVertical: 200
 	},
 	returnButton: {
-		marginTop: 30
+		marginTop: 30,
+		color: '#88888888'
 	}
 });
 

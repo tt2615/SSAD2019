@@ -230,7 +230,7 @@ const StudentProfileScreen = props => {
 											/>
 										)}
 									</TouchableOpacity>
-									<Text style={{color:'#DAA520',fontSize: 12,	fontFamily: 'trajan-pro'}}>
+									<Text style={{color:'#DAA520',fontSize: 10,	fontFamily: 'trajan-pro'}}>
 										{itemData.item.name}
 									</Text>
 								</View>
