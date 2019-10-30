@@ -54,6 +54,7 @@ const LeaderBoardScreen = props => {
   			    return 0;
 			  });
 			  setUserList(allUsers);
+			  //console.log(allUsers);
 			
 			//get user ranking and score
 			for(let i=0;i<allUsers.length;i++){

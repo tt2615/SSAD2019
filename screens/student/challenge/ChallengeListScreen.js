@@ -97,15 +97,36 @@ const ChallengeListScreen = props => {
 
  	if (!isLoading && challengeList.unreadChallenges.length === 0 && challengeList.readChallenges.length === 0) {
  	  return (
- 	    <View style={styles.centered}>
- 	    	<Button
- 	    		title='create new challenge'
- 	    		onPress={()=>{
- 	    			props.navigation.navigate('ChallengeCreation');
- 	    		}}
- 	    	/>
- 	      <Text>No Challenges found. Start creating one!</Text>
- 	    </View>
+		<SafeAreaView>
+			<ImageBackground source={require('../../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+				<View style={styles.header2Container}>
+                    <ImageBackground source={require('../../../assets/images/icons/header.png')} style={styles.header}>  
+                        <View>
+                            <Text style = {styles.challengeText}>
+                                CHALLENGE LIST
+                            </Text>
+                        </View>
+                    </ImageBackground>
+                </View>
+				<View style={styles.button2Container}>
+					<TouchableOpacity activeOpacity={.5} onPress={()=>{props.navigation.navigate('ChallengeCreation');}}>
+						<Image resizeMode='contain'
+                            style ={{width: 360, height: 41}}
+                            source={require("../../../assets/images/icons/createChallenge.png")}/>
+					</TouchableOpacity>
+					<Text style={styles.nochallenge}>No Challenges found. {'\n'}Start creating one!</Text>
+				</View>
+			</ImageBackground>
+		</SafeAreaView>
+ 	    // <View style={styles.centered}>
+ 	    // 	<Button
+ 	    // 		title='create new challenge'
+ 	    // 		onPress={()=>{
+ 	    // 			props.navigation.navigate('ChallengeCreation');
+ 	    // 		}}
+ 	    // 	/>
+ 	    //   <Text>No Challenges found. Start creating one!</Text>
+ 	    // </View>
  	  );
  	}
 
@@ -191,11 +212,31 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'trajan-pro',
 	},
+	nochallenge:{
+		width:'100%',
+		textAlign:'center',
+		marginTop:20,
+		color: '#D97D54',
+		fontFamily: 'trajan-pro',
+		fontSize: 14,
+	},
 	buttonContainer:{
 		flex: 1,
 		marginTop: 70,
 		width: '100%',
 		alignItems: 'center'
+	},
+	header2Container:{
+		marginTop:50,
+		width: '100%',
+		alignItems: 'center',
+		textAlignVertical:'center',
+	},
+	button2Container:{
+		flex: 1,
+		marginTop: 100,
+		width:'100%',
+		alignItems:'center'
 	},
 	listContainer:{
 		flex: 5,

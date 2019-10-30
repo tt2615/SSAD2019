@@ -3,7 +3,9 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	SafeAreaView
+	SafeAreaView,
+	ImageBackground,
+	ScrollView,
 } from 'react-native';
 
 const ReportScreen = props => {
@@ -119,6 +121,17 @@ const ReportScreen = props => {
 
 	return(
 		<SafeAreaView>
+			<ImageBackground source={require('../../assets/images/backgrounds/teacherbg.png')} style={styles.mainContainer}>
+			<ScrollView>
+					<View style={styles.headerContainer}>
+						<ImageBackground source={require('../../assets/images/icons/header.png')} style={styles.header}>  
+							<View>
+								<Text style = {styles.reportText}>
+									REPORT
+								</Text>
+							</View>
+						</ImageBackground>
+					</View>
 			<View>
 				{
 					worldAveScore===null?<Text>Loading</Text>:
@@ -143,23 +156,45 @@ const ReportScreen = props => {
 					</View>
 				}
 			</View>
+			</ScrollView>
+			</ImageBackground>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	mainContainer:{
-		backgroundColor:'#000',
-        width:'100%',
+		width:'100%',
 		height:'100%',
 		alignItems:'center',
     },
+	headerContainer: {
+		flex:2,
+		marginTop:50,
+        width: '100%',
+		alignItems: 'center',
+		textAlignVertical:'center',
+	},
+	header:{
+		width: 316,
+		height: 102,
+		alignItems: 'center',
+	},
+	reportText:{
+		width: '100%',
+        textTransform: 'uppercase',
+		textAlign:'center',
+		marginTop: 35,
+        color: '#DAA520',
+        fontSize: 20,
+        fontFamily: 'trajan-pro',
+	},
 	worldStat: {
 		paddingVertical:10,
 		width:'100%',
         borderWidth:5,
 		borderColor:'#DAA520',
-        backgroundColor: '#000000',
+        
         alignItems:'center',
         marginTop:40
 	},

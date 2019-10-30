@@ -5,7 +5,9 @@ import {
 	Text,
 	StyleSheet,
 	Button,
-	ImageBackground
+	ImageBackground,
+	SafeAreaView,
+	Platform
 } from 'react-native';
 import {useSelector,useDispatch} from 'react-redux';
 import StageButton from '../../../components/UI/stageButton.js';
@@ -16,20 +18,33 @@ import * as worldsActions from '../../../store/actions/worldsActions';
 
 const GameMapScreen = props => {
 	const [worldInfo, setworldInfo]=useState(props.navigation.state.params.wid);
-	const [sectionPosition, setSectionPosition]=useState([
+	const [sectionPosition, setSectionPosition]=useState(
+		Platform.OS === 'android'? [
 		{
-			x: 10,
-			y:20
+			x:50,
+			y:60
 		},
 		{
-			x:300,
-			y:400
+			x:105,
+			y:220
 		},
 		{
-			x:10,
-			y:500
+			x:160,
+			y:410
 		}
-		]
+		]:
+		[{
+			x:70,
+			y:110
+		},
+		{
+			x:130,
+			y:320
+		},
+		{
+			x:210,
+			y:560
+		}]
 	);
 	const dispatch=useDispatch();
 	const sectionInfo=useSelector(state=>state.map);
@@ -57,14 +72,14 @@ const GameMapScreen = props => {
 	// },[getSections]);
 
 	return(
-		<View>
+		<SafeAreaView>
 			{sectionInfo.length===0?<Text>Loading...</Text>:
 				<ImageBackground source={bgDic(worldInfo)} style={styles.imageBackground}>
 					<Text style={styles.returnButton} 
 						onPress={async ()=>{
 							await dispatch(worldsActions.getWorlds(userInfo.userId));
 							props.navigation.navigate('GameMapSelection',{wid:worldInfo})}
-							}>Return</Text>
+							}></Text>
 							
 							{sectionInfo.map(res=>
 							<StageButton key={res.sid} 
@@ -77,7 +92,7 @@ const GameMapScreen = props => {
 										targetNav={props.navigation}/>)}
 				</ImageBackground>
 			}
-		</View>
+		</SafeAreaView>
 	);
 };
 
@@ -92,7 +107,8 @@ const styles = StyleSheet.create({
 		marginVertical: 200
 	},
 	returnButton: {
-		marginTop: 30
+		marginTop: 30,
+		color: '#88888888'
 	}
 });
 

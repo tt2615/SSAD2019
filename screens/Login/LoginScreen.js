@@ -9,7 +9,8 @@ import {
 	ActivityIndicator,
 	Image,
 	Alert,
-	AsyncStorage
+	AsyncStorage,
+	Text
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import 'react-native-console-time-polyfill';
@@ -141,13 +142,19 @@ const LoginScreen = props => {
 
 				<Card style={styles.authContainer}>
 					<ScrollView>
+						<Text style={{width:'100%', textAlign:'center', color: '#DAA520',fontFamily: 'trajan-pro',fontSize: 18,}}>
+							EMAIL
+						</Text>
 						<Input 
-							label='Email'
+							//label='Email'
 							id='email'
 							onInputChange={inputChangeHandler}
 						/>
+						<Text style={{width:'100%', textAlign:'center', color: '#DAA520',fontFamily: 'trajan-pro',fontSize: 18, marginTop:20}}>
+							PASSWORD
+						</Text>
 						<Input 
-							label='Password'
+							//label='Password'
 							id='password'
 							onInputChange={inputChangeHandler}
 							secureTextEntry={true}
@@ -185,7 +192,8 @@ const styles = StyleSheet.create({
 	},
 	loginImage2: {
 		width: '90%',
-		resizeMode: 'contain'
+		resizeMode: 'contain',
+		marginTop:-20,
 	},
 	screen: {
 		flex: 1,
