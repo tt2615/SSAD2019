@@ -12,6 +12,7 @@ import {
 	AsyncStorage
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import 'react-native-console-time-polyfill';
 
 import Input from '../../components/UI/Input';
 import Card from '../../components/UI/Card';
@@ -44,7 +45,7 @@ const formReducer = (state, action) => {
 };
 
 const LoginScreen = props => {
-
+	console.time('1');
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
 	const [isSignup, setIsSignup] = useState(false);
@@ -76,7 +77,7 @@ const LoginScreen = props => {
 	   },
 	   [dispatchFormState]
 	 );
-
+	   
 	// handle signup/login request
 	const authHandler = async () => {
 		let action;
@@ -118,8 +119,9 @@ const LoginScreen = props => {
     		//todo: empty password field
       		Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
     	}
-  	}, [error]);
-
+	  }, [error]);
+	
+	console.timeEnd('1');
 	//return main page
 	return(
 		<ImageBackground source={require('../../assets/images/backgrounds/login.jpg')} style={{width: '100%', height: '100%'}}>
@@ -167,7 +169,7 @@ const LoginScreen = props => {
 								onPress={() => {
 								setIsSignup(prevState => !prevState);
 								}}
-							/>						
+							/>								
 						</View>				
 					</ScrollView>
 				</Card>

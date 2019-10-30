@@ -10,10 +10,11 @@ import {
 	ImageBackground
 } from 'react-native';
 import { useSelector } from 'react-redux';
-
+import 'react-native-console-time-polyfill';
 import Card from '../../components/UI/Card';
 
 const LeaderBoardScreen = props => {
+	console.time('leaderboard')
 	const [userList, setUserList] = useState([]); 
 	const [err, setErr] = useState();
 	const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +32,7 @@ const LeaderBoardScreen = props => {
   			    throw new Error('Something went wrong when get user list!');
   			}
   			const resData = await response.json();
-  			console.log(resData);
+  			//console.log(resData);
   			let allUsers=[];
   			for (const key in resData){
   				if(resData[key].userType==='student'){
@@ -70,9 +71,9 @@ const LeaderBoardScreen = props => {
   		}catch(err){
   			setErr(err);
   		}
-  	},[]);
-
-
+	  },[]);
+	
+	console.timeEnd('leaderboard')
 	return(
 		<SafeAreaView>
 			<ImageBackground source={require('../../assets/images/backgrounds/leaderboard.jpeg')} style={styles.mainContainer}>
