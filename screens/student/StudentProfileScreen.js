@@ -155,7 +155,7 @@ const StudentProfileScreen = props => {
 
 	return(
 	<SafeAreaView>
-		<ImageBackground source={require('../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
+		<ImageBackground source={require('../../assets/images/icons/profilebg.png')} style={styles.mainContainer}>
 			<ScrollView>
 				<KeyboardAvoidingView
 				behavior='padding'
