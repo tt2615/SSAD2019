@@ -9,7 +9,8 @@ import {
 	Alert,
 	ActivityIndicator,
 	ImageBackground,
-	KeyboardAvoidingView
+	KeyboardAvoidingView,
+	Image
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Facebook from 'expo-facebook';
@@ -211,28 +212,21 @@ const TeacherProfileScreen = props => {
 						
 						<View style={styles.fbContainer}>
 							<Text style ={styles.email_text}>CONNECT TO FACEBOOK{"\n"}</Text>
-							<TouchableOpacity onPress={() => fbLogin()}>
-								<View style={styles.fbButton}>
-									<Text style={{ color: 'white', fontWeight: 'bold' }}>
-											Login to Facebook
-									</Text>
-								</View>
+							<TouchableOpacity activeOpacity={.5} onPress={() => fbLogin()}>
+								<Image resizeMode='contain'
+                            	style ={{width: 257, height: 42}}
+                            	source={require("../../assets/images/icons/facebook.png")}/>
 							</TouchableOpacity>
 						</View>
 
-						<View>
-							<Button
-								title='Log out'
-								onPress={()=>{
-									dispatch(authActions.logout());
-									props.navigation.navigate('Auth');
-								}}
-							/>
+						<View style={styles.qnsContainer}>
+							<Text style ={styles.email_text}>ADD QUESTIONS{"\n"}</Text>
+							<TouchableOpacity activeOpacity={.5} onPress={()=>{dispatch(questionActions.addQuestions())}}>
+								<Image resizeMode='contain'
+                            	style ={{width: 283, height: 46}}
+                            	source={require("../../assets/images/icons/addqns.png")}/>
+							</TouchableOpacity>
 						</View>
-						<Button 
-							title='add questions'
-							onPress={()=>{dispatch(questionActions.addQuestions())}}
-						/>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</ImageBackground>
@@ -305,17 +299,12 @@ const styles = StyleSheet.create({
 	},
 	fbContainer:{
 		width:'100%',
-		padding: 20,
-		textAlign:'center',
+		alignItems:'center',
 	},
-  	fbButton: {
-        width: '50%',
-		alignSelf: 'center',
-		textAlign:'center',
-        borderRadius: 4,
-        padding: 24,
-        backgroundColor: '#3B5998',
-    }
+	qnsContainer:{
+		width:'100%',
+		alignItems:'center',
+	}
 });
 
 export default TeacherProfileScreen;
