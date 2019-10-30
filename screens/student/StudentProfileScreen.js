@@ -156,82 +156,89 @@ const StudentProfileScreen = props => {
 	return(
 	<SafeAreaView>
 		<ImageBackground source={require('../../assets/images/backgrounds/challengebg.png')} style={styles.mainContainer}>
-			<View style={styles.headerContainer}>
-				<ImageBackground source={require('../../assets/images/icons/header.png')} style={styles.header}>  
-					<View>
-						<Text style = {styles.profile_text}>
-							PROFILE
-						</Text>
-					</View>
-				</ImageBackground>
-			</View>
-		
-		<KeyboardAvoidingView
-		  behavior='padding'
-		  keyboardVerticalOffset={50}
-		  style={styles.screen}
-		>
-			<ScrollView style={styles.mainContainer}>
-				
-				<View style={styles.emailContainer}>
-					<Text style ={styles.email_text}>EMAIL ADDRESS{"\n"}</Text>
-					<Text style ={styles.email}>{userInfo.userEmail}</Text>
-				</View>
-				<View style={styles.scoreContainer}>
-					<Text style={styles.score_text}>TOTAL SCORE{"\n"}</Text>
-					<Text style={styles.score}>{userInfo.userTotalScore}</Text>
-				</View>
-				<View style={styles.editInput}>	
-					<Input
-						style={{flex:1, fontSize: 18}}
-						id='username'
-						label='USERNAME'
-						editable={isEditing}
-						initialValue={formState.inputValues.username}
-						initialValidity={true}
-						onInputChange={inputChangeHandler}
-					/>
-					{isLoading ? (
-						<ActivityIndicator size="small" />
-					) : (
-					<Button 
-						title= {isEditing ? 'Save': 'Edit'}
-						color = '#324755'
-						onPress={()=>nameChangeSubmitHandler()}
-					/>)
-					}
-				</View>
-				<View style={styles.characterList}>
-					<FlatList
-						numColumns={2}
-						data={CHARACTERS}
-						extraData={characterId}
-						keyExtractor={item => item.id}
-						renderItem={itemData => (
+			<ScrollView>
+				<KeyboardAvoidingView
+				behavior='padding'
+				keyboardVerticalOffset={50}
+				style={styles.screen}
+				>
+					<View style={styles.headerContainer}>
+						<ImageBackground source={require('../../assets/images/icons/header.png')} style={styles.header}>  
 							<View>
-								<TouchableOpacity
-									onPress={()=>changeCharacterHandler(itemData.item.id)}
-								>	
-									{(characterIsLoading && itemData.item.id===characterId) ? (
-										<ActivityIndicator size="small" />
-									) : (
-										<Image
-											source={images[itemData.item.id]}
-											borderWidth={itemData.item.id === characterId ? 5: 0}
-											borderColor='#C8DAD3'
-											alignItems='center'
-										/>
-									)}
-								</TouchableOpacity>
-								<Text style={{color:'#DAA520',fontSize: 12,	fontFamily: 'trajan-pro'}}>
-									{itemData.item.name}
+								<Text style = {styles.profile_text}>
+									PROFILE
 								</Text>
 							</View>
-						)}
-					/>
-				</View>
+						</ImageBackground>
+					</View>
+		
+					<View style={styles.emailContainer}>
+						<Text style ={styles.email_text}>EMAIL ADDRESS{"\n"}</Text>
+						<Text style ={styles.email}>{userInfo.userEmail}</Text>
+					</View>
+
+					<View style={styles.scoreContainer}>
+						<Text style={styles.score_text}>TOTAL SCORE{"\n"}</Text>
+						<Text style={styles.score}>{userInfo.userTotalScore}</Text>
+					</View>
+
+					<View
+							style={styles.inputContainer}
+						>	
+							<Text style ={styles.email_text}>USERNAME{"\n"}</Text>
+							<View style={styles.editInput}>	
+								<Input
+									style={{flex:1, fontSize: 18}}
+									id='username'
+									//label='USERNAME'
+									editable={isEditing}
+									initialValue={formState.inputValues.username}
+									initialValidity={true}
+									onInputChange={inputChangeHandler}
+								/>
+								{isLoading ? (
+									<ActivityIndicator size="small" />
+								) : (
+								<Button 
+									title= {isEditing ? 'Save': 'Edit'}
+									color = '#DAA520'
+									onPress={()=>nameChangeSubmitHandler()}
+								/>)
+								}
+							</View>
+						</View>
+					<View style={styles.characterList}>
+						<Text style ={styles.email_text}>CHARACTER{"\n"}</Text>
+						<FlatList
+							numColumns={2}
+							data={CHARACTERS}
+							extraData={characterId}
+							keyExtractor={item => item.id}
+							renderItem={itemData => (
+								<View>
+									<TouchableOpacity
+										onPress={()=>changeCharacterHandler(itemData.item.id)}
+									>	
+										{(characterIsLoading && itemData.item.id===characterId) ? (
+											<ActivityIndicator size="small" />
+										) : (
+											<Image
+												source={images[itemData.item.id]}
+												borderWidth={itemData.item.id === characterId ? 5: 0}
+												borderColor='#C8DAD3'
+												alignItems='center'
+											/>
+										)}
+									</TouchableOpacity>
+									<Text style={{color:'#DAA520',fontSize: 12,	fontFamily: 'trajan-pro'}}>
+										{itemData.item.name}
+									</Text>
+								</View>
+							)}
+						/>
+					</View>
+				</KeyboardAvoidingView>
 			</ScrollView>
-		</KeyboardAvoidingView>
 		</ImageBackground>
 	</SafeAreaView>
 	);
@@ -296,6 +303,7 @@ const styles = StyleSheet.create({
 		color: '#DAA520',
 		fontFamily: 'trajan-pro',
 		fontSize: 18,
+		textAlignVertical:'center',
 	},
 	score:{
 		width:'100%',
@@ -307,12 +315,10 @@ const styles = StyleSheet.create({
 		textAlignVertical:'center',
 	},
 	editInput: {
-		flexDirection: 'row',
+		flexDirection:'row',
 		width: '80%',
-		padding: 40,
-		fontSize: 18,
-		color: '#324755',
-		//marginVertical: 70,
+		alignItems:'center',
+		justifyContent:'center'
 	},
 	input:{
 		width: '100%',
@@ -320,6 +326,9 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		color: '#DAA520',
 		fontFamily: 'trajan-pro'
+	},
+	inputContainer:{
+		alignItems:'center',
 	},
 	formState: {
 		
