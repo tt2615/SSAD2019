@@ -17,7 +17,7 @@ const StageButton= props=>{
             position: 'absolute',
             top: position.y,
             left: position.x,
-            width:'100%',
+            width:150,
             height:150,
             // backgroundColor: 'white'
         },
@@ -25,7 +25,7 @@ const StageButton= props=>{
             position: 'absolute',
             top: position.y,
             left: position.x,
-            width:'100%',
+            width:150,
             height:50,
             // backgroundColor: 'pink'
         },
@@ -90,26 +90,12 @@ const StageButton= props=>{
                     <Text style={styles.name}>{name}</Text>
                 </TouchableOpacity>
                 <Text style={styles.score}>Best Score: {score}</Text>
-                {/* <Button title={name} 
-                        style={styles.stagePic} 
-                        onPress={async ()=>{
-                            await dispatch(questionActions.getQuestions(wid,tid));
-                            targetNav.navigate('GameQuestion',
-                                                        {sid: tid, 
-                                                        wid:wid,
-                                                        prevScore: score});
-                                }}></Button>
-                <Text>Total score: {score}</Text> */}
             </View>:
             <View style={styles.stageButtonLocked}>
                 <TouchableOpacity activeOpacity={.5} onPress={e=>{alert('Section Locked!')}}>
                     <Text style={styles.nameLock}>{name}</Text>
                 </TouchableOpacity>
                 <Text style={styles.scoreLock}>Total Score: {score}</Text>
-                {/* <Button title={name} 
-                        style={styles.stagePic} 
-                        onPress={e=>{alert('Section Locked!')}}></Button>
-                <Text>Total score: {score}</Text> */}
             </View>
             }
         </View>

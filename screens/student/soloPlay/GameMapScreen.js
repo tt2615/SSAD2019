@@ -6,7 +6,8 @@ import {
 	StyleSheet,
 	Button,
 	ImageBackground,
-	SafeAreaView
+	SafeAreaView,
+	Platform
 } from 'react-native';
 import {useSelector,useDispatch} from 'react-redux';
 import StageButton from '../../../components/UI/stageButton.js';
@@ -17,7 +18,8 @@ import * as worldsActions from '../../../store/actions/worldsActions';
 
 const GameMapScreen = props => {
 	const [worldInfo, setworldInfo]=useState(props.navigation.state.params.wid);
-	const [sectionPosition, setSectionPosition]=useState([
+	const [sectionPosition, setSectionPosition]=useState(
+		Platform.OS === 'android'? [
 		{
 			x:50,
 			y:60
@@ -30,7 +32,19 @@ const GameMapScreen = props => {
 			x:160,
 			y:410
 		}
-		]
+		]:
+		[{
+			x:70,
+			y:110
+		},
+		{
+			x:130,
+			y:320
+		},
+		{
+			x:210,
+			y:560
+		}]
 	);
 	const dispatch=useDispatch();
 	const sectionInfo=useSelector(state=>state.map);
