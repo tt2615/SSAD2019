@@ -18,7 +18,8 @@ const GameResultScreen = props => {
             score: params.score,
             wid: params.wid,
             tid: params.tid,
-            pass: params.pass
+            pass: params.pass,
+            curPosition: params.curPosition
         };
         setTopicInfo(tempInfo);
     },[]);
@@ -31,7 +32,9 @@ const GameResultScreen = props => {
         props.navigation.navigate(
             'GameMap',
             {
-                wid: topicInfo.wid
+                wid: topicInfo.wid,
+                pastPosition: topicInfo.curPosition
+
             }
         );
     }

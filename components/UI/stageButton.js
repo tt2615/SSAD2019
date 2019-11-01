@@ -10,7 +10,7 @@ import * as questionActions from '../../store/actions/questionActions';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const StageButton= props=>{
-    const {tid, name, wid, available,score,position, targetNav}=props;
+    const {tid, name, wid, available,curPosition, score,position, targetNav}=props;
     const dispatch=useDispatch();
     const styles = StyleSheet.create({
         stageButton:{
@@ -85,6 +85,7 @@ const StageButton= props=>{
                     targetNav.navigate('GameQuestion',
                                                 {sid: tid, 
                                                 wid:wid,
+                                                curPosition: curPosition,
                                                 prevScore: score});
                         }} >
                     <Text style={styles.name}>{name}</Text>

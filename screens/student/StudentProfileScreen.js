@@ -20,6 +20,8 @@ import * as userActions from '../../store/actions/userActions';
 import Input from '../../components/UI/Input';
 import { SafeAreaView } from 'react-navigation';
 import CHARACTERS from '../../data/characters'
+import charPic from '../../assets/images/characters/charPic';
+
 
 const LOGIN_INPUT_UPDATE = 'LOGIN_INPUT_UPDATE';
 
@@ -57,10 +59,6 @@ const StudentProfileScreen = props => {
 	const [characterIsLoading, setCharacterIsLoading] = useState(false);
 
 	const dispatch = useDispatch();
-	const images = {
-		'0':require('../../assets/images/characters/biobo.png'),
-		'1':require('../../assets/images/characters/thorin.png')
-	};
 
 	//initialise local formState
 	const [formState, dispatchFormState] = useReducer(formReducer, {
@@ -223,7 +221,7 @@ const StudentProfileScreen = props => {
 											<ActivityIndicator size="small" />
 										) : (
 											<Image
-												source={images[itemData.item.id]}
+												source={charPic(itemData.item.id)}
 												borderWidth={itemData.item.id === characterId ? 5: 0}
 												borderColor='#DAA520'
 												alignItems='center'

@@ -136,6 +136,7 @@ const GameQuestionScreen = props => {
 				{wid: params.wid,
 				sid: params.sid, 
 				score: tempScore,
+				curPosition: params.curPosition,
 				pass:pass
 				}
 			);

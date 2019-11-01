@@ -34,7 +34,7 @@ const StudentNavigator = createStackNavigator({
 	ChallengeCreation: ChallengeCreationScreen,
 	ChallengeQuestion: ChallengeQuestionScreen,
 	ChallengeResult: ChallengeResultScreen,
-	LeaderBoard: LeaderBoardScreen,
+	LeaderBoard: LeaderBoardScreen
 },{
 	initialRouteName: 'StudentMain',
 	headerMode: 'none',

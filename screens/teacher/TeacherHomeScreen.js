@@ -11,7 +11,7 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const TeacherHomeScreen = props => {
-
+	console.log(props);
 	return(
 		<SafeAreaView>
 			<ImageBackground source={require('../../assets/images/backgrounds/teacherbg.png')} style={styles.mainContainer}>

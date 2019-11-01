@@ -127,8 +127,9 @@ const TeacherProfileScreen = props => {
 		    	console.log('entered');
 		    	const response = await fetch(
 		    	`https://graph.facebook.com/me?fields=id,name,email,about,picture&access_token=${token}`);
-		    	const userInfo = await response.json();
-		    	console.log(JSON.stringify(userInfo));
+		    	const tempuserInfo = await response.json();
+				console.log(JSON.stringify(tempuserInfo));
+				
 
 	   			//  const test = await fetch(
 				// 	`https://graph.facebook.com/${userId.id}/permissions`,
