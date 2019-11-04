@@ -1,4 +1,4 @@
-import React, {useReducer, useCallback} from 'react';
+import React, {useReducer, useState, useCallback} from 'react';
 import {
 	View,
 	Text,
@@ -8,59 +8,21 @@ import {
 	KeyboardAvoidingView,
 	TouchableOpacity,
 	Image,
-	Input
+	TextInput
 } from 'react-native';
+import Input from '../../components/UI/Input';
 import { useSelector } from 'react-redux';
 const LOGIN_INPUT_UPDATE = 'LOGIN_INPUT_UPDATE';
-
-// const formReducer = (state, action) => {
-
-// 	if (action.type === LOGIN_INPUT_UPDATE) {
-// 	  const updatedValues = {
-// 		...state.inputValues,
-// 		[action.input]: action.value
-// 	  };
-// 	  const updatedValidities = {
-// 		...state.inputValidities,
-// 		[action.input]: action.isValid
-// 	  };
-// 	  let updatedFormIsValid = true;
-// 	  for (const key in updatedValidities) {
-// 		updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
-// 	  }
-// 	  return {
-// 		formIsValid: updatedFormIsValid,
-// 		inputValidities: updatedValidities,
-// 		inputValues: updatedValues
-// 	  };
-// 	}
-// 	return state;
-//   };
 
 const SocialMediaScreen = props => {
 
 	const fbInfo=useSelector(state=> state.fb);
-	
-// 	const [formState, dispatchFormState] = useReducer(formReducer, {
-// 		inputValues: {
-// 		  content: ''
-// 		},
-// 		inputValidities: {
-// 		  content: true
-// 		},
-// 		formIsValid: true
-//   });
-	// const inputChangeHandler = useCallback(
-	// 	(inputIdentifier, inputValue, inputValidity) => {
-	// 		dispatchFormState({
-	// 			type: LOGIN_INPUT_UPDATE,
-	// 			value: inputValue,
-	// 			isValid: inputValidity,
-	// 			input: inputIdentifier
-	// 		});
-	// 	},
-	// 	[dispatchFormState]
-	// );
+	const [postContent,setPostContent]=useState('Please input your post content here!');
+
+	const postAssignment=async ()=>{
+		const response=await fetch(`https://graph.facebook.com/546349135390552/feed?message=${postContent}&access_token=${fbInfo.token}`,{method: 'POST'});
+		console.log(response);
+	}
 
 	return(
 		<SafeAreaView>
@@ -79,16 +41,17 @@ const SocialMediaScreen = props => {
 					<Text>Name: {fbInfo.name}</Text>
 				</View>
 				<View style={styles.postContent}>
-					{/* <Input id='post content' 
-					// onInputChangeHandler={inputChangeHandler}
-					/> */}
+					<TextInput 
+						onChangeText={(text)=>setPostContent(text)}
+						value={postContent}
+					/>
 				</View>
 				<KeyboardAvoidingView
 				behavior='padding'
 				keyboardVerticalOffset={50}
 				style={styles.screen}
 				>
-					<TouchableOpacity activeOpacity={.5}>
+					<TouchableOpacity activeOpacity={.5} onPress={()=>{postAssignment}}>
 						<Image resizeMode='contain'
 						style ={{width: 241, height: 41, marginTop: 20}}
 						source={require("../../assets/images/icons/post.png")}/>

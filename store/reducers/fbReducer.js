@@ -1,4 +1,4 @@
-import { LOAD_FB } from '../actions/fbActions';
+import { LOAD_FB, DELETE_FB } from '../actions/fbActions';
 
 const initialState= {
     id: '',
@@ -11,7 +11,6 @@ const initialState= {
 export default (state=initialState, action)=> {
     switch (action.type){
         case LOAD_FB:
-            console.log(action);
             return {
                 id: action.id,
                 name: action.name,
@@ -19,6 +18,8 @@ export default (state=initialState, action)=> {
                 pictureUrl: action.pictureUrl,
                 token: action.token           
             }
+        case DELETE_FB:
+            return initialState;
 
         default:
             return state;

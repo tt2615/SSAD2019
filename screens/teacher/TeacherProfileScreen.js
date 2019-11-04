@@ -122,7 +122,7 @@ const TeacherProfileScreen = props => {
 		if (fbInfo.token!=null) Alert.alert("You have already logged in!");
 		else{
 			const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbId, {
-					permissions: ['public_profile', 'email', 'user_friends'],
+					permissions: ['manage_pages','publish_pages','public_profile', 'email', 'user_friends'],
 				});
 				if (type === 'success') {
 					const response = await fetch(
@@ -148,6 +148,19 @@ const TeacherProfileScreen = props => {
 		}
 	};
 
+	const fbLogout= async () => {
+		if (fbInfo.token===null) Alert.alert("You have not logged in yet! Please login first!");
+		else {
+			const logout=await fetch(`https://graph.facebook.com/${fbInfo.id}/permissions`,{
+				method: 'DELETE',
+				body: `access_token=${fbInfo.token}`
+			});
+			Alert.alert("Logout succeed!");
+			await dispatch(fbActions.deleteFb());
+			console.log(logout);
+
+		}
+	}
 
 	//show error
 	useEffect(() => {
@@ -224,14 +237,18 @@ const TeacherProfileScreen = props => {
 							</TouchableOpacity>
 						</View>
 
-						<View style={styles.qnsContainer}>
+						<View style={styles.fbLogout}>
+								<Text onPress={()=>fbLogout()}>Logout</Text>
+						</View>
+
+						{/* <View style={styles.qnsContainer}>
 							<Text style ={styles.email_text}>ADD QUESTIONS{"\n"}</Text>
 							<TouchableOpacity activeOpacity={.5} onPress={()=>{dispatch(questionActions.addQuestions())}}>
 								<Image resizeMode='contain'
                             	style ={{width: 283, height: 46}}
                             	source={require("../../assets/images/icons/addqns.png")}/>
 							</TouchableOpacity>
-						</View>
+						</View> */}
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</ImageBackground>
