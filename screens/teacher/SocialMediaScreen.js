@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useReducer, useCallback} from 'react';
 import {
 	View,
 	Text,
@@ -7,10 +7,60 @@ import {
 	ImageBackground,
 	KeyboardAvoidingView,
 	TouchableOpacity,
-	Image
+	Image,
+	Input
 } from 'react-native';
+import { useSelector } from 'react-redux';
+const LOGIN_INPUT_UPDATE = 'LOGIN_INPUT_UPDATE';
+
+// const formReducer = (state, action) => {
+
+// 	if (action.type === LOGIN_INPUT_UPDATE) {
+// 	  const updatedValues = {
+// 		...state.inputValues,
+// 		[action.input]: action.value
+// 	  };
+// 	  const updatedValidities = {
+// 		...state.inputValidities,
+// 		[action.input]: action.isValid
+// 	  };
+// 	  let updatedFormIsValid = true;
+// 	  for (const key in updatedValidities) {
+// 		updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+// 	  }
+// 	  return {
+// 		formIsValid: updatedFormIsValid,
+// 		inputValidities: updatedValidities,
+// 		inputValues: updatedValues
+// 	  };
+// 	}
+// 	return state;
+//   };
 
 const SocialMediaScreen = props => {
+
+	const fbInfo=useSelector(state=> state.fb);
+	
+// 	const [formState, dispatchFormState] = useReducer(formReducer, {
+// 		inputValues: {
+// 		  content: ''
+// 		},
+// 		inputValidities: {
+// 		  content: true
+// 		},
+// 		formIsValid: true
+//   });
+	// const inputChangeHandler = useCallback(
+	// 	(inputIdentifier, inputValue, inputValidity) => {
+	// 		dispatchFormState({
+	// 			type: LOGIN_INPUT_UPDATE,
+	// 			value: inputValue,
+	// 			isValid: inputValidity,
+	// 			input: inputIdentifier
+	// 		});
+	// 	},
+	// 	[dispatchFormState]
+	// );
 
 	return(
 		<SafeAreaView>
@@ -24,7 +74,15 @@ const SocialMediaScreen = props => {
 						</View>
 					</ImageBackground>
 				</View>
-
+				<View style={styles.fbInfoDisplayer}>
+					<Text>Account: {fbInfo.email}</Text>
+					<Text>Name: {fbInfo.name}</Text>
+				</View>
+				<View style={styles.postContent}>
+					{/* <Input id='post content' 
+					// onInputChangeHandler={inputChangeHandler}
+					/> */}
+				</View>
 				<KeyboardAvoidingView
 				behavior='padding'
 				keyboardVerticalOffset={50}

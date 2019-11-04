@@ -17,6 +17,7 @@ import * as Facebook from 'expo-facebook';
 
 import * as authActions from '../../store/actions/authActions';
 import * as userActions from '../../store/actions/userActions';
+import * as fbActions from '../../store/actions/fbActions';
 import * as questionActions from '../../store/actions/questionActions';
 import Input from '../../components/UI/Input';
 import { SafeAreaView } from 'react-navigation';
@@ -50,6 +51,7 @@ const formReducer = (state, action) => {
 
 const TeacherProfileScreen = props => {
 	const userInfo = useSelector(state => state.user);
+	const fbInfo = useSelector(state => state.fb);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
@@ -117,38 +119,40 @@ const TeacherProfileScreen = props => {
 	};
 
 	const fbLogin = async () => {
-		const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbId, {
-		    	permissions: ['public_profile', 'email', 'user_friends'],
-		    });
-			console.log(type);
-			console.log('token: '+ token);
-
-		    if (type === 'success') {
-		    	console.log('entered');
-		    	const response = await fetch(
-		    	`https://graph.facebook.com/me?fields=id,name,email,about,picture&access_token=${token}`);
-		    	const tempuserInfo = await response.json();
-				console.log(JSON.stringify(tempuserInfo));
-				
-
-	   			//  const test = await fetch(
-				// 	`https://graph.facebook.com/${userId.id}/permissions`,
-				// 	{
-				// 		method : 'DELETE',
-				// 		body: token
-				// 	}
-				// );
-	      	    // console.log(JSON.stringify(await test.json()));
-		    } else {
-		      	setError(type);
-		    }
+		if (fbInfo.token!=null) Alert.alert("You have already logged in!");
+		else{
+			const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbId, {
+					permissions: ['public_profile', 'email', 'user_friends'],
+				});
+				if (type === 'success') {
+					const response = await fetch(
+					`https://graph.facebook.com/me?fields=id,name,email,about,picture&access_token=${token}`);
+					const tempuserInfo =await response.json();
+					await dispatch(fbActions.getFb(tempuserInfo.id,tempuserInfo.name,tempuserInfo.email,tempuserInfo.picture.data.url,token));
+					Alert.alert('Login succeed! You can now post assignments!');
+					//  const test = await fetch(
+					// 	`https://graph.facebook.com/${userId.id}/permissions`,
+					// 	{
+					// 		method : 'DELETE',
+					// 		body: token
+					// 	}
+					// );
+					// console.log(JSON.stringify(await test.json()));
+				} 
+				else if (type === 'cancel'){
+					setError('Login canceled');
+				}
+				else {
+					setError(type);
+				}
+		}
 	};
 
 
 	//show error
 	useEffect(() => {
     	if (error) {
-      		Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
+      		Alert.alert('An Error Occurred!', error, [{ text: 'Ok' }]);
     	}
   	}, [error]);
 

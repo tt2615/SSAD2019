@@ -1,0 +1,14 @@
+export const LOAD_FB= 'LOAD_FB';
+
+export const getFb = (id, name, email, pictureUrl, token) => {
+    return async (dispatch, getStates) => {
+        await dispatch({
+            type: LOAD_FB,
+            id,
+            name,
+            email,
+            pictureUrl,
+            token
+        });
+    }
+}
