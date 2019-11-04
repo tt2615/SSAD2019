@@ -20,7 +20,18 @@ const SocialMediaScreen = props => {
 	const [postContent,setPostContent]=useState('Please input your post content here!');
 
 	const postAssignment=async ()=>{
-		const response=await fetch(`https://graph.facebook.com/546349135390552/feed?message=${postContent}&access_token=${fbInfo.token}`,{method: 'POST'});
+		console.log('token: '+fbInfo.token);
+		console.log('content: '+postContent);
+		console.log('id: '+fbInfo.id);
+		// const postBody='message='+postContent+'&access_token='+fbInfo.token;
+		const response=await fetch(`https://graph.facebook.com/${fbInfo.id}/feed?message=${postContent}&access_token=${fbInfo.token}`,
+			{
+				method: 'POST',
+				headers:{
+					'Accept': 'application/json',
+					'Content-Type': 'application/json;charset=utf-8'
+				}
+			});
 		console.log(response);
 	}
 
@@ -51,7 +62,7 @@ const SocialMediaScreen = props => {
 				keyboardVerticalOffset={50}
 				style={styles.screen}
 				>
-					<TouchableOpacity activeOpacity={.5} onPress={()=>{postAssignment}}>
+					<TouchableOpacity activeOpacity={.5} onPress={()=>{postAssignment()}}>
 						<Image resizeMode='contain'
 						style ={{width: 241, height: 41, marginTop: 20}}
 						source={require("../../assets/images/icons/post.png")}/>
