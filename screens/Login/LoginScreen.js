@@ -186,12 +186,20 @@ const LoginScreen = props => {
 const styles = StyleSheet.create({
 	loginImage: {
 		width: '90%',
-		resizeMode: 'contain'
+		resizeMode: 'contain',
+		shadowColor: '#000',
+		shadowOffset: { width: 3, height: 3 },
+		shadowOpacity: 1,
+		shadowRadius: 3,
 	},
 	loginImage2: {
 		width: '90%',
 		resizeMode: 'contain',
 		marginTop:-20,
+		shadowColor: '#000',
+		shadowOffset: { width: 3, height: 3 },
+		shadowOpacity: 1,
+		shadowRadius: 3,
 	},
 	screen: {
 		flex: 1,
