@@ -46,7 +46,6 @@ const formReducer = (state, action) => {
 };
 
 const LoginScreen = props => {
-	console.time('1');
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
 	const [isSignup, setIsSignup] = useState(false);
@@ -122,7 +121,6 @@ const LoginScreen = props => {
     	}
 	  }, [error]);
 	
-	console.timeEnd('1');
 	//return main page
 	return(
 		<ImageBackground source={require('../../assets/images/backgrounds/login.jpg')} style={{width: '100%', height: '100%'}}>

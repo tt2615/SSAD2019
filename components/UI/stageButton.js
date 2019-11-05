@@ -34,44 +34,40 @@ const StageButton= props=>{
             fontSize: 14,
             textAlign:'center',
             color: '#DAA520',
-            backgroundColor:'#00000888',
             borderWidth: 0.5,
             borderTopLeftRadius:10,
             borderTopRightRadius:10,
-            borderColor:'#DAA520'
+            borderColor:'#DAA520',
         },
         score:{
             fontFamily:'trajan-pro-bold',
             fontSize: 14,
             textAlign:'center',
             color:'#DAA520',
-            backgroundColor:'#00000888',
             borderWidth: 0.5,
             borderBottomLeftRadius:10,
             borderBottomRightRadius:10,
-            borderColor:'#DAA520'
+            borderColor:'#DAA520',
         },
         nameLock:{
             fontFamily:'trajan-pro-bold',
             fontSize: 14,
             textAlign:'center',
             color: '#868686',
-            backgroundColor:'#00000088',
             borderWidth: 0.5,
             borderTopLeftRadius:10,
             borderTopRightRadius:10,
-            borderColor:'#868686'
+            borderColor:'#868686',
         },
         scoreLock:{
             fontFamily:'trajan-pro-bold',
             fontSize: 14,
             textAlign:'center',
             color:'#868686',
-            backgroundColor:'#00000088',
             borderWidth: 0.5,
             borderBottomLeftRadius:10,
             borderBottomRightRadius:10,
-            borderColor:'#868686'
+            borderColor:'#868686',
         }
     });
 

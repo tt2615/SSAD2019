@@ -55,26 +55,22 @@ const GameMapScreen = props => {
 		}
 		]:
 		[{
-			x:70,
-			y:110
+			x:55,
+			y:90
 		},
 		{
-			x:130,
-			y:320
+			x:115,
+			y:275
 		},
 		{
-			x:210,
-			y:560
+			x:180,
+			y:485
 		}]
 	);
 
 	return(
 		<SafeAreaView>
 				<ImageBackground source={bgDic(worldInfo)} style={styles.imageBackground}>
-					<CharImage source={charPic(userInfo.character)} 
-								startPos={{x: sectionPosition[pastPosition].x, y: sectionPosition[pastPosition].y}}
-								endPos={{x: sectionPosition[curPosition].x, y: sectionPosition[curPosition].y}}
-								/>
 					<Text style={styles.returnButton} 
 						onPress={async ()=>{
 							await dispatch(worldsActions.getWorlds(userInfo.userId));
@@ -91,6 +87,10 @@ const GameMapScreen = props => {
 										curPosition={curPosition}
 										position={{x:sectionPosition[res.sid-1].x,y:sectionPosition[res.sid-1].y}} 
 										targetNav={props.navigation}/>)}
+					<CharImage source={charPic(userInfo.character)} 
+								startPos={{x: sectionPosition[pastPosition].x, y: sectionPosition[pastPosition].y}}
+								endPos={{x: sectionPosition[curPosition].x, y: sectionPosition[curPosition].y}}
+								/>
 				</ImageBackground>
 		</SafeAreaView>
 	);
