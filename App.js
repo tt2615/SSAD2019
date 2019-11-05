@@ -18,6 +18,7 @@ import NavigationContainer from './navigation/NavigationContainer';
 import mapReducer from './store/reducers/mapReducer';
 import questionReducer from './store/reducers/questionReducer';
 import challengeQuesReducer from './store/reducers/challengeQuesReducer';
+import fbReducer from './store/reducers/fbReducer';
 //add reducers
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   worlds: worldsReducer,
   map: mapReducer,
   challengeQues: challengeQuesReducer,
-  questions: questionReducer
+  questions: questionReducer,
+  fb: fbReducer
 });
 
 //todo: remove devtools after dev is finished

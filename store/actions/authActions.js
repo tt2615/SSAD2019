@@ -52,14 +52,14 @@ export const signup = (email,password) => {
 
 		//add user (with default settings) to database
 		dispatch(
-			userActions.addStudent(
-				email,
-				'student',
-				'Anonymous Player',
-				0, //character
-				0 //totalScore
-			)
-			// userActions.addTeacher(email, 'teacher', 'Wu Ziqing','','','','')
+			// userActions.addStudent(
+			// 	email,
+			// 	'student',
+			// 	'Anonymous Player',
+			// 	0, //character
+			// 	0 //totalScore
+			// )
+			userActions.addTeacher(email, 'teacher', 'Wu Ziqing','','','','')
 		);
 		//place userInfo to store
 		await dispatch(
