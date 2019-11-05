@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		marginTop: 35
 	},
+	fbContainer:{
+		alignItems:'center'
+	}
 	
 });
 
