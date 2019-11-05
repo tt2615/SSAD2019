@@ -23,16 +23,19 @@ const SocialMediaScreen = props => {
 		console.log('token: '+fbInfo.token);
 		console.log('content: '+postContent);
 		console.log('id: '+fbInfo.id);
+		const pageResponse= await fetch(`https://graph.facebook.com/106036027509525?fields=access_token&access_token=${fbInfo.token}`);
+		const page_token=await pageResponse.json();
+		console.log(page_token);
 		// const postBody='message='+postContent+'&access_token='+fbInfo.token;
-		const response=await fetch(`https://graph.facebook.com/${fbInfo.id}/feed?message=${postContent}&access_token=${fbInfo.token}`,
-			{
-				method: 'POST',
-				headers:{
-					'Accept': 'application/json',
-					'Content-Type': 'application/json;charset=utf-8'
-				}
-			});
-		console.log(response);
+		// const response=await fetch(`https://graph.facebook.com/${fbInfo.id}/feed?message=${postContent}&access_token=${fbInfo.token}`,
+		// 	{
+		// 		method: 'POST',
+		// 		headers:{
+		// 			'Accept': 'application/json',
+		// 			'Content-Type': 'application/json;charset=utf-8'
+		// 		}
+		// 	});
+		// console.log(response);
 	}
 
 	return(
