@@ -85,7 +85,7 @@ const GameMapScreen = props => {
 										score={res.score} 
 										available={res.available}
 										curPosition={curPosition}
-										position={{x:sectionPosition[res.sid-1].x,y:sectionPosition[res.sid-1].y}} 
+										position={{x:sectionPosition[(res.sid-1)%3].x,y:sectionPosition[(res.sid-1)%3].y}} 
 										targetNav={props.navigation}/>)}
 					<CharImage source={charPic(userInfo.character)} 
 								startPos={{x: sectionPosition[pastPosition].x, y: sectionPosition[pastPosition].y-60}}
