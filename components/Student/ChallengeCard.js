@@ -138,7 +138,7 @@ const ChallengeCard = props => {
 				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 				{isAcceptLoading?(
 					<ActivityIndicator size='small'/>
 				) : (
@@ -161,7 +161,7 @@ const ChallengeCard = props => {
 				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 			</View>
 		);
 	}
@@ -175,7 +175,7 @@ const ChallengeCard = props => {
 				<Text style={styles.opp}>Opponent: {props.challenge.challengerId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 			</View>
 		);
 	}
@@ -188,7 +188,7 @@ const ChallengeCard = props => {
 				<Text style={styles.opp}>Opponent: {props.challenge.challengeeId}</Text>
 				<Text style={styles.bid}>Bid: {props.challenge.bid}</Text>
 				<Text style={styles.diff}>Difficulty: {diffLvl}</Text>
-				<Text>Challenge Time: {time}</Text>
+				<Text style={styles.time}>Challenge Time: {time}</Text>
 				{isDoQuesLoading?(
 					<ActivityIndicator size='small'/>
 				) : (
