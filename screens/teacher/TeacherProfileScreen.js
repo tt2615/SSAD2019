@@ -126,7 +126,7 @@ const TeacherProfileScreen = props => {
 		}
 		setIsEditing(!isEditing);
 	};
-
+/*
 	const fbConnection = () => {
 		let fburl='http://www.facebook.com';
 		Linking.openURL(fburl);
@@ -136,7 +136,7 @@ const TeacherProfileScreen = props => {
 		let twurl='http://www.twitter.com';
 		Linking.openURL(twurl);
 	}
-
+*/
 	// const fbLogin = async () => {
 	// 	if (fbInfo.token!=null) Alert.alert("You have already logged in!");
 	// 	else{
@@ -240,7 +240,7 @@ const TeacherProfileScreen = props => {
 							</View>
 						</View>
 						
-						<View style={styles.fbContainer}>
+						{/*<View style={styles.fbContainer}>
 							<Text style ={styles.email_text}>CONNECT TO FACEBOOK{"\n"}</Text>
 							<TouchableOpacity activeOpacity={.5} onPress={() => fbConnection()}>
 								<Image resizeMode='contain'
@@ -256,7 +256,7 @@ const TeacherProfileScreen = props => {
                             	style ={{width: 257, height: 42}}
                             	source={require("../../assets/images/icons/twitter-login.gif")}/>
 							</TouchableOpacity>
-						</View>
+						</View>*/}
 
 						{/* <View style={styles.fbLogout}>
 								<Text onPress={()=>fbLogout()}>Logout</Text>

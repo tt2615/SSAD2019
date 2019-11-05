@@ -48,14 +48,11 @@ const TeacherHomeScreen = props => {
                             style = {{width: 283, height:46}}
                             source={require("../../assets/images/icons/report.png")}/>
                     </TouchableOpacity>
-					{/* {fbInfo.token!==null?
                     <TouchableOpacity style={{paddingBottom:20}} activityOpacity={.5} onPress = { () => {props.navigation.navigate('SocialMedia');}}>
                         <Image resizeMode = 'contain'
                             style = {{width: 283, height:46}}
                             source={require("../../assets/images/icons/postassignment.png")}/>
                     </TouchableOpacity>
-					:null
-					} */}
 					<TouchableOpacity activityOpacity={.5} onPress={()=>{
 									props.navigation.navigate('Auth');
 								}}>

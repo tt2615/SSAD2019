@@ -15,7 +15,8 @@ import {
 	KeyboardAvoidingView,
 	TouchableOpacity,
 	Image,
-	TextInput
+	TextInput,
+	Linking
 } from 'react-native';
 import Input from '../../components/UI/Input';
 import { useSelector } from 'react-redux';
@@ -23,7 +24,7 @@ const LOGIN_INPUT_UPDATE = 'LOGIN_INPUT_UPDATE';
 
 const SocialMediaScreen = props => {
 
-	const fbInfo=useSelector(state=> state.fb);
+/*	const fbInfo=useSelector(state=> state.fb);
 	const [postContent,setPostContent]=useState('Please input your post content here!');
 
 	const postAssignment=async ()=>{
@@ -44,7 +45,16 @@ const SocialMediaScreen = props => {
 		// 	});
 		// console.log(response);
 	}
+*/
+	const fbConnection = () => {
+		let fburl='http://www.facebook.com';
+		Linking.openURL(fburl);
+	}
 
+	const twConnection = () =>{
+		let twurl='http://www.twitter.com';
+		Linking.openURL(twurl);
+	}
 	return(
 		<SafeAreaView>
 			<ImageBackground source={require('../../assets/images/backgrounds/teacherbg.png')} style={styles.mainContainer}>
@@ -57,28 +67,24 @@ const SocialMediaScreen = props => {
 						</View>
 					</ImageBackground>
 				</View>
-				<View style={styles.fbInfoDisplayer}>
-					<Text>Account: {fbInfo.email}</Text>
-					<Text>Name: {fbInfo.name}</Text>
-				</View>
-				<View style={styles.postContent}>
-					<TextInput 
-						onChangeText={(text)=>setPostContent(text)}
-						value={postContent}
-					/>
-				</View>
-				<KeyboardAvoidingView
-				behavior='padding'
-				keyboardVerticalOffset={50}
-				style={styles.screen}
-				>
-					<TouchableOpacity activeOpacity={.5} onPress={()=>{postAssignment()}}>
+				<View style={{marginVertical:30}}></View>
+				<View style={styles.fbContainer}>
+					<Text style ={styles.email_text}>POST TO FACEBOOK{"\n"}</Text>
+					<TouchableOpacity activeOpacity={.5} onPress={() => fbConnection()}>
 						<Image resizeMode='contain'
-						style ={{width: 241, height: 41, marginTop: 20}}
-						source={require("../../assets/images/icons/post.png")}/>
+						style ={{width: 257, height: 42}}
+						source={require("../../assets/images/icons/facebook.png")}/>
 					</TouchableOpacity>
+				</View>
 
-				</KeyboardAvoidingView>
+				<View style={styles.fbContainer}>
+					<Text style ={styles.email_text}>POST TO TWITTER{"\n"}</Text>
+					<TouchableOpacity activeOpacity={.5} onPress={() => twConnection()}>
+						<Image resizeMode='contain'
+						style ={{width: 257, height: 42}}
+						source={require("../../assets/images/icons/twitter-login.gif")}/>
+					</TouchableOpacity>
+				</View>
 
 			</ImageBackground>
 		</SafeAreaView>
@@ -113,7 +119,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'trajan-pro',
 	},
-
+	email_text:{
+		width:'100%',
+		textAlign:'center',
+		color: '#DAA520',
+		fontFamily: 'trajan-pro',
+		fontSize: 18,
+		marginTop: 35
+	},
 	
 });
 
