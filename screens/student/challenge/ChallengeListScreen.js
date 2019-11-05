@@ -2,7 +2,7 @@
  * @method
  * @desc create a screen so that the user can see challenges that they sent or received and see the result of the challenges.
  * @returns screen to see the challenge list.
- * @author ziqing & qian yi
+ * @authors ziqing & qian yi
  */
 import React, { useState,useEffect,useCallback } from 'react';
 import {

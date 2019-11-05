@@ -4,7 +4,7 @@
  * score will be displayed and time left to answer the question will be displayed.
  *  
  * @returns screen to see the answer challenge questions.
- * @author ziqing & wei min
+ * @authors ziqing & wei min
  */
 import React,{useState,useEffect} from 'react';
 import {
