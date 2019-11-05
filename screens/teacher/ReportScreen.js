@@ -22,6 +22,7 @@ const ReportScreen = props => {
 	const [worldAveScore,setWorldAveScore]=useState(null);
 	const [sectionAveScore,setSectionAveScore]=useState(null);
 
+	console.log('rerender');
 	const getAveWorldScore= async () => {
 		let wid=[];
 		let wname=[];
@@ -144,7 +145,7 @@ const ReportScreen = props => {
 					</View>
 			<View>
 				{
-					worldAveScore===null?<Text>Loading</Text>:
+					(worldAveScore===null|sectionAveScore===null)?<Text>Loading</Text>:
 					<View style = {styles.mainContainer}>
 					{
 						worldAveScore.map(res=>

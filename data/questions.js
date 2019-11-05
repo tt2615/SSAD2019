@@ -364,7 +364,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		1,
+		4,
 		'Why does many design principles shared by software engineering design?',
 		'For expansion of product lifetime',
 		'Common design goal of creating high quality design',
@@ -376,7 +376,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		1,
+		4,
 		'What does “Every software system has an architecture” implies?',
 		'System itself is a component',
 		'Architecture an exist independently of its description or specification',
@@ -388,7 +388,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		1,
+		4,
 		'What is architectural style?',
 		'Architectural style is a description of component types',
 		'It is a pattern of run-time control',
@@ -400,7 +400,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		1,
+		4,
 		'Which of the following can be considered regarding client and server?',
 		'Client and server is an architectural style',
 		'Client and server may be considered as an architectural style',
@@ -412,7 +412,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		1,
+		4,
 		'Which of the statements truly concludes client and server relation with architectural styles?',
 		'They are component types and their coordination is described in terms of protocols that server uses to communicate with each of its clients',
 		'Multiple client cannot exist at an instance',
@@ -424,7 +424,7 @@ const QUESTIONS = [
 	new Question(
 		2,
 		2,
-		1,
+		4,
 		'What is Architecture?',
 		'Architecture is components',
 		'Architecture is connectors',
@@ -436,7 +436,7 @@ const QUESTIONS = [
 	new Question(
 		2,
 		2,
-		1,
+		4,
 		'Which of the following is right dependence relationship?',
 		'Performance depends on how strongly components are coupled with other components in system',
 		'Re-usability depends on the volume and complexity of the inter-component communication and coordination',
@@ -448,7 +448,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		1,
+		4,
 		'Architectural design has no role in agile software process models',
 		'True',
 		'False',
@@ -460,7 +460,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		1,
+		4,
 		'What makes a good architecture?',
 		'The architecture may not be the product of a single architect or a small group',
 		'The architect should have the technical requirements for the system and an articulated and prioritized list of qualitative properties',
@@ -472,7 +472,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		1,
+		4,
 		'Which of the following are correct statements?',
 		'An architecture may or may not defines components',
 		'An architecture is not dependable on requirements',
@@ -484,7 +484,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		2,
+		5,
 		'Architectural styles is composed of which of the following?',
 		'A set of component types that perform some function at run-time',
 		'A topological layout of these components indicating their run-time inter relationships',
@@ -496,7 +496,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		2,
+		5,
 		'Which of the following are types of Call and return architecture?',
 		'Main program and subroutine Architecture',
 		'Remote Procedure Call system',
@@ -508,7 +508,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		2,
+		5,
 		'Which of the following are considered for connectors?',
 		'Connectors transfers data bidirectionally',
 		'Connectors connect two component of type procedure',
@@ -520,7 +520,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		2,
+		5,
 		'Which of the following architecture consists of independent processes or objects that communicate through messages?',
 		'Independent Component architecture',
 		'Heterogeneous Architectures',
@@ -532,7 +532,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		2,
+		5,
 		'What are the disadvantages of pipe & filters?',
 		'Interactive applications are difficult to create',
 		'Performance is poor due several reasons',
@@ -544,7 +544,7 @@ const QUESTIONS = [
 	new Question(
 		2,
 		2,
-		2,
+		5,
 		'What does software design defines?',
 		'Software design is an activity subjected to constraints',
 		'Software Design satisfies client needs and desires',
@@ -556,7 +556,7 @@ const QUESTIONS = [
 	new Question(
 		2,
 		2,
-		2,
+		5,
 		'What is false statement about structural design ?',
 		'The advantage is data flow representation',
 		'It follows Structure chart',
@@ -568,7 +568,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		2,
+		5,
 		'What does a typical top level architecture consists of?',
 		'Prop Loss Model(MOPD)',
 		'Reverb Model(MODR)',
@@ -580,7 +580,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		2,
+		5,
 		'Architectural pattern that best fis online flight booking application is',
 		'Distributed Architecture',
 		'Model View Controller Architecture',
@@ -592,7 +592,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		2,
+		5,
 		'Which of the following represents a Hierarchical organization',
 		'Client-Server',
 		'Deployment',
@@ -604,7 +604,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		3,
+		6,
 		'Which pattern facilitates accessing shared resources and services for large numbers of distributed clients',
 		'Web Server',
 		'Client Server',
@@ -616,7 +616,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		3,
+		6,
 		'Infromation hiding method is one of the',
 		'Availability tactic',
 		'Reliability tactic',
@@ -628,7 +628,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		3,
+		6,
 		'Why does architecture dictates organizational structure?',
 		'Architecture describes the structure of the system being developed which becomes engraved in the development project structure',
 		'An implementation exhibits an architecture if it conforms to the structural decisions described by the architecture',
@@ -640,7 +640,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		3,
+		6,
 		'Every possible architecture partition possible changes into which of the following categories?',
 		'Local',
 		'Non Local',
@@ -652,7 +652,7 @@ const QUESTIONS = [
 	new Question(
 		1,
 		2,
-		3,
+		6,
 		'What is Reference architecture?',
 		'It is a reference model mapped onto software components',
 		'It provided data flow with comments',
@@ -664,7 +664,7 @@ const QUESTIONS = [
 	new Question(
 		2,
 		2,
-		3,
+		6,
 		'What effect does achievement of quality attribute will have?',
 		'The achievement of quality attribute will always have a positive effect',
 		'The achievement of quality attribute will always have a negative effect',
@@ -676,7 +676,7 @@ const QUESTIONS = [
 	new Question(
 		2,
 		2,
-		3,
+		6,
 		'Which of the following is right dependence relationship?',
 		'Performance depends on how strongly components are coupled with other components in system',
 		'Re-usability depends on the volume and complexity of the inter-component communication and coordination',
@@ -688,7 +688,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		3,
+		6,
 		'What truly describes the reference architecture decomposition?',
 		'A reference architecture is the mapping of that functionality onto system decomposition may be one to one',
 		'A reference architecture is the mapping of that functionality onto system decomposition is many to one',
@@ -700,7 +700,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		3,
+		6,
 		'Which of the following is incorrect for Reference model, architectural styles and reference architecture?',
 		'They are not architectures',
 		'They are useful steps towards an architecture',
@@ -712,7 +712,7 @@ const QUESTIONS = [
 	new Question(
 		3,
 		2,
-		3,
+		6,
 		'What is a Reference Model?',
 		'It is a division of functionality together with data flow between the pieces',
 		'It is a description of component types',
