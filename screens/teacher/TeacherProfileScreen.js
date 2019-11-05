@@ -18,13 +18,15 @@ import {
 	ActivityIndicator,
 	ImageBackground,
 	KeyboardAvoidingView,
-	Image
+	Image,
+	Linking
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Facebook from 'expo-facebook';
 
 import * as authActions from '../../store/actions/authActions';
 import * as userActions from '../../store/actions/userActions';
+import * as fbActions from '../../store/actions/fbActions';
 import * as questionActions from '../../store/actions/questionActions';
 import Input from '../../components/UI/Input';
 import { SafeAreaView } from 'react-navigation';
@@ -58,6 +60,7 @@ const formReducer = (state, action) => {
 
 const TeacherProfileScreen = props => {
 	const userInfo = useSelector(state => state.user);
+	const fbInfo = useSelector(state => state.fb);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
@@ -124,39 +127,57 @@ const TeacherProfileScreen = props => {
 		setIsEditing(!isEditing);
 	};
 
-	const fbLogin = async () => {
-		const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbId, {
-		    	permissions: ['public_profile', 'email', 'user_friends'],
-		    });
-			console.log(type);
-			console.log('token: '+ token);
+	const fbConnection = () => {
+		let fburl='http://www.facebook.com';
+		Linking.openURL(fburl);
+	}
 
-		    if (type === 'success') {
-		    	console.log('entered');
-		    	const response = await fetch(
-		    	`https://graph.facebook.com/me?fields=id,name,email,about,picture&access_token=${token}`);
-		    	const tempuserInfo = await response.json();
-				console.log(JSON.stringify(tempuserInfo));
-				
+	const twConnection = () =>{
+		let twurl='http://www.twitter.com';
+		Linking.openURL(twurl);
+	}
 
-	   			//  const test = await fetch(
-				// 	`https://graph.facebook.com/${userId.id}/permissions`,
-				// 	{
-				// 		method : 'DELETE',
-				// 		body: token
-				// 	}
-				// );
-	      	    // console.log(JSON.stringify(await test.json()));
-		    } else {
-		      	setError(type);
-		    }
-	};
+	// const fbLogin = async () => {
+	// 	if (fbInfo.token!=null) Alert.alert("You have already logged in!");
+	// 	else{
+	// 		const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbId, {
+	// 				permissions: ['manage_pages','publish_pages','public_profile', 'email','user_friends'],
+	// 			});
+	// 			if (type === 'success') {
+	// 				const response = await fetch(
+	// 				`https://graph.facebook.com/me?fields=id,name,email,about,picture&access_token=${token}`);
+	// 				const tempuserInfo =await response.json();
+	// 				console.log(tempuserInfo);
+	// 				await dispatch(fbActions.getFb(tempuserInfo.id,tempuserInfo.name,tempuserInfo.email,tempuserInfo.picture.data.url,token));
+	// 				Alert.alert('Login succeed! You can now post assignments!');
+	// 			} 
+	// 			else if (type === 'cancel'){
+	// 				setError('Login canceled');
+	// 			}
+	// 			else {
+	// 				setError(type);
+	// 			}
+	// 	}
+	// };
 
+	// const fbLogout= async () => {
+	// 	if (fbInfo.token===null) Alert.alert("You have not logged in yet! Please login first!");
+	// 	else {
+	// 		const logout=await fetch(`https://graph.facebook.com/${fbInfo.id}/permissions`,{
+	// 			method: 'DELETE',
+	// 			body: `access_token=${fbInfo.token}`
+	// 		});
+	// 		Alert.alert("Logout succeed!");
+	// 		await dispatch(fbActions.deleteFb());
+	// 		console.log(logout);
+
+	// 	}
+	// }
 
 	//show error
 	useEffect(() => {
     	if (error) {
-      		Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
+      		Alert.alert('An Error Occurred!', error, [{ text: 'Ok' }]);
     	}
   	}, [error]);
 
@@ -221,21 +242,34 @@ const TeacherProfileScreen = props => {
 						
 						<View style={styles.fbContainer}>
 							<Text style ={styles.email_text}>CONNECT TO FACEBOOK{"\n"}</Text>
-							<TouchableOpacity activeOpacity={.5} onPress={() => fbLogin()}>
+							<TouchableOpacity activeOpacity={.5} onPress={() => fbConnection()}>
 								<Image resizeMode='contain'
                             	style ={{width: 257, height: 42}}
                             	source={require("../../assets/images/icons/facebook.png")}/>
 							</TouchableOpacity>
 						</View>
 
-						<View style={styles.qnsContainer}>
+						<View style={styles.fbContainer}>
+							<Text style ={styles.email_text}>CONNECT TO TWITTER{"\n"}</Text>
+							<TouchableOpacity activeOpacity={.5} onPress={() => twConnection()}>
+								<Image resizeMode='contain'
+                            	style ={{width: 257, height: 42}}
+                            	source={require("../../assets/images/icons/twitter-login.gif")}/>
+							</TouchableOpacity>
+						</View>
+
+						{/* <View style={styles.fbLogout}>
+								<Text onPress={()=>fbLogout()}>Logout</Text>
+						</View> */}
+
+						{/* <View style={styles.qnsContainer}>
 							<Text style ={styles.email_text}>ADD QUESTIONS{"\n"}</Text>
 							<TouchableOpacity activeOpacity={.5} onPress={()=>{dispatch(questionActions.addQuestions())}}>
 								<Image resizeMode='contain'
                             	style ={{width: 283, height: 46}}
                             	source={require("../../assets/images/icons/addqns.png")}/>
 							</TouchableOpacity>
-						</View>
+						</View> */}
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</ImageBackground>

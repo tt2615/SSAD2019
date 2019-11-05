@@ -55,7 +55,7 @@ const GameQuestionScreen = props => {
 	const curQuestionBase=curQuestionBaseMatch(controls.diffLvl);
 	const curQuestion=curQuestionBase[controls.internalIndex];
 		//seconds
-	const [seconds, setSeconds]=useState(5);
+	const [seconds, setSeconds]=useState(15);
 		//styles for question options
 	const [correctStyle, setCorrectStyle]=useState(
 		{
@@ -120,7 +120,7 @@ const GameQuestionScreen = props => {
 		if (correct===true)
 			tempScore+=curQuestion.score;
 		if (tempCount<6){
-			setSeconds(5);
+			setSeconds(15);
 			setControls({
 				score: tempScore,
 				diffLvl: tempDiff,
@@ -176,7 +176,7 @@ const GameQuestionScreen = props => {
         }
         else {
 				getNextQues(controls.diffLvl,false);
-				setSeconds(5);
+				setSeconds(15);
 			}
 
 	},1000);

@@ -103,7 +103,7 @@ export const updateWorlds= (uid,wid,score)=>{
 
         const tscore=score+curscore;
 
-        if (tscore>30){
+        if (tscore>18){
             for (const key in resData){
                 if (resData[key].wid===wid+1) {
                     nextkey=key;

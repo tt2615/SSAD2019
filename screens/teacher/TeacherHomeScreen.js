@@ -17,9 +17,10 @@ import {
 	Image
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 
 const TeacherHomeScreen = props => {
-	console.log(props);
+	const fbInfo=useSelector(state=> state.fb);
 	return(
 		<SafeAreaView>
 			<ImageBackground source={require('../../assets/images/backgrounds/teacherbg.png')} style={styles.mainContainer}>
@@ -47,11 +48,14 @@ const TeacherHomeScreen = props => {
                             style = {{width: 283, height:46}}
                             source={require("../../assets/images/icons/report.png")}/>
                     </TouchableOpacity>
+					{/* {fbInfo.token!==null?
                     <TouchableOpacity style={{paddingBottom:20}} activityOpacity={.5} onPress = { () => {props.navigation.navigate('SocialMedia');}}>
                         <Image resizeMode = 'contain'
                             style = {{width: 283, height:46}}
                             source={require("../../assets/images/icons/postassignment.png")}/>
                     </TouchableOpacity>
+					:null
+					} */}
 					<TouchableOpacity activityOpacity={.5} onPress={()=>{
 									props.navigation.navigate('Auth');
 								}}>
