@@ -1,3 +1,12 @@
+ /**
+ * @method
+ * @desc create a screen to show the leaderboard.
+ * rank of the user should be shown on top so that can see easily. 
+ * score of the user should be shown to compare with other user.
+ * rank and score of the other users should be shown.
+ * @returns screen to show leaderboard
+ * @authors ziqing & weimin
+ */ 
 import React, { useState,useEffect } from 'react';
 import {
 	View,

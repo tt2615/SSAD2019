@@ -1,3 +1,11 @@
+ /**
+ * @method
+ * @desc create a main screen that will be shown after the teacher log in.
+ * buttons corresponding to the functions for the teacher like 
+ * (post assignment and view report) should be shown
+ * @returns screen for teacher main screen  
+ * @authors ziqing & wanting
+ */ 
 import React from 'react';
 import {
 	View,

@@ -1,3 +1,10 @@
+ /**
+ * @method
+ * @desc create a main screen that will be shown after the student log in.
+ * buttons corresponding to the functions for the user like (play game and challenge and view leaderboard) should be shown
+ * @returns screen for main screen
+ * @authors ziqing & wanting
+ */ 
 import React from 'react';
 import {
 	View,
