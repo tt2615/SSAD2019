@@ -88,8 +88,8 @@ const GameMapScreen = props => {
 										position={{x:sectionPosition[res.sid-1].x,y:sectionPosition[res.sid-1].y}} 
 										targetNav={props.navigation}/>)}
 					<CharImage source={charPic(userInfo.character)} 
-								startPos={{x: sectionPosition[pastPosition].x, y: sectionPosition[pastPosition].y}}
-								endPos={{x: sectionPosition[curPosition].x, y: sectionPosition[curPosition].y}}
+								startPos={{x: sectionPosition[pastPosition].x, y: sectionPosition[pastPosition].y-60}}
+								endPos={{x: sectionPosition[curPosition].x, y: sectionPosition[curPosition].y-60}}
 								/>
 				</ImageBackground>
 		</SafeAreaView>
