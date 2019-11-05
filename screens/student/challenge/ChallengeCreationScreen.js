@@ -111,7 +111,7 @@ const ChallengeCreationScreen = props => {
 
 	//create new challenge upon submit
 	const challengeSubmitHandler = async () => {
-		Alert.alert('Confirm Challenge', 'Do you want to create a challenge with ' + bid + ' points?',
+		Alert.alert('Confirm Challenge', 'Do you want to create this challenge?',
 			 [
 			 	{ text: 'Okay', onPress: async ()=>{
 	 				setIsLoading(true);
