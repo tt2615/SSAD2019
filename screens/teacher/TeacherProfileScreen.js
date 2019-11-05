@@ -246,7 +246,7 @@ const TeacherProfileScreen = props => {
 							<TouchableOpacity activeOpacity={.5} onPress={() => twConnection()}>
 								<Image resizeMode='contain'
                             	style ={{width: 257, height: 42}}
-                            	source={}/>
+                            	source={require("../../assets/images/icons/twitter-login.gif")}/>
 							</TouchableOpacity>
 						</View>
 
