@@ -1,3 +1,9 @@
+/**
+ * @method
+ * @desc create a screen for the user to select the world. 
+ * @returns screen to select world
+ * @authors ziqing & weimin
+ */
 import React, { useEffect,useState } from 'react';
 import {
 	View,

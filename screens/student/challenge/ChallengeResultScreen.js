@@ -1,3 +1,9 @@
+/**
+ * @method
+ * @desc create a screen to show the result (ie score) of the challenge 
+ * @returns screen to see the result of the challenge 
+ * @author ziqing & wei min
+ */
 import React from 'react';
 import {
 	View,

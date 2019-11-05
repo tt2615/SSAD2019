@@ -1,3 +1,9 @@
+ /**
+ * @method
+ * @desc create a screen to show result of the game . Result should be shown.
+ * @returns screen to show result of the game 
+ * @authors ziqing & weimin
+ */ 
 import React,{useState,useEffect} from 'react';
 import {
 	View,

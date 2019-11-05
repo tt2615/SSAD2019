@@ -1,3 +1,9 @@
+/**
+ * @method
+ * @desc Create a screen for user to create challenge. The user can choose their opponent and difficulty level.
+ * @returns screen to create challenge
+ * @author ziqing & wanting
+ */
 import React, { useState, useEffect } from 'react';
 import {
 	View,

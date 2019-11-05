@@ -1,3 +1,9 @@
+/**
+ * @method
+ * @desc Create a login screen for user interaction
+ * @returns login screen 
+ * @author ziqing & qian yi
+ */
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import {
 	ScrollView,

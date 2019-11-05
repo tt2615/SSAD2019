@@ -1,3 +1,10 @@
+/**
+ * @method
+ * @desc create a screen for the user to select the section. 
+ * score of each section and section that is locked and unlocked should be shown  .
+ * @returns screen to select section.
+ * @authors ziqing & wan ting
+ */
 import React,{useState,useEffect, useCallback} from 'react';
 import bgDic from '../../../assets/images/backgrounds/bgDic.js';
 import {

@@ -1,4 +1,11 @@
-  
+/**
+ * @method
+ * @desc create a screen for user to answer the challenge questions, 
+ * score will be displayed and time left to answer the question will be displayed.
+ *  
+ * @returns screen to see the answer challenge questions.
+ * @author ziqing & wei min
+ */
 import React,{useState,useEffect} from 'react';
 import {
 	View,
@@ -38,7 +45,7 @@ const ChallengeQuestionScreen = props => {
 		//location of current question
 	const curQuestion=questionBase[controls.internalIndex];
 		//seconds
-	const [seconds, setSeconds]=useState(5);
+	const [seconds, setSeconds]=useState(30);
 		//styles for question options
 	const [correctStyle, setCorrectStyle]=useState(
 		{
@@ -91,7 +98,7 @@ const ChallengeQuestionScreen = props => {
 		if (correct===true)
 			tempScore+=curQuestion.score;
 		if (tempCount<6){
-			setSeconds(5);
+			setSeconds(30);
 			setControls({
 				score: tempScore,
 				internalIndex: tempIndex,
@@ -120,7 +127,7 @@ const ChallengeQuestionScreen = props => {
         }
         else {
 				getNextQues(0,false);
-				setSeconds(5);
+				setSeconds(30);
 			}
 
 	},1000);

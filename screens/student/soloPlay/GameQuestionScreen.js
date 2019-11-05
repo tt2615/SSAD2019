@@ -1,4 +1,10 @@
-  
+ /**
+ * @method
+ * @desc create a screen for user to answer the challenge questions, 
+ * score will be displayed and time left to answer the question will be displayed.
+ * @returns screen to answer mcq question.
+ * @authors ziqing & weimin
+ */ 
 import React,{useState,useEffect} from 'react';
 import {
 	View,

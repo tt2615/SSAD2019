@@ -1,3 +1,11 @@
+ /**
+ * @method
+ * @desc create a screen for the teacher to edit their name and change character.
+ * characters available to choose should be shown.
+ * teacher name should be able to be edited in this screen.
+ * @returns screen to display and edit teacher info  
+ * @authors ziqing & wan ting
+ */ 
 import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import {
 	View,

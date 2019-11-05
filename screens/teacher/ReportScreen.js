@@ -1,3 +1,13 @@
+ /**
+ * @method
+ * @desc create a summary report screen for the teacher 
+ * to analyse the student's overall mastery to adjust teaching content.
+ * average score of all student for each world should be shown here. 
+ * average score of all student for each section should be shown here.
+ * student name should be able to be edited in this screen.
+ * @returns screen for summary report   
+ * @authors ziqing & wei min
+ */ 
 import React, {useState,useEffect} from 'react';
 import {
 	View,

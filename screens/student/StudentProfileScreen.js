@@ -1,3 +1,11 @@
+ /**
+ * @method
+ * @desc create a screen for the student to edit their name and change character.
+ * characters available to choose should be shown.
+ * student name should be able to be edited in this screen.
+ * @returns screen to display and edit student info  
+ * @authors ziqing & qian yi & wan ting
+ */ 
 import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import {
 	ScrollView,

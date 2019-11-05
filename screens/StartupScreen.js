@@ -1,3 +1,8 @@
+ /**
+ * @method
+ * @desc link to log in page if havent logged in, link to home 
+ * @authors ziqing 
+ */ 
 import React, { useEffect } from 'react';
 import {
 	View,

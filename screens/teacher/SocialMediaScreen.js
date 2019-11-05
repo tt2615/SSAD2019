@@ -1,3 +1,10 @@
+ /**
+ * @method
+ * @desc create a screen for the teacher to post assignment to social media.
+ * at least 2 social media should be connected.
+ * @returns screen for the teacher to post assignment 
+ * @authors ziqing & qian yi & wan ting
+ */ 
 import React from 'react';
 import {
 	View,
