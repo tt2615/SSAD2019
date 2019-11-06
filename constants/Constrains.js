@@ -1,14 +1,11 @@
 //input criteria
 
 export default {
-	userID: {
+	email: {
 		presence: {
 			allowEmpty: false
 		},
-		format:{
-			pattern: /[A-Z][0-9]{7}[A-Z]/,
-			message: "must be a valid matriculation No."
-		}
+		email: true
 	},
 	password: {
 		presence: {
@@ -18,6 +15,14 @@ export default {
 			//requirement: len>6, small and cap letter, digit
 			pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/,
 			message:"must conatin at least 6 numbers, with a mixtrue of digits, small letters and capital letters"
+		}
+	},
+	username: {
+		presence: {
+			allowEmpty: false
+		},
+		length: {
+			maximum: 30
 		}
 	}
 }

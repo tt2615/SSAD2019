@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native'
+import { Image, View, Text, Platform, YellowBox } from 'react-native'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
@@ -10,12 +10,26 @@ import { composeWithDevTools } from 'redux-devtools-extension'; //todo: remove a
 
 //todo: import reducers
 import authReducer from './store/reducers/authReducer';
-
-import RootNavigator from './navigation/RootNavigator';
-
+import userReducer from './store/reducers/userReducer';
+import SMReducer from './store/reducers/userReducer';
+import challengeReducer from './store/reducers/challengeReducer';
+import worldsReducer from './store/reducers/worldsReducer';
+import NavigationContainer from './navigation/NavigationContainer';
+import mapReducer from './store/reducers/mapReducer';
+import questionReducer from './store/reducers/questionReducer';
+import challengeQuesReducer from './store/reducers/challengeQuesReducer';
+import fbReducer from './store/reducers/fbReducer';
 //add reducers
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  user: userReducer,
+  sm: SMReducer,
+  challenge: challengeReducer,
+  worlds: worldsReducer,
+  map: mapReducer,
+  challengeQues: challengeQuesReducer,
+  questions: questionReducer,
+  fb: fbReducer
 });
 
 //todo: remove devtools after dev is finished
@@ -25,11 +39,17 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk),composeWithDe
 const fetchFont = () => {
   return Font.loadAsync({
     'open-sans' : require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    'trajan-pro' : require('./assets/fonts/TrajanPro-Regular.ttf'),
+    'trajan-pro-bold' : require('./assets/fonts/TrajanPro-Bold.otf'),
   });
 };
 
 export default function App() {
+
+  //suppress the irritating timer warning
+  YellowBox.ignoreWarnings(['Setting a timer','Can\'t perform a React state update on an unmounted component. This is a no-op']);
+
   //load elements
   const [isReady, setIsReady] = useState(false);
   
@@ -48,7 +68,7 @@ export default function App() {
   //render main navigator
   return (
     <Provider store={store}>
-      <RootNavigator />
+      <NavigationContainer />
     </Provider>
   );
 };
